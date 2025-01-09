@@ -57,14 +57,14 @@ function watch() {
     browserSync.init({
         server: {
             baseDir: './',
-            index: "/html/index.html",
+            index: "/html/index.php",
             directory: true
         },
-        startPath: '/html/index.html'
+        startPath: '/html/index.php'
     })
     gulp.watch(['scss/**/*.scss'], style);
     gulp.watch(['dist/css/style.css'], minifycss);
-    gulp.watch('html/*.html').on('change', browserSync.reload);
+    gulp.watch('html/*.php').on('change', browserSync.reload);
     gulp.watch(['dist/js/**/*.js', '!dist/js/**/*.min.js'], minifyjs);
 }
 
