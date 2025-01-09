@@ -1,3 +1,5 @@
+<?php include("../model/conn.php"); ?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
