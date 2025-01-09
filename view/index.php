@@ -1,4 +1,4 @@
-<?php include("../model/conn.php"); ?>
+<?php include("../controller/controller.php"); ?>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">

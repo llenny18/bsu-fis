@@ -145,10 +145,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
+                                <img src="assets/images/Batangas_State_Logo.png" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">Jason Doe</span> <i data-feather="chevron-down"
+                                        class="text-dark">Fname1</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -207,12 +207,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">User Accounts</span></li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="ui-cards.php"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="admins.php"
                                 aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span
                                     class="hide-menu">Administrators
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="ui-cards.php"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="employees.php"
                                 aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span
                                     class="hide-menu">Employee
                                 </span></a>
