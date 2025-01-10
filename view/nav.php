@@ -190,30 +190,30 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.php"
-                                aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
+                                aria-expanded="false"><i  class="fas fa-chart-pie" style="font-size: 1.2em;"  class="feather-icon"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Operational Plan</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.php"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                                aria-expanded="false"><i class="fas fa-list-ol"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Records
                                 </span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.php"
-                                aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
+                                aria-expanded="false"><i class="fas fa-table" style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Monitoring Matrix</span></a></li>
                      
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">User Accounts</span></li>
                         
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="admins.php"
-                                aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span
+                                aria-expanded="false"><i class="fas fa-user-circle" class="feather-icon"  style="font-size: 1.2em;"></i><span
                                     class="hide-menu">Administrators
                                 </span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="employees.php"
-                                aria-expanded="false"><i data-feather="sidebar" class="feather-icon"></i><span
+                                aria-expanded="false"><i class="fas fa-users"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Employee
                                 </span></a>
                         </li>
@@ -221,7 +221,7 @@
                         <li class="nav-small-cap"><span class="hide-menu">Analytics</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.php"
-                                aria-expanded="false"><i data-feather="lock" class="feather-icon"></i><span
+                                aria-expanded="false"><i  class="far fa-file-pdf" style="font-size: 1.2em;"  class="feather-icon"></i><span
                                     class="hide-menu">Generate Reports
                                 </span></a>
                         </li>

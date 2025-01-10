@@ -33,7 +33,7 @@ function display_admin_accounts($pdo) {
 function display_employee_accounts($pdo) {
     try {
         // Query to fetch employee accounts
-        $employeeQuery = "SELECT id, username, first_name, middle_name, last_name, contact_number, email FROM employee_accounts";
+        $employeeQuery = "SELECT * FROM employee_accounts";
         $stmtEmployee = $pdo->prepare($employeeQuery);
         $stmtEmployee->execute();
         $employeeResults = $stmtEmployee->fetchAll(PDO::FETCH_ASSOC);
@@ -42,13 +42,22 @@ function display_employee_accounts($pdo) {
         foreach ($employeeResults as $employee) {
             echo "<tr>
                     <td>{$employee['id']}</td>
-                    <td>{$employee['username']}</td>
-                    <td>{$employee['first_name']}</td>
-                    <td>{$employee['middle_name']}</td>
-                    <td>{$employee['last_name']}</td>
-                    <td>{$employee['contact_number']}</td>
-                    <td>{$employee['email']}</td>
-                    <td><button class='btn btn-success'>Edit</button><button class='btn btn-primary'>Delete</button></td>
+                <td>{$employee['username']}</td>
+                <td>{$employee['password_hashed']}</td>
+                <td>{$employee['first_name']}</td>
+                <td>{$employee['middle_name']}</td>
+                <td>{$employee['last_name']}</td>
+                <td>{$employee['sex']}</td>
+                <td>{$employee['age']}</td>
+                <td>{$employee['date_of_birth']}</td>
+                <td>{$employee['place_of_origin']}</td>
+                <td>{$employee['civil_status']}</td>
+                <td>{$employee['contact_number']}</td>
+                <td>{$employee['email']}</td>
+                <td>
+                    <button class='btn btn-success'>Edit</button>
+                    <button class='btn btn-danger'>Delete</button>
+                </td>
                   </tr>";
         }
     } catch (PDOException $e) {

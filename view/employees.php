@@ -88,13 +88,19 @@
                                         <thead>
                                             <tr>
                                             <th>ID</th>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Contact Number</th>
-                    <th>Email</th>
-                    <th>Action</th>
+                <th>Username</th>
+                <th>Password Hashed</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Sex</th>
+                <th>Age</th>
+                <th>Date of Birth</th>
+                <th>Place of Origin</th>
+                <th>Civil Status</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -116,10 +122,7 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
-            </footer>
+            
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->
