@@ -1,3 +1,4 @@
+<?php include("../controller/controller.php"); ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -21,7 +22,44 @@
             <div class="lds-pos"></div>
         </div>
     </div>
+    <?php
 
+// Check if a_id is passed in the URL for editing
+if (isset($_GET['a_id'])) {
+    $a_id = $_GET['a_id'];
+
+    // Fetch existing data
+    $stmt = $pdo->prepare("SELECT * FROM admin_accounts WHERE id = :a_id");
+    $stmt->execute(['a_id' => $a_id]);
+    $admin = $stmt->fetch();
+
+    // Check if the admin exists
+    if (!$admin) {
+        echo "Admin not found!";
+        exit;
+    }
+}
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the form data
+    $full_name = $_POST['full_name'];
+    $username = $_POST['username'];
+    $password =  encryptPassword($_POST['password']) ;
+
+    if (isset($a_id)) {
+        // Update the existing record
+        $stmt = $pdo->prepare("UPDATE admin_accounts SET full_name = :full_name, username = :username, password_hashed = :password WHERE id = :a_id");
+        $stmt->execute(['full_name' => $full_name, 'username' => $username, 'password' => $password, 'a_id' => $a_id]);
+        echo "Record updated successfully!";
+    } else {
+        // Insert a new record
+        $stmt = $pdo->prepare("INSERT INTO admin_accounts (full_name, username, password_hashed) VALUES (:full_name, :username, :password)");
+        $stmt->execute(['full_name' => $full_name, 'username' => $username, 'password' => $password]);
+        echo "Record inserted successfully!";
+    }
+}
+?>
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <?php include("./nav.php") ?>
    
@@ -29,12 +67,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Form Input Grid</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Administrator Details</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page"><?php if(isset($_GET['a_id'])){ echo "Edit ";  }else{ echo "Register "; }  ?>Administrator</li>
                                 </ol>
                             </nav>
                         </div>
@@ -58,28 +96,27 @@
                             <div class="card-body">
                                 <h4 class="card-title" id="edata-title">Administrator Credentials</h4>
                                         <hr class="red-hr">
-                                <form action="#">
+                                <form action="" method="POST">
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <input type="text" name="full_name" class="form-control" placeholder="Full Name here">
+                                                    <input type="text" name="full_name" class="form-control" placeholder="Full Name here" value="<?php echo isset($admin) ? $admin['full_name'] : ''; ?>" required>
                                                 </div>
                                             </div>
-                                           
                                         </div>
                                         <div class="row">
                                         <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Username</label>
-                                                    <input type="text" name="username"  class="form-control" placeholder="Username here">
+                                                    <input type="text" name="username" class="form-control" placeholder="Username here" value="<?php echo isset($admin) ? $admin['username'] : ''; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="text" name="password"  class="form-control" placeholder="Password here">
+                                                    <input type="text" name="password" class="form-control" placeholder="Password here" value="<?php echo isset($admin) ? decryptPassword($admin['password_hashed']) : ''; ?>" required>
                                                 </div>
                                             </div>
                                           
@@ -96,13 +133,13 @@
                         </div>
                     </div>
                 </div>
-               
-               
+                </div>
             </div>
-
         </div>
 
     </div>
+
+   
 
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
