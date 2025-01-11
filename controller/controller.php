@@ -1,6 +1,31 @@
 <?php
 include("../model/conn.php");
 
+
+
+define('ENCRYPTION_KEY', 'aEloMUFGdmJlSnBFUEVhZzRNbkJ5UktGbVJiMUUvcGhqTDJadXFkMVUxaz06OkygJAkjIuZV690rgA7wOFY='); 
+define('ENCRYPTION_METHOD', 'AES-256-CBC'); 
+
+function encryptPassword($password) {
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length(ENCRYPTION_METHOD));
+    $encrypted = openssl_encrypt($password, ENCRYPTION_METHOD, ENCRYPTION_KEY, 0, $iv);
+    return base64_encode($encrypted . '::' . $iv); // Store both encrypted data and IV
+}
+
+
+function decryptPassword($encryptedPassword) {
+    list($encrypted_data, $iv) = explode('::', base64_decode($encryptedPassword), 2);
+    return openssl_decrypt($encrypted_data, ENCRYPTION_METHOD, ENCRYPTION_KEY, 0, $iv);
+}
+
+
+// Encrypt the password
+// $encryptedPassword = encryptPassword($plainPassword);
+// echo "Encrypted Password: " . $encryptedPassword . PHP_EOL;
+
+// Decrypt the password
+// $decryptedPassword = decryptPassword($encryptedPassword);
+
 // Function to fetch and display admin accounts
 function display_admin_accounts($pdo) {
     try {
@@ -55,6 +80,73 @@ function display_employee_accounts($pdo) {
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+    }
+}
+
+
+// Function to fetch and display data from the view
+function display_pmm_data($pdo) {
+    try {
+        // Query to fetch data from the view
+        $sql = "SELECT * FROM operational_plan_view";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        // Fetch all results
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Check if data is available
+        if (!empty($data)) {
+            foreach ($data as $row) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row['matrix_id']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['development_area']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['outcome']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['strategy']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
+                echo "<td><a href='e_data.php?e_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='19'>No data found</td></tr>";
+        }
+    } catch (PDOException $e) {
+        echo "<tr><td colspan='19'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+    }
+}
+
+// Function to fetch and display data from the view
+function display_pmm_data_matrix($pdo) {
+    try {
+        // Query to fetch data from the view
+        $sql = "SELECT * FROM operational_plan_view";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        // Fetch all results
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Check if data is available
+        if (!empty($data)) {
+            foreach ($data as $row) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($row['matrix_id']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['development_area']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['outcome']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['strategy']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['performance_indicator']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['variance']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['remarks']) . "</td>";
+                echo "<td><a href='e_data.php?e_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "<tr><td colspan='19'>No data found</td></tr>";
+        }
+    } catch (PDOException $e) {
+        echo "<tr><td colspan='19'>Error: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
     }
 }
 

@@ -151,6 +151,7 @@
                                         <hr class="red-hr">
                                         
                                       <?php
+                                      
 if ($employee_id > 0) {
     // Prepare the SQL statement
     $query2 = "SELECT * FROM education WHERE employee_id = :employee_id";

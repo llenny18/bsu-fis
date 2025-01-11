@@ -195,12 +195,12 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Operational Plan</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.php"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="opmm.php"
                                 aria-expanded="false"><i class="fas fa-list-ol"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Records
                                 </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.php"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="opmm_matrix.php"
                                 aria-expanded="false"><i class="fas fa-table" style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Monitoring Matrix</span></a></li>
                      
