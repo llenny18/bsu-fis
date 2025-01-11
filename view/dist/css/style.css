@@ -65,6 +65,10 @@
 *::after {
   box-sizing: border-box; }
 
+  #edata-title{
+    color: #dc4747; /* Set the color */
+  
+  }
 html {
   font-family: sans-serif;
   line-height: 1.15;

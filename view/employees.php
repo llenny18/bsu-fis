@@ -90,17 +90,10 @@
                                             <th>ID</th>
                 <th>Username</th>
                 <th>Password Hashed</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Sex</th>
-                <th>Age</th>
-                <th>Date of Birth</th>
-                <th>Place of Origin</th>
-                <th>Civil Status</th>
-                <th>Contact Number</th>
-                <th>Email</th>
-                <th>Actions</th>
+                <th>Full Name</th>
+                
+               
+                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>

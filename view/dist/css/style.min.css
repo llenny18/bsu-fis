@@ -11,6 +11,18 @@ label,
 output {
   display: inline-block;
 }
+
+.red-hr {
+  border: none; /* Remove default border */
+  height: 3px;
+  margin-top: -5px; /* Set the thickness */
+  background-color: #dc4747; /* Set the color */
+}
+
+#edata-title{
+  color: #dc4747; /* Set the color */
+
+}
 button,
 hr,
 input {

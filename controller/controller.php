@@ -44,18 +44,11 @@ function display_employee_accounts($pdo) {
                     <td>{$employee['id']}</td>
                 <td>{$employee['username']}</td>
                 <td>{$employee['password_hashed']}</td>
-                <td>{$employee['first_name']}</td>
-                <td>{$employee['middle_name']}</td>
-                <td>{$employee['last_name']}</td>
-                <td>{$employee['sex']}</td>
-                <td>{$employee['age']}</td>
-                <td>{$employee['date_of_birth']}</td>
-                <td>{$employee['place_of_origin']}</td>
-                <td>{$employee['civil_status']}</td>
-                <td>{$employee['contact_number']}</td>
-                <td>{$employee['email']}</td>
+                <td>{$employee['first_name']} {$employee['middle_name']} {$employee['last_name']}</td>
+               
+              
                 <td>
-                    <button class='btn btn-success'>Edit</button>
+                    <a href='e_data.php?e_id={$employee['id']}' class='btn btn-success'>View Full Data</a>
                     <button class='btn btn-danger'>Delete</button>
                 </td>
                   </tr>";

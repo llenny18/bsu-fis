@@ -5,51 +5,43 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <?php include("./title.php") ?>
-    <!-- Custom CSS -->
+    <?php include("./title.php");
+    
+    $employee_id = isset($_GET['e_id']) ? intval($_GET['e_id']) : 0;
+
+    if ($employee_id > 0) {
+        // Prepare the SQL statement
+        $query = "SELECT * FROM employee_full_data WHERE employee_id = :employee_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    }
+    ?>
     <link href="dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
+
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
+
         <?php include("./nav.php") ?>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
+
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
+       
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
@@ -66,17 +58,9 @@
                  
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+   
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-               
+          
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -85,37 +69,37 @@
                                 <br>
                                 <form action="#">
                                     <div class="form-body">
-                                     <h4 class="card-title">Personal Info</h4>
-                                     <hr>
+                                     <h4 class="card-title" id="edata-title">Personal Info</h4>
+                                     <hr class="red-hr">
                                     <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>First Name</label>
-                                                        <input type="text" class="form-control" >
+                                                        <input type="text" value="<?= $row['first_name'] ?>" class="form-control" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Middle Name</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['middle_name'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Last Name</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['last_name'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Sex</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['sex'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Age</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['age'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                            
@@ -124,178 +108,390 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Date of Birth</label>
-                                                    <input type="date" class="form-control" >
+                                                    <input type="date" value="<?= $row['date_of_birth'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Place of Origin</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['place_of_origin'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Civil Status</label>
-                                                    <select class="form-control"><option value="" selected="selected">Select...</option><option value="Single">Single</option><option value="Married">Married</option><option value="Divorced">Divorced</option><option value="Separated">Separated</option><option value="Widowed">Widowed</option></select>
+                                                    <select class="form-control">
+    <option value="" <?= $row['civil_status'] == '' ? 'selected' : '' ?>>Select...</option>
+    <option value="Single" <?= $row['civil_status'] == 'Single' ? 'selected' : '' ?>>Single</option>
+    <option value="Married" <?= $row['civil_status'] == 'Married' ? 'selected' : '' ?>>Married</option>
+    <option value="Divorced" <?= $row['civil_status'] == 'Divorced' ? 'selected' : '' ?>>Divorced</option>
+    <option value="Separated" <?= $row['civil_status'] == 'Separated' ? 'selected' : '' ?>>Separated</option>
+    <option value="Widowed" <?= $row['civil_status'] == 'Widowed' ? 'selected' : '' ?>>Widowed</option>
+</select>
+   
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Contact No.</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text"  value="<?= $row['contact_number'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <input type="email" class="form-control" >
+                                                    <input type="email" value="<?= $row['email'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                            
                                         </div>
 
                                         <br>
-                                        <h4 class="card-title">Education</h4>
-                                        <hr>
+                                        <h4 class="card-title mt-5" id="edata-title">Education</h4>
+                                        <hr class="red-hr">
                                         
-                                        <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Level</label>
-                                                        <select class="form-control"><option value="" selected="selected">Select...</option><option value="Bachelor's">Bachelor's</option><option value="Master's">Master's</option><option value="Doctorate">Doctorate</option></select>
-                                                    </div>
-                                                </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Institution</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Degree</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                           
-                                        </div>
-                                        <div class="row">
-                                            
-                                        <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Major/Specialization</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Year Graduated</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Units Earned</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                    
-                                           
-                                        </div>
+                                      <?php
+if ($employee_id > 0) {
+    // Prepare the SQL statement
+    $query2 = "SELECT * FROM education WHERE employee_id = :employee_id";
+    $stmt2 = $pdo->prepare($query2);
+    $stmt2->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+    $stmt2->execute();
+
+    // Fetch all results
+    $results2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($results2) {
+        // Loop through each row and generate the HTML structure
+        foreach ($results2 as $row2) {
+            ?>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select class="form-control">
+                            <option value="" <?= htmlspecialchars($row2['Level']) == '' ? 'selected' : '' ?>>Select...</option>
+                            <option value="Bachelors" <?= htmlspecialchars($row2['Level']) == 'Bachelors' ? 'selected' : '' ?>>Bachelor's</option>
+                            <option value="Masters" <?= htmlspecialchars($row2['Level']) == 'Masters' ? 'selected' : '' ?>>Master's</option>
+                            <option value="Doctorate" <?= htmlspecialchars($row2['Level']) == 'Doctorate' ? 'selected' : '' ?>>Doctorate</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Institution</label>
+                        <input type="text" value="<?= htmlspecialchars($row2['Institution']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Degree</label>
+                        <input type="text" value="<?= htmlspecialchars($row2['Degree']) ?>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Major/Specialization</label>
+                        <input type="text" value="<?= htmlspecialchars($row2['Major_Specialization']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Year Graduated</label>
+                        <input type="text" value="<?= htmlspecialchars($row2['Year_Graduated']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Units Earned</label>
+                        <input type="text" value="<?= htmlspecialchars($row2['Units_Earned']) ?>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <?php
+        }
+    } else {
+        echo '<p>No education records found for Employee ID: ' . htmlspecialchars($employee_id) . '</p>';
+    }
+} else {
+    // If no employee_id is selected, display empty input fields
+    ?>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Level</label>
+                <select class="form-control">
+                    <option value="" selected>Select...</option>
+                    <option value="Bachelors">Bachelor's</option>
+                    <option value="Masters">Master's</option>
+                    <option value="Doctorate">Doctorate</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Institution</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Degree</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Major/Specialization</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Year Graduated</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Units Earned</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+?>
                                       
+                                        <button type="submit" class="btn btn-info">+ Add New</button>
                                         <br>
-                                        <h4 class="card-title">Licenses and Organizations</h4>
-                                        <hr>
+                                        <h4 class="card-title mt-5" id="edata-title">Licenses and Organizations</h4>
+                                        <hr class="red-hr">
                                         
                                         <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Type</label>
-                                                        <input type="text" class="form-control" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Name</label>
-                                                    <input type="text" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label>Actions</label>
-                                                    <input type="text" class="form-control" >
                                                 </div>
                                             </div>
-                                           
-                                        </div>
-                                       
-                                       
-                                        <br>
-                                        <h4 class="card-title">Teaching Load</h4>
-                                        <hr>
-                                        
-                                        <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Academic Load Units</label>
-                                                        <input type="text" class="form-control" >
-                                                    </div>
-                                                </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>General Education Units</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                          
                                            
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Course Type</label>
-                                                    <select  class="form-control" z><option value="" selected="selected">Select...</option><option value="Academic">Academic</option><option value="General Education">General Education</option></select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Course Code</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Course Code</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>Units</label>
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                            </div>
-                                           
-                                           
-                                        </div>
+                                        <?php
+                                         if ($employee_id > 0) {
+  $query1 = "SELECT * FROM licensesandorganizations WHERE employee_id = :employee_id";
+        $stmt1 = $pdo->prepare($query1);
+        $stmt1->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+        $stmt1->execute();
+
+        // Fetch all results
+        $results1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($results1) {
+            // Loop through each row and generate the HTML structure
+            foreach ($results1 as $row1) {
+                echo '<div class="row">';
+                echo '    <div class="col-md-4">';
+                echo '        <div class="form-group">';
+                echo '            <input type="text" class="form-control" value="' . htmlspecialchars($row1['Type']) . '" >';
+                echo '        </div>';
+                echo '    </div>';
+                echo '    <div class="col-md-4">';
+                echo '        <div class="form-group">';
+                echo '            <input type="text" class="form-control" value="' . htmlspecialchars($row1['Name']) . '" >';
+                echo '        </div>';
+                echo '    </div>';
+                echo '    <div class="col-md-4">';
+                echo '        <div class="form-group">';
+                echo '            <input type="text" class="form-control" value="View | Edit | Delete" >';
+                echo '        </div>';
+                echo '    </div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>No licenses or organizations found for Employee ID: ' . htmlspecialchars($employee_id) . '</p>';
+        }
+    } else {
+        // If no employee_id is selected, display empty input fields
+        echo '<div class="row">';
+        echo '    <div class="col-md-4">';
+        echo '        <div class="form-group">';
+        echo '            <input type="text" class="form-control" value="">';
+        echo '        </div>';
+        echo '    </div>';
+        echo '    <div class="col-md-4">';
+        echo '        <div class="form-group">';
+        echo '            <input type="text" class="form-control" value="">';
+        echo '        </div>';
+        echo '    </div>';
+        echo '    <div class="col-md-4">';
+        echo '        <div class="form-group">';
+        echo '            <input type="text" class="form-control" value="">';
+        echo '        </div>';
+        echo '    </div>';
+        echo '</div>';
+    }
+                                        ?>
+                                        <button type="submit" class="btn btn-info">+ Add New</button>
+                                       
+                                       
+                                        <br>
+                                        <h4 class="card-title mt-5" id="edata-title">Teaching Load</h4>
+                                        <hr class="red-hr">
+                                        
+                                       <?php
+
+if ($employee_id > 0) {
+    // Prepare the SQL statement
+    $query3 = "SELECT * FROM teachingload WHERE employee_id = :employee_id";
+    $stmt3 = $pdo->prepare($query3);
+    $stmt3->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
+    $stmt3->execute();
+
+    // Fetch all results
+    $results3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($results3) {
+        // Loop through each row and generate the HTML structure
+        foreach ($results3 as $row3) {
+            ?>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Academic Load Units</label>
+                        <input type="text" value="<?= htmlspecialchars($row3['Academic_Load_Units']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>General Education Units</label>
+                        <input type="text" value="<?= htmlspecialchars($row3['General_Education_Units']) ?>" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Course Type</label>
+                        <select class="form-control">
+                            <option value="" <?= htmlspecialchars($row3['Course_Type']) == '' ? 'selected' : '' ?>>Select...</option>
+                            <option value="Academic" <?= htmlspecialchars($row3['Course_Type']) == 'Academic' ? 'selected' : '' ?>>Academic</option>
+                            <option value="General" <?= htmlspecialchars($row3['Course_Type']) == 'General' ? 'selected' : '' ?>>General</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Course Code</label>
+                        <input type="text" value="<?= htmlspecialchars($row3['Course_Code']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Course Title</label>
+                        <input type="text" value="<?= htmlspecialchars($row3['Course_Title']) ?>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Units</label>
+                        <input type="text" value="<?= htmlspecialchars($row3['Units']) ?>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <?php
+        }
+    } else {
+        echo '<p>No teaching load records found for Employee ID: ' . htmlspecialchars($employee_id) . '</p>';
+    }
+} else {
+    // If no employee_id is selected, display empty input fields
+    ?>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Academic Load Units</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>General Education Units</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Course Type</label>
+                <select class="form-control">
+                    <option value="" selected>Select...</option>
+                    <option value="Academic">Academic</option>
+                    <option value="General">General</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Course Code</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Course Title</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Units</label>
+                <input type="text" value="" class="form-control">
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+?>
+                                        <button type="submit" class="btn btn-info">+ Add New</button>
                                         
                                         <br>
-                                        <h4 class="card-title">Work Info</h4>
-                                        <hr>
+                                        <h4 class="card-title mt-5" id="edata-title">Work Info</h4>
+                                        <hr class="red-hr">
                                         
                                         
                                         <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Date of Appointment</label>
-                                                        <input type="text" class="form-control" >
+                                                        <input type="text" value="<?= $row['Date_of_Appointment'] ?>"  class="form-control" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Years in Service</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['Years_in_Service'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -310,7 +506,6 @@
                                                     <select  class="form-control" ><option value="" selected="selected">Select...</option><option value="Permanent">Permanent</option><option value="Temporary">Temporary</option><option value="Contractual">Contractual</option><option value="Guest Lecturer">Guest Lecturer</option></select>
                                                 </div>
                                             </div>
-                                           
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -322,25 +517,25 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Designation</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['Designation'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Annual Salary</label>
-                                                    <input type="text" class="form-control" >
+                                                    <input type="text" value="<?= $row['Annual_Salary'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                            
                                         </div>
-                                        <hr>
+                                        <hr class="red-hr">
                                         
                                     </div>
                                 
                                     
                                     <div class="form-actions">
                                         <div class="text-right">
-                                            <button type="submit" class="btn btn-info">Submit</button>
+                                            <button type="submit" class="btn btn-success">Submit</button>
                                             <button type="reset" class="btn btn-dark">Reset</button>
                                         </div>
                                     </div>
@@ -351,44 +546,19 @@
                 </div>
                 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+        
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+        
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+   
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- apps -->
-    <!-- apps -->
     <script src="dist/js/app-style-switcher.js"></script>
     <script src="dist/js/feather.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
     <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-    <!--Wave Effects -->
-    <!-- themejs -->
-    <!--Menu sidebar -->
     <script src="dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
 </body>
 
