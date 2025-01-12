@@ -4,14 +4,14 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- Tell the browser to be responsive to screen width -->
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<!-- Favicon icon -->
+	
 	<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
 	<?php include("./title.php") ?>
-	<!-- Custom CSS -->
+	
 	<link href="dist/css/style.min.css" rel="stylesheet">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -41,12 +41,10 @@
 		<header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                  
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
+                  
                     <div class="navbar-brand">
                         <!-- Logo icon -->
                         <a href="index.php">
@@ -66,26 +64,17 @@
                             </span>
                         </a>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- Toggle which is visible on mobile only -->
-                    <!-- ============================================================== -->
+                
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
                         data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
                             class="ti-more"></i></a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
+         
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
+       
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- Notification -->
+                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
                                 id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -250,12 +239,7 @@
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+       
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-sidebarbg="skin6">
@@ -3739,11 +3723,11 @@
 	<!-- All Jquery -->
 	<!-- ============================================================== -->
 	<script src="assets/libs/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
+	
 	<script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
 	<script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- apps -->
-	<!-- apps -->
+	
+	
 	<script src="dist/js/app-style-switcher.js"></script>
 	<script src="dist/js/feather.min.js"></script>
 	<!-- slimscrollbar scrollbar JavaScript -->
@@ -3753,7 +3737,7 @@
 	<!-- themejs -->
 	<!--Menu sidebar -->
 	<script src="dist/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
+	
 	<script src="dist/js/custom.min.js"></script>
 </body>
 
