@@ -91,11 +91,7 @@
                     <th>Development Area</th>
                     <th>Outcome</th>
                     <th>Strategy</th>
-                    <th>Program/Activity/Project</th>
-                    <th>Performance Indicator/s</th>
-                    <th>Actual Accomplishments</th>
-                    <th>Variance</th>
-                    <th>Remarks</th>
+             
 
                 <th>Action</th>
                                             </tr>

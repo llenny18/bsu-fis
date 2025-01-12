@@ -1,3 +1,4 @@
+<?php include("../controller/controller.php"); ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -22,15 +23,11 @@
 </head>
 
 <body>
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
+    
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -61,15 +58,7 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -79,9 +68,7 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
+
                 <div class="row">
                     
                     <div class="col-12">
@@ -89,59 +76,119 @@
                             
                             
                             <div class="table-responsive p-1">
-                                <table class="table table-bordered table-responsive-lg">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Development Area</th>
-                                            <th scope="col" colspan="11">Table header</th>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Outcome 1</th>
-                                            <th scope="col" colspan="11">Table header</th>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <th scope="col">Strategy 1</th>
-                                            <th scope="col" colspan="11">Table header</th>
-                                            
-                                        </tr>
-                                        <tr>
-      <th rowspan="2">Program / Activity / Project</th>
-      <th rowspan="2">Performance Indicator</th>
-      <th rowspan="2">Personnel / Office Concerned</th>
-      <th colspan="4">Quarterly Targets (Milestone) FY 2024</th>
-      <th rowspan="2">Total Estimated Cost</th>
-      <th rowspan="2">Funding Source</th>
-      <th rowspan="2">Risks</th>
-      <th rowspan="2">Assessment of Risk</th>
-      <th rowspan="2">Mitigating Activities</th>
-    </tr>
-    <tr>
-      <th>Q1</th>
-      <th>Q2</th>
-      <th>Q3</th>
-      <th>Q4</th>
-    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                            <td>Table cell</td>
-                                        </tr>
-                                      
-                                    </tbody>
-                                </table>
+                            <?php
+if (isset($_GET['op_id'])) {
+    $op_id = $_GET['op_id'];
+
+    // Fetch data from the operational_plan_view
+    try {
+        $query = "SELECT 
+                    development_area_name,
+                    outcome_name,
+                    strategy_name,
+                    pap_name,
+                    performance_indicator,
+                    personnel_office_concerned,
+                    quarterly_target_q1,
+                    quarterly_target_q2,
+                    quarterly_target_q3,
+                    quarterly_target_q4,
+                    total_estimated_cost,
+                    funding_source,
+                    risks,
+                    assessment_of_risk,
+                    mitigating_activities
+                  FROM operational_plan_full
+                  WHERE unique_id = :op_id
+                  ORDER BY development_area_name, outcome_name, strategy_name";
+
+        $stmt = $pdo->prepare($query); // Use prepare instead of query
+        $stmt->bindParam(':op_id', $op_id, PDO::PARAM_STR);
+        $stmt->execute(); // Execute the prepared statement
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt2 = $pdo->prepare($query); // Use prepare instead of query
+        $stmt2->bindParam(':op_id', $op_id, PDO::PARAM_STR);
+        $stmt2->execute(); // Execute the prepared statement
+        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        echo "Query failed: " . htmlspecialchars($e->getMessage());
+        exit();
+    }
+} else {
+    echo "No operational plan ID provided.";
+    exit();
+}
+?>
+
+<!-- HTML and Table Structure -->
+<?php if (!empty($data)) { ?>
+<table class="table table-bordered table-responsive-lg">
+    <thead>
+        <tr>
+            <th scope="col">Development Area</th>
+            <th scope="col" colspan="11"><?= $row2['development_area_name'] ?></th>
+        </tr>
+        <tr>
+            <th scope="col">Outcome 1</th>
+            <th scope="col" colspan="11"><?= $row2['outcome_name'] ?></th>
+        </tr>
+        <tr>
+            <th scope="col">Strategy 1</th>
+            <th scope="col" colspan="11"><?= $row2['strategy_name'] ?></th>
+        </tr>
+        <tr>
+            <th rowspan="2">Program / Activity / Project</th>
+            <th rowspan="2">Performance Indicator</th>
+            <th rowspan="2">Personnel / Office Concerned</th>
+            <th colspan="4">Quarterly Targets (Milestone) FY 2024</th>
+            <th rowspan="2">Total Estimated Cost</th>
+            <th rowspan="2">Funding Source</th>
+            <th rowspan="2">Risks</th>
+            <th rowspan="2">Assessment of Risk</th>
+            <th rowspan="2">Mitigating Activities</th>
+        </tr>
+        <tr>
+            <th>Q1</th>
+            <th>Q2</th>
+            <th>Q3</th>
+            <th>Q4</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $currentDevArea = '';
+        $currentOutcome = '';
+        $currentStrategy = '';
+
+        foreach ($data as $row) {
+            // Print Development Area only if it changes
+        
+
+            // Print data row
+            echo "<tr>
+                <td>" . htmlspecialchars($row['pap_name']) . "</td>
+                <td>" . htmlspecialchars($row['performance_indicator']) . "</td>
+                <td>" . htmlspecialchars($row['personnel_office_concerned']) . "</td>
+                <td>" . htmlspecialchars($row['quarterly_target_q1']) . "</td>
+                <td>" . htmlspecialchars($row['quarterly_target_q2']) . "</td>
+                <td>" . htmlspecialchars($row['quarterly_target_q3']) . "</td>
+                <td>" . htmlspecialchars($row['quarterly_target_q4']) . "</td>
+                <td>" . htmlspecialchars($row['total_estimated_cost']) . "</td>
+                <td>" . htmlspecialchars($row['funding_source']) . "</td>
+                <td>" . htmlspecialchars($row['risks']) . "</td>
+                <td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>
+                <td>" . htmlspecialchars($row['mitigating_activities']) . "</td>
+            </tr>";
+        }
+        ?>
+    </tbody>
+</table>
+<?php } else { ?>
+<p>No data found for the provided Operational Plan ID.</p>
+<?php } ?>
+
                             </div>
                         </div>
                     </div>

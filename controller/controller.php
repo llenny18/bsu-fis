@@ -88,7 +88,7 @@ function display_employee_accounts($pdo) {
 function display_pmm_data($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_view";
+        $sql = "SELECT * FROM operational_plan_full GROUP BY unique_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -99,12 +99,12 @@ function display_pmm_data($pdo) {
         if (!empty($data)) {
             foreach ($data as $row) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['matrix_id']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['development_area']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['outcome']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['strategy']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['unique_id']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['development_area_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['outcome_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
-                echo "<td><a href='e_data.php?e_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "<td><a href='view-oppm.php?op_id={$row['unique_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
         } else {
@@ -119,7 +119,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_view";
+        $sql = "SELECT * FROM operational_plan_view group by development_area";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -134,12 +134,7 @@ function display_pmm_data_matrix($pdo) {
                 echo "<td>" . htmlspecialchars($row['development_area']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['outcome']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['strategy']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['performance_indicator']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['variance']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['remarks']) . "</td>";
-                echo "<td><a href='e_data.php?e_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "<td><a href='view-oppm-matrix.php?pap_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
         } else {
