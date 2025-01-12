@@ -12,7 +12,14 @@
     <meta name="author" content="">
     
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <?php include("./title.php") ?>
+    <?php include("./title.php");
+    
+     if (isset($_SESSION['id'])){
+        if($_SESSION['user_type'] == "employee"){
+            echo "<script>window.location.href='employees.php'</script>";
+        }
+        
+        }?>
     
     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -43,7 +50,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning Jason!</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning <?= $_SESSION['full_name'] ?>!</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">

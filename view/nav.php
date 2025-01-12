@@ -1,3 +1,12 @@
+<?php
+if(!isset($_SESSION['id'])){
+echo "<script>window.location.href='login.php'</script>";
+}
+
+
+
+?>
+
 <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md">
                 <div class="navbar-header" data-logobg="skin6">
@@ -137,7 +146,7 @@
                                 <img src="assets/images/Batangas_State_Logo.png" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">Fname1</span> <i data-feather="chevron-down"
+                                        class="text-dark"><?= $_SESSION['full_name'] ?></span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -155,7 +164,7 @@
                                         class="svg-icon mr-2 ml-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
+                                <a class="dropdown-item" href="logout.php"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                                 <div class="dropdown-divider"></div>
@@ -178,6 +187,9 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
+                        <?php if($_SESSION['user_type'] == "administrator"){
+
+                         ?>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="index.php"
                                 aria-expanded="false"><i  class="fas fa-chart-pie" style="font-size: 1.2em;"  class="feather-icon"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
@@ -194,19 +206,29 @@
                                     class="hide-menu">Monitoring Matrix</span></a></li>
                      
                         <li class="list-divider"></li>
+                        <?php 
+
+}  ?>
                         <li class="nav-small-cap"><span class="hide-menu">User Accounts</span></li>
                         
+                        <?php if($_SESSION['user_type'] == "administrator"){
+ ?>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="admins.php"
                                 aria-expanded="false"><i class="fas fa-user-circle" class="feather-icon"  style="font-size: 1.2em;"></i><span
                                     class="hide-menu">Administrators
                                 </span></a>
                         </li>
+                        <?php
+}  ?>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="employees.php"
                                 aria-expanded="false"><i class="fas fa-users"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Employee
                                 </span></a>
                         </li>
+                        <?php if($_SESSION['user_type'] == "administrator"){
+ ?>
                         <li class="list-divider"></li>
+
                         <li class="nav-small-cap"><span class="hide-menu">Analytics</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.php"
@@ -214,6 +236,9 @@
                                     class="hide-menu">Generate Reports
                                 </span></a>
                         </li>
+                        <?php 
+
+}  ?>
                        
 
                     </ul>

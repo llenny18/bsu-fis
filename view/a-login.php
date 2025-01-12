@@ -1,5 +1,4 @@
 <?php include("../controller/controller.php"); ?>
-
 <!DOCTYPE html>
 <html dir="ltr">
 
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Prepare the SQL query to find the user
-        $stmt = $pdo->prepare("SELECT id, username, password_hashed, e_type, first_name, middle_name, last_name FROM employee_accounts WHERE username = :username");
+        $stmt = $pdo->prepare("SELECT id, username, password_hashed,  full_name FROM admin_accounts WHERE username = :username");
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
 
@@ -36,17 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($user &&  ($password== decryptPassword($user['password_hashed']))) {
             // Valid credentials, create session variables
             $_SESSION['id'] = $user['id'];
-            $_SESSION['user_type'] = 'employee';
+            $_SESSION['user_type'] = 'administrator';
             $_SESSION['username'] = $user['username'];
-            $_SESSION['first_name'] = $user['first_name'];
-            $_SESSION['full_name'] = $user['first_name'] . " " . $user['middle_name']. " " .$user['last_name'];
+            $_SESSION['full_name'] = $user['full_name'] ;
 
             // Redirect to index.php
             echo "<script>alert('Login Success!'); window.location.href='index.php'</script>";
             exit();
         } else {
             // Invalid credentials
-            echo "<script>alert('Invalid username or password!'); </script>";
+            echo "<script>alert('Invalid username or password!'); window.location.href='a-login.php' </script>";
         }
     } catch (PDOException $e) {
         // Handle any errors
@@ -54,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <body>
     <div class="main-wrapper">
 
@@ -76,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <img src="assets/images/favicon.png" style="width: 100px;" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">BATSTATEU-FIS</h2>
-                        <p class="text-center">User Employee LogIn</p>
-                        <form class="mt-4" action="login.php" method="POST">
+                        <p class="text-center">User Administrator LogIn</p>
+                        <form class="mt-4" action="a-login.php" method="POST">
     <div class="row">
         <div class="col-lg-12">
             <div class="form-group">
