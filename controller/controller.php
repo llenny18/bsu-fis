@@ -145,6 +145,70 @@ function display_pmm_data_matrix($pdo) {
     }
 }
 
+function get_pmm_data_matrix_count($pdo) {
+    try {
+        // Query to count the rows grouped by development_area
+        $countSql = "SELECT COUNT(*) as row_count FROM (SELECT development_area FROM operational_plan_view GROUP BY development_area) as grouped_data";
+        $countStmt = $pdo->prepare($countSql);
+        $countStmt->execute();
 
+        // Fetch the count result
+        $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
+        return $countResult['row_count'];
+    } catch (PDOException $e) {
+        // Return 0 in case of an error
+        return 0;
+    }
+}
+
+
+function get_pmm_data_count($pdo) {
+    try {
+        // Query to count the rows grouped by development_area
+        $countSql = "SELECT COUNT(*) as row_count FROM (SELECT development_area_name FROM operational_plan_full GROUP BY development_area_name) as grouped_data";
+        $countStmt = $pdo->prepare($countSql);
+        $countStmt->execute();
+
+        // Fetch the count result
+        $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
+        return $countResult['row_count'];
+    } catch (PDOException $e) {
+        // Return 0 in case of an error
+        return 0;
+    }
+}
+
+function get_employee_count($pdo) {
+    try {
+        // Query to count the rows grouped by development_area
+        $countSql = "SELECT COUNT(*) as row_count FROM employee_accounts";
+        $countStmt = $pdo->prepare($countSql);
+        $countStmt->execute();
+
+        // Fetch the count result
+        $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
+        return $countResult['row_count'];
+    } catch (PDOException $e) {
+        // Return 0 in case of an error
+        return 0;
+    }
+}
+
+
+function get_admin_count($pdo) {
+    try {
+        // Query to count the rows grouped by development_area
+        $countSql = "SELECT COUNT(*) as row_count FROM admin_accounts";
+        $countStmt = $pdo->prepare($countSql);
+        $countStmt->execute();
+
+        // Fetch the count result
+        $countResult = $countStmt->fetch(PDO::FETCH_ASSOC);
+        return $countResult['row_count'];
+    } catch (PDOException $e) {
+        // Return 0 in case of an error
+        return 0;
+    }
+}
 
 ?>

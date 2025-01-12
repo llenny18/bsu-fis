@@ -53,15 +53,7 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
            
@@ -73,14 +65,13 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">236</h2>
-                                        <span
-                                            class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
+                                        <h2 class="font-weight-medium text-primary"><?= get_pmm_data_count($pdo) ?></h2>
+                                       
                                     </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">New Clients</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Operational Plan </h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
+                                    <span class=" text-muted"><i class="fas fa-table text-primary"  style="font-size: 1.5em;"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +80,12 @@
                         <div class="card-body">
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
-                                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">$</sup>18,306</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Earnings of Month
+                                    <h2 class="w-100 text-truncate font-weight-medium text-primary"><?= get_employee_count($pdo) ?></h2>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Employees
                                     </h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
+                                    <span class=" text-muted"><i class="fas fa-users text-primary"  style="font-size: 1.5em;"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -105,14 +95,13 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">1538</h2>
-                                        <span
-                                            class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>
+                                        <h2 class="font-weight-medium text-primary"><?= get_admin_count($pdo) ?></h2>
+                             
                                     </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">New Projects</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Administrator</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
+                                    <span class=" text-muted"><i class="fas fa-address-card text-primary"  style="font-size: 1.5em;"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -121,11 +110,11 @@
                         <div class="card-body">
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
-                                    <h2 class="text-dark mb-1 font-weight-medium">864</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Projects</h6>
+                                    <h2 class="font-weight-medium text-primary"><?= get_pmm_data_matrix_count($pdo) ?></h2>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Operational Plan Monitoring Matrix</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
+                                    <span class=" text-muted"><i class="fas fa-file-alt text-primary"  style="font-size: 1.5em;"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +125,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Total Sales</h4>
+                                <h4 class="card-title">Development Area Performance</h4>
                                 <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div>
                                 <ul class="list-style-none mb-0">
                                     <li>
@@ -161,7 +150,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Net Income</h4>
+                                <h4 class="card-title">Employee distribution by department and role</h4>
                                 <div class="net-income mt-4 position-relative" style="height:294px;"></div>
                                 <ul class="list-inline text-center mt-5 mb-2">
                                     <li class="list-inline-item text-muted font-italic">Sales for this month</li>
@@ -172,7 +161,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Earning by Location</h4>
+                                <h4 class="card-title mb-4">Outcome Analysis and Strategy Effectiveness</h4>
                                 <div class="" style="height:180px">
                                     <div id="visitbylocate" style="height:100%"></div>
                                 </div>
@@ -242,7 +231,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Earning Statistics</h4>
+                                    <h4 class="card-title mb-0">Overall Operational Plan Progress</h4>
                                     <div class="ml-auto">
                                         <div class="dropdown sub-dropdown">
                                             <button class="btn btn-link text-muted dropdown-toggle" type="button"
@@ -270,7 +259,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Recent Activity</h4>
+                                <h4 class="card-title">Quarterly Target Achievement</h4>
                                 <div class="mt-4 activity">
                                     <div class="d-flex align-items-start border-left-line pb-3">
                                         <div>
@@ -326,7 +315,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-4">
-                                    <h4 class="card-title">Top Leaders</h4>
+                                    <h4 class="card-title">Program/Activity/Project (PAP) Overview</h4>
                                     <div class="ml-auto">
                                         <div class="dropdown sub-dropdown">
                                             <button class="btn btn-link text-muted dropdown-toggle" type="button"

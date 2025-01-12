@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2025 at 01:00 PM
+-- Generation Time: Jan 12, 2025 at 07:59 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,21 +39,21 @@ CREATE TABLE `admin_accounts` (
 --
 
 INSERT INTO `admin_accounts` (`id`, `full_name`, `username`, `password_hashed`) VALUES
-(1, 'Fname1', 'admin1', 'hashed_password1'),
-(2, 'Fname2', 'admin2', 'hashed_password2'),
-(3, 'Fname3', 'admin3', 'hashed_password3'),
-(4, 'Fname4', 'admin4', 'hashed_password4'),
-(5, 'Fname5', 'admin5', 'hashed_password5'),
-(6, 'Fname6', 'admin6', 'hashed_password6'),
-(7, 'Fname7', 'admin7', 'hashed_password7'),
-(8, 'Fname8', 'admin8', 'hashed_password8'),
-(9, 'Fname9', 'admin9', 'hashed_password9'),
-(10, 'Fname10', 'admin10', 'hashed_password10'),
-(11, 'Fname11', 'admin11', 'hashed_password11'),
-(12, 'Fname12', 'admin12', 'hashed_password12'),
-(13, 'Fname13', 'admin13', 'hashed_password13'),
-(14, 'Fname14', 'admin14', 'hashed_password14'),
-(15, 'Fname15', 'admin15', 'hashed_password15');
+(1, 'Fname12', 'admin1', 'cTJWL1ZpNW50cStveDR1ZlQyVWNmZz09OjoCQlBrQDxqZ/Bpz2+gKmXZ'),
+(2, 'Fname2', 'admin2', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(3, 'Fname3', 'admin3', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(4, 'Fname4', 'admin4', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(5, 'Fname5', 'admin5', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(6, 'Fname6', 'admin6', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(7, 'Fname7', 'admin7', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(8, 'Fname8', 'admin8', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(9, 'Fname9', 'admin9', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(10, 'Fname10', 'admin10', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(11, 'Fname11', 'admin11', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(12, 'Fname12', 'admin12', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(13, 'Fname13', 'admin13', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(14, 'Fname14', 'admin14', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
+(15, 'Fname15', 'admin15', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz');
 
 -- --------------------------------------------------------
 
@@ -210,6 +210,35 @@ INSERT INTO `licensesandorganizations` (`id`, `employee_id`, `Type`, `Name`) VAL
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `operational_plan_full`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_full` (
+`development_area_id` int(11)
+,`development_area_name` varchar(255)
+,`outcome_id` int(11)
+,`outcome_name` varchar(255)
+,`strategy_id` int(11)
+,`strategy_name` varchar(255)
+,`unique_id` varchar(35)
+,`pap_id` int(11)
+,`pap_name` varchar(255)
+,`performance_indicator` varchar(255)
+,`personnel_office_concerned` varchar(255)
+,`quarterly_target_q1` int(11)
+,`quarterly_target_q2` int(11)
+,`quarterly_target_q3` int(11)
+,`quarterly_target_q4` int(11)
+,`total_estimated_cost` decimal(10,2)
+,`funding_source` varchar(255)
+,`risks` text
+,`assessment_of_risk` text
+,`mitigating_activities` text
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `operational_plan_monitoring_matrix`
 --
 
@@ -233,7 +262,36 @@ INSERT INTO `operational_plan_monitoring_matrix` (`id`, `development_area_id`, `
 (2, 2, 3, 3, 'Number of clinics upgraded', '3', 1.00, 'On track for expansion'),
 (3, 3, 4, 4, 'Amount of energy saved', '650', 150.00, 'Ahead of schedule'),
 (4, 4, 5, 5, 'Number of students enrolled', '400', 100.00, 'On track for digital expansion'),
-(5, 5, 2, 2, 'Number of people enrolled', '1100', 100.00, 'Meeting Q2 targets');
+(5, 5, 2, 2, 'Number of people enrolled', '1100', 100.00, 'Meeting Q2 targets'),
+(6, 5, 2, 2, 'Count of people enrolled', '1100', 100.00, 'Meeting Q2 targets');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `operational_plan_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_view` (
+`matrix_id` int(11)
+,`development_area` varchar(255)
+,`outcome` varchar(255)
+,`strategy` varchar(255)
+,`pap_name` varchar(255)
+,`performance_indicator` varchar(255)
+,`actual_accomplishments` text
+,`variance` decimal(10,2)
+,`remarks` text
+,`personnel_office_concerned` varchar(255)
+,`quarterly_target_q1` int(11)
+,`quarterly_target_q2` int(11)
+,`quarterly_target_q3` int(11)
+,`quarterly_target_q4` int(11)
+,`total_estimated_cost` decimal(10,2)
+,`funding_source` varchar(255)
+,`risks` text
+,`assessment_of_risk` text
+,`mitigating_activities` text
+);
 
 -- --------------------------------------------------------
 
@@ -256,7 +314,8 @@ INSERT INTO `outcome` (`id`, `development_area_id`, `name`) VALUES
 (2, 1, 'Poverty Reduction'),
 (3, 2, 'Access to Healthcare'),
 (4, 3, 'Carbon Footprint Reduction'),
-(5, 4, 'Improved Literacy Rates');
+(5, 4, 'Improved Literacy Rates'),
+(6, 5, 'Improved Literacy Rates');
 
 -- --------------------------------------------------------
 
@@ -290,7 +349,8 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', 1000, 1200, 1400, 1600, 200000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors'),
 (3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 2, 3, 4, 5, 300000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
 (4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', 500, 600, 700, 800, 100000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
-(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 300, 400, 500, 600, 150000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs');
+(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 300, 400, 500, 600, 150000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
+(6, 1, 'S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 60, 70, 80, 50000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications');
 
 -- --------------------------------------------------------
 
@@ -382,6 +442,24 @@ INSERT INTO `workinfo` (`id`, `employee_id`, `Date_of_Appointment`, `Years_in_Se
 DROP TABLE IF EXISTS `employee_full_data`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `employee_full_data`  AS SELECT `ea`.`id` AS `employee_id`, `ea`.`username` AS `username`, `ea`.`first_name` AS `first_name`, `ea`.`middle_name` AS `middle_name`, `ea`.`last_name` AS `last_name`, `ea`.`sex` AS `sex`, `ea`.`age` AS `age`, `ea`.`date_of_birth` AS `date_of_birth`, `ea`.`place_of_origin` AS `place_of_origin`, `ea`.`civil_status` AS `civil_status`, `ea`.`contact_number` AS `contact_number`, `ea`.`email` AS `email`, `wi`.`Date_of_Appointment` AS `Date_of_Appointment`, `wi`.`Years_in_Service` AS `Years_in_Service`, `wi`.`Appointment_Status` AS `Appointment_Status`, `wi`.`Tenure_of_Employment` AS `Tenure_of_Employment`, `wi`.`Faculty_Rank` AS `Faculty_Rank`, `wi`.`Designation` AS `Designation`, `wi`.`Annual_Salary` AS `Annual_Salary`, `lo`.`Type` AS `License_Or_Organization_Type`, `lo`.`Name` AS `License_Or_Organization_Name`, `tl`.`Academic_Load_Units` AS `Academic_Load_Units`, `tl`.`General_Education_Units` AS `General_Education_Units`, `tl`.`Course_Type` AS `Course_Type`, `tl`.`Course_Code` AS `Course_Code`, `tl`.`Course_Title` AS `Course_Title`, `tl`.`Units` AS `Teaching_Units`, `ed`.`Level` AS `Education_Level`, `ed`.`Institution` AS `Education_Institution`, `ed`.`Degree` AS `Education_Degree`, `ed`.`Major_Specialization` AS `Education_Major_Specialization`, `ed`.`Year_Graduated` AS `Education_Year_Graduated`, `ed`.`Units_Earned` AS `Education_Units_Earned` FROM ((((`employee_accounts` `ea` join `workinfo` `wi` on(`ea`.`id` = `wi`.`employee_id`)) left join `licensesandorganizations` `lo` on(`ea`.`id` = `lo`.`employee_id`)) left join `teachingload` `tl` on(`ea`.`id` = `tl`.`employee_id`)) left join `education` `ed` on(`ea`.`id` = `ed`.`employee_id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `operational_plan_full`
+--
+DROP TABLE IF EXISTS `operational_plan_full`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_full`  AS SELECT `da`.`id` AS `development_area_id`, `da`.`name` AS `development_area_name`, `o`.`id` AS `outcome_id`, `o`.`name` AS `outcome_name`, `s`.`id` AS `strategy_id`, `s`.`name` AS `strategy_name`, concat(`da`.`id`,'-',`o`.`id`,'-',`s`.`id`) AS `unique_id`, `p`.`id` AS `pap_id`, `p`.`name` AS `pap_name`, `p`.`performance_indicator` AS `performance_indicator`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM (((`development_area` `da` left join `outcome` `o` on(`o`.`development_area_id` = `da`.`id`)) left join `strategy` `s` on(`s`.`outcome_id` = `o`.`id`)) left join `pap` `p` on(`p`.`strategy_id` = `s`.`id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `operational_plan_view`
+--
+DROP TABLE IF EXISTS `operational_plan_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view`  AS SELECT `opmm`.`id` AS `matrix_id`, `da`.`name` AS `development_area`, `o`.`name` AS `outcome`, `s`.`name` AS `strategy`, `p`.`name` AS `pap_name`, `opmm`.`performance_indicator` AS `performance_indicator`, `opmm`.`actual_accomplishments` AS `actual_accomplishments`, `opmm`.`variance` AS `variance`, `opmm`.`remarks` AS `remarks`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM ((((`operational_plan_monitoring_matrix` `opmm` join `development_area` `da` on(`opmm`.`development_area_id` = `da`.`id`)) join `outcome` `o` on(`opmm`.`outcome_id` = `o`.`id`)) join `strategy` `s` on(`opmm`.`strategy_id` = `s`.`id`)) join `pap` `p` on(`s`.`id` = `p`.`strategy_id`)) ;
 
 --
 -- Indexes for dumped tables
@@ -501,25 +579,25 @@ ALTER TABLE `licensesandorganizations`
 -- AUTO_INCREMENT for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `outcome`
 --
 ALTER TABLE `outcome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pap`
 --
 ALTER TABLE `pap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `strategy`
 --
 ALTER TABLE `strategy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `teachingload`
