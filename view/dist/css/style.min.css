@@ -15689,12 +15689,28 @@ ul.list-style-none li a:hover {
 }
 .stats .ct-series-a .ct-line,
 .stats .ct-series-a .ct-point {
-  stroke: #dc4747;
-  stroke-width: 3px;
+  stroke: #F93827;
+  stroke-width: 13px;
 }
 .stats .ct-series-a .ct-point {
+  stroke-width: 13px;
+}
+
+
+.stats .ct-series-b .ct-area {
+  fill-opacity: 0.2;
+  fill: transparent;
+}
+.stats .ct-series-b .ct-line,
+.stats .ct-series-b .ct-point {
+  stroke: #FFF574;
   stroke-width: 3px;
 }
+.stats .ct-series-b .ct-point {
+  stroke-width: 3px;
+}
+
+
 .chartist-tooltip {
   display: inline-block;
   opacity: 0;
@@ -15729,7 +15745,7 @@ ul.list-style-none li a:hover {
   fill: #b8c3d5;
 }
 #campaign-v2 .c3-chart-arc path {
-  stroke-width: 4px;
+  height: 500px;stroke-width: 4px;
 }
 #visitbylocate .jvectormap-zoomin,
 #visitbylocate .jvectormap-zoomout {
@@ -15743,8 +15759,18 @@ ul.list-style-none li a:hover {
 }
 .ct-series-a .ct-bar,
 .ct-series-a .ct-line {
-  stroke: #dc4747;
+  stroke: #F93827;
 }
+
+.ct-series-b .ct-bar,
+.ct-series-b .ct-line {
+  stroke: #FFF574;
+}
+
+
+
+
+
 .fc-view {
   margin-top: 30px;
 }

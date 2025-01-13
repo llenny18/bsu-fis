@@ -10,7 +10,8 @@ $(function () {
             columns: [
                 ['Direct Sales', 25],
                 ['Referral Sales', 15],
-                ['Afilliate Sales', 10],
+                ['Afilliate Sales', 5],
+                ['Afilliate Sales2', 5],
                 ['Indirect Sales', 15]
             ],
 
