@@ -43,7 +43,7 @@ function display_admin_accounts($pdo) {
                     <td>{$admin['full_name']}</td>
                     <td>{$admin['username']}</td>
                     <td>{$admin['password_hashed']}</td>
-                    <td><button class='btn btn-success'>Edit</button><button class='btn btn-primary'>Delete</button></td>
+                    <td><a href='manage_admin.php?a_id={$admin['id']}' class='btn btn-success'>Edit</a><button class='btn btn-primary'>Delete</button></td>
                   </tr>";
         }
 

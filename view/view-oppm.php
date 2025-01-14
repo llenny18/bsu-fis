@@ -54,6 +54,7 @@
                             
                             
                             <div class="table-responsive p-1">
+                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button>
                             <?php
 if (isset($_GET['op_id'])) {
     $op_id = $_GET['op_id'];
@@ -102,19 +103,20 @@ if (isset($_GET['op_id'])) {
 
 <!-- HTML and Table Structure -->
 <?php if (!empty($data)) { ?>
-<table class="table table-bordered table-responsive-lg">
+    <form method="post"> 
+<table class="table table-bordered table-responsive-lg" id="opmm-table">
     <thead>
         <tr>
             <th scope="col">Development Area</th>
-            <th scope="col" colspan="11"><?= $row2['development_area_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['development_area_name'] ?></th>
         </tr>
         <tr>
             <th scope="col">Outcome 1</th>
-            <th scope="col" colspan="11"><?= $row2['outcome_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['outcome_name'] ?></th>
         </tr>
         <tr>
             <th scope="col">Strategy 1</th>
-            <th scope="col" colspan="11"><?= $row2['strategy_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['strategy_name'] ?></th>
         </tr>
         <tr>
             <th rowspan="2">Program / Activity / Project</th>
@@ -126,6 +128,7 @@ if (isset($_GET['op_id'])) {
             <th rowspan="2">Risks</th>
             <th rowspan="2">Assessment of Risk</th>
             <th rowspan="2">Mitigating Activities</th>
+            <th rowspan="2">Action</th>
         </tr>
         <tr>
             <th>Q1</th>
@@ -158,11 +161,13 @@ if (isset($_GET['op_id'])) {
                 <td>" . htmlspecialchars($row['risks']) . "</td>
                 <td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>
                 <td>" . htmlspecialchars($row['mitigating_activities']) . "</td>
+                <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>
             </tr>";
         }
         ?>
     </tbody>
 </table>
+</form>
 <?php } else { ?>
 <p>No data found for the provided Operational Plan ID.</p>
 <?php } ?>
@@ -179,7 +184,83 @@ if (isset($_GET['op_id'])) {
         </div>
         
     </div>
- 
+    <script>
+ function editRow(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[0].innerText;
+            var cell2 = row.cells[1].innerText;
+            var cell3 = row.cells[2].innerText;
+            var cell4 = row.cells[3].innerText;
+            var cell5 = row.cells[4].innerText;
+            var cell6 = row.cells[5].innerText;
+            var cell7 = row.cells[6].innerText;
+            var cell8 = row.cells[7].innerText;
+            var cell9 = row.cells[8].innerText;
+            var cell10 = row.cells[9].innerText;
+            var cell11 = row.cells[10].innerText;
+            var cell12 = row.cells[11].innerText;
+            var cell13 = row.cells[12].innerText;
+
+            // Replace the current row values with input fields
+            row.cells[0].innerHTML = `<input type="text" value="${cell1}">`;
+            row.cells[1].innerHTML = `<input type="text" value="${cell2}">`;
+            row.cells[2].innerHTML = `<input type="text" value="${cell3}">`;
+            row.cells[3].innerHTML = `<input type="text" value="${cell4}">`;
+            row.cells[4].innerHTML = `<input type="text" value="${cell5}">`;
+            row.cells[5].innerHTML = `<input type="text" value="${cell6}">`;
+            row.cells[6].innerHTML = `<input type="text" value="${cell7}">`;
+            row.cells[7].innerHTML = `<input type="text" value="${cell8}">`;
+            row.cells[8].innerHTML = `<input type="text" value="${cell9}">`;
+            row.cells[9].innerHTML = `<input type="text" value="${cell10}">`;
+            row.cells[10].innerHTML = `<input type="text" value="${cell11}">`;
+            row.cells[11].innerHTML = `<input type="text" value="${cell12}">`;
+            row.cells[12].innerHTML = `<button type="submit" class="btn btn-success" >Save Data</button>`;
+
+           
+        }
+
+
+        function addRow() {
+            // Get the table body
+            var table = document.getElementById("opmm-table").getElementsByTagName('tbody')[0];
+
+            // Create a new row
+            var newRow = table.insertRow();
+
+            // Insert new cells and add data
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+            var cell7 = newRow.insertCell(6);
+            var cell8 = newRow.insertCell(7);
+            var cell9 = newRow.insertCell(8);
+            var cell10 = newRow.insertCell(9);
+            var cell11 = newRow.insertCell(10);
+            var cell12 = newRow.insertCell(11);
+            var cell13 = newRow.insertCell(12);
+
+            // Add text input for each cell
+            cell1.innerHTML = '<input type="text" placeholder="Enter Name">';
+            cell2.innerHTML = '<input type="number" placeholder="Enter Age">';
+            cell3.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell4.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell5.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell6.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell7.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell8.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell9.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell10.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell11.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell12.innerHTML = '<input type="text" placeholder="Enter City">';
+            cell13.innerHTML = '<button type="submit" class="btn btn-success" >Insert Data</button>';
+        }
+    </script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
