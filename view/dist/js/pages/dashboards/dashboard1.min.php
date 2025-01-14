@@ -18,7 +18,7 @@ $data_accomplishments_vs_variance = [];
 
 while ($row_accomplishments_vs_variance = $stmt_accomplishments_vs_variance->fetch(PDO::FETCH_ASSOC)) {
     // Add each row to the data array, formatted as a JavaScript-compatible array
-    $data_accomplishments_vs_variance[] = "['{$row_accomplishments_vs_variance['development_area']}', {$row_accomplishments_vs_variance['target_cost']}, {$row_accomplishments_vs_variance['actual_cost']}]";
+    $data_accomplishments_vs_variance[] = "['{$row_accomplishments_vs_variance['development_area_name']}', {$row_accomplishments_vs_variance['target_cost']}, {$row_accomplishments_vs_variance['actual_cost']}]";
 }
 
 // Convert the PHP array to a JavaScript-compatible array
@@ -34,10 +34,55 @@ while ($row_count_by_remarks = $stmt_count_by_remarks->fetch(PDO::FETCH_ASSOC)) 
 // Convert the PHP array to a JavaScript-compatible array
 $total_count_by_remarks = implode(',', $data_count_by_remarks);
 
+
+
+
+// Query the view to get quarterly sums
+$query_quarterly_sums = "SELECT total_q1, total_q2, total_q3, total_q4 FROM operational_plan_quarterly_sums";
+$stmt_quarterly_sums = $pdo->query($query_quarterly_sums);
+
+// Initialize an array to store the sums
+$quarterly_sums = [];
+
+// Fetch the data
+$row = $stmt_quarterly_sums->fetch(PDO::FETCH_ASSOC);
+if ($row) {
+    $quarterly_sums = [
+        (int)$row['total_q1'],
+        (int)$row['total_q2'],
+        (int)$row['total_q3'],
+        (int)$row['total_q4']
+    ];
+}
+$highest_value = max($quarterly_sums);
+    
+// Add 1000 to the highest value
+$highest_value_plus_1000_sums = $highest_value + 1000;
+
+
+// Query the view to get quarterly sums
+$query_quarterly_sums_bydname = "SELECT * FROM operational_plan_quarterly_sums_byd_name";
+$stmt_quarterly_sums_bydname = $pdo->query($query_quarterly_sums_bydname);
+
+// Initialize an array to store the sums
+$quarterly_sums_bydname = [];
+while ($row = $stmt_quarterly_sums_bydname->fetch(PDO::FETCH_ASSOC)) {
+    $quarterly_sums_bydname[] = [
+        $row['development_area_name'],
+        (int)$row['total_q1'],
+        (int)$row['total_q2'],
+        (int)$row['total_q3'],
+        (int)$row['total_q4']
+    ];
+}
+
+
+
 ?>
 
 
 <script>
+
 
 var dataAccomplishmentsVsVariance = [
     <?php echo $accomplishments_vs_variance; ?>
@@ -86,6 +131,31 @@ $(function () {
     plugins: [Chartist.plugins.tooltip()],
     width: "100%",
   };
+
+  
+
+
+c3.generate({
+  bindto: "#campaign-v3",
+  data: {
+    columns: <?= json_encode($quarterly_sums_bydname) ?>,
+    type: "line", // Line chart type
+    tooltip: { show: true },
+  },
+  legend: { hide: true },
+  color: { pattern: ["#C96868", "#5f76e8", "#ff4f70", "#01caf1", "#C96868"] },
+});
+
+d3.select("#campaign-v3 .c3-chart-arcs-title").style("font-family", "Rubik");
+
+var e = {
+  axisX: { showGrid: false },
+  seriesBarDistance: 1,
+  chartPadding: { top: 15, right: 15, bottom: 5, left: 0 },
+  plugins: [Chartist.plugins.tooltip()],
+  width: "100%",
+};
+
 
 
   c3.generate({
@@ -185,12 +255,12 @@ jQuery("#visitbylocate").vectorMap({
   var t = new Chartist.Line(
     ".stats",
     {
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      series: [[11, 10, 15, 21, 14, 23, 12]],
+      labels: ["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"],
+    series: [<?= json_encode($quarterly_sums) ?>],
     },
     {
-      low: 0,
-      high: 28,
+      low: 2000,
+      high: <?= $highest_value ?>,
       showArea: !0,
       fullWidth: !0,
       plugins: [Chartist.plugins.tooltip()],
