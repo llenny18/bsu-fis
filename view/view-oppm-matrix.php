@@ -84,17 +84,17 @@ if (isset($_GET['pap_id'])) {
 }
 ?>
                 <div class="row">
-                    
+                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button>
                     <div class="col-12">
                         <div class="card">
                           
                             
                             <div class="table-responsive p-1">
-                                <table class="table table-bordered table-responsive-lg">
+                                <table class="table table-bordered table-responsive-lg" id="opmm-table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Development Area</th>
-                                            <th scope="col" colspan="6"><?= $row2['development_area'] ?></th>
+                                            <th scope="col" colspan="7"><?= $row2['development_area'] ?></th>
                                             
                                         </tr>
                                        
@@ -106,6 +106,7 @@ if (isset($_GET['pap_id'])) {
       <th >Actual Accomplishments</th>
       <th >Variance</th>
       <th >Remarks</th>
+      <th >Action</th>
     </tr>
     
                                     </thead>
@@ -128,6 +129,7 @@ if (isset($_GET['pap_id'])) {
                 <td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>
                 <td>" . htmlspecialchars($row['variance']) . "</td>
                 <td>" . htmlspecialchars($row['remarks']) . "</td>
+                <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>
           
             </tr>";
         }
@@ -147,7 +149,106 @@ if (isset($_GET['pap_id'])) {
         </div>
         
     </div>
- 
+    <script>
+function editDA(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[1].innerText;
+            var cell2 = row.cells[2].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="dname" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[2].innerHTML = `<button type="submit" name="dname_btn" class="btn btn-success" >Save</button>`;
+
+        }
+
+        
+function editOC(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+            var cell1 = row.cells[1].innerText;
+            var cell2 = row.cells[2].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="outcome" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[2].innerHTML = `<button type="submit" name="outcome_btn" class="btn btn-success" >Save</button>`;
+        }
+
+        
+function editST(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            var cell1 = row.cells[1].innerText;
+            var cell2 = row.cells[2].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="strategy" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[2].innerHTML = `<button type="submit" name="strategy_btn" class="btn btn-success" >Save</button>`;
+        }
+
+ function editRow(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[0].innerText;
+            var cell2 = row.cells[1].innerText;
+            var cell3 = row.cells[2].innerText;
+            var cell4 = row.cells[3].innerText;
+            var cell5 = row.cells[4].innerText;
+            var cell6 = row.cells[5].innerText;
+            var cell7 = row.cells[6].innerText;
+            var cell8 = row.cells[7].innerText;
+
+            // Replace the current row values with input fields
+            row.cells[0].innerHTML = `<input type="text" name="pap_name" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;"  value="${cell1}">`;
+            row.cells[1].innerHTML = `<input type="text" name="p_indicator" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell2}">`;
+            row.cells[2].innerHTML = `<input type="text" name="personnel" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell3}">`;
+            row.cells[3].innerHTML = `<input type="text" name="q1" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell4}">`;
+            row.cells[4].innerHTML = `<input type="text" name="q2" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
+            row.cells[5].innerHTML = `<input type="text" name="q3" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
+            row.cells[6].innerHTML = `<input type="text" name="q3" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
+            row.cells[7].innerHTML = `<button type="submit" name="pap_btn" class="btn btn-success" >Save Data</button>`;
+
+           
+        }
+
+
+        function addRow() {
+            // Get the table body
+            var table = document.getElementById("opmm-table").getElementsByTagName('tbody')[0];
+
+            // Create a new row
+            var newRow = table.insertRow();
+
+            // Insert new cells and add data
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+            var cell7 = newRow.insertCell(6);
+            var cell8 = newRow.insertCell(7);
+            
+
+            // Add text input for each cell
+            cell1.innerHTML = '<input type="text" name="pap_namea" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell2.innerHTML = '<input type="number" name="p_indicatora" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell3.innerHTML = '<input type="text" name="personnela" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell4.innerHTML = '<input type="text" name="q2a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell5.innerHTML = '<input type="text" name="q3a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell6.innerHTML = '<input type="text" name="q2a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell7.innerHTML = '<input type="text" name="q2a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell8.innerHTML = '<button type="submit" class="btn btn-success" name="pap_new" >Insert Data</button>';
+        }
+    </script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
