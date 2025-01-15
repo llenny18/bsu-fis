@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2025 at 10:42 AM
+-- Generation Time: Jan 15, 2025 at 06:44 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `bsu_fis`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `actual_accomplishments_vs_variance`
+-- (See below for the actual view)
+--
+CREATE TABLE `actual_accomplishments_vs_variance` (
+`development_area` varchar(255)
+,`total_accomplishments` double
+,`total_variance` decimal(32,2)
+);
 
 -- --------------------------------------------------------
 
@@ -54,6 +66,17 @@ INSERT INTO `admin_accounts` (`id`, `full_name`, `username`, `password_hashed`) 
 (13, 'Fname13', 'admin13', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
 (14, 'Fname14', 'admin14', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz'),
 (15, 'Fname15', 'admin15', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `count_by_remarks`
+-- (See below for the actual view)
+--
+CREATE TABLE `count_by_remarks` (
+`remarks` text
+,`remark_count` bigint(21)
+);
 
 -- --------------------------------------------------------
 
@@ -268,6 +291,33 @@ INSERT INTO `operational_plan_monitoring_matrix` (`id`, `development_area_id`, `
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `operational_plan_quarterly_sums`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_quarterly_sums` (
+`total_q1` decimal(32,0)
+,`total_q2` decimal(32,0)
+,`total_q3` decimal(32,0)
+,`total_q4` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `operational_plan_quarterly_sums_byd_name`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_quarterly_sums_byd_name` (
+`development_area_name` varchar(255)
+,`total_q1` decimal(32,0)
+,`total_q2` decimal(32,0)
+,`total_q3` decimal(32,0)
+,`total_q4` decimal(32,0)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `operational_plan_view`
 -- (See below for the actual view)
 --
@@ -314,8 +364,7 @@ INSERT INTO `outcome` (`id`, `development_area_id`, `name`) VALUES
 (2, 1, 'Poverty Reduction'),
 (3, 2, 'Access to Healthcare'),
 (4, 3, 'Carbon Footprint Reduction'),
-(5, 4, 'Improved Literacy Rates'),
-(6, 5, 'Improved Literacy Rates');
+(5, 4, 'Improved Literacy Rates');
 
 -- --------------------------------------------------------
 
@@ -345,12 +394,12 @@ CREATE TABLE `pap` (
 --
 
 INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `personnel_office_concerned`, `quarterly_target_q1`, `quarterly_target_q2`, `quarterly_target_q3`, `quarterly_target_q4`, `total_estimated_cost`, `funding_source`, `risks`, `assessment_of_risk`, `mitigating_activities`) VALUES
-(1, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 60, 70, 80, 50000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
-(2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', 1000, 1200, 1400, 1600, 200000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors'),
-(3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 2, 3, 4, 5, 300000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
-(4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', 500, 600, 700, 800, 100000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
-(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 300, 400, 500, 600, 150000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
-(6, 1, 'S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 60, 70, 80, 50000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications');
+(1, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 500, 60, 70, 80, 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
+(2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', 1000, 1200, 1400, 1600, 20000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors'),
+(3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 2000, 4000, 4000, 5000, 30000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
+(4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', 500, 600, 700, 800, 10000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
+(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 300, 400, 500, 600, 15000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
+(6, 1, 'S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 600, 70, 80, 500.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications');
 
 -- --------------------------------------------------------
 
@@ -374,6 +423,18 @@ INSERT INTO `strategy` (`id`, `outcome_id`, `name`) VALUES
 (3, 3, 'Improve Rural Health Clinics'),
 (4, 4, 'Adopt Renewable Energy'),
 (5, 5, 'Implement Digital Learning Tools');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `target_vs_actual_cost`
+-- (See below for the actual view)
+--
+CREATE TABLE `target_vs_actual_cost` (
+`development_area_name` varchar(255)
+,`target_cost` decimal(35,0)
+,`actual_cost` decimal(32,2)
+);
 
 -- --------------------------------------------------------
 
@@ -408,6 +469,17 @@ INSERT INTO `teachingload` (`id`, `employee_id`, `Academic_Load_Units`, `General
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `total_cost_per_area`
+-- (See below for the actual view)
+--
+CREATE TABLE `total_cost_per_area` (
+`development_area_name` varchar(255)
+,`total_cost` decimal(32,2)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `workinfo`
 --
 
@@ -437,6 +509,24 @@ INSERT INTO `workinfo` (`id`, `employee_id`, `Date_of_Appointment`, `Years_in_Se
 -- --------------------------------------------------------
 
 --
+-- Structure for view `actual_accomplishments_vs_variance`
+--
+DROP TABLE IF EXISTS `actual_accomplishments_vs_variance`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `actual_accomplishments_vs_variance`  AS SELECT `operational_plan_view`.`development_area` AS `development_area`, sum(`operational_plan_view`.`actual_accomplishments`) AS `total_accomplishments`, sum(`operational_plan_view`.`variance`) AS `total_variance` FROM `operational_plan_view` GROUP BY `operational_plan_view`.`development_area` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `count_by_remarks`
+--
+DROP TABLE IF EXISTS `count_by_remarks`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_by_remarks`  AS SELECT `operational_plan_view`.`remarks` AS `remarks`, count(0) AS `remark_count` FROM `operational_plan_view` GROUP BY `operational_plan_view`.`remarks` ORDER BY count(0) DESC ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `employee_full_data`
 --
 DROP TABLE IF EXISTS `employee_full_data`;
@@ -455,11 +545,47 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `operational_plan_quarterly_sums`
+--
+DROP TABLE IF EXISTS `operational_plan_quarterly_sums`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_quarterly_sums`  AS SELECT sum(`p`.`quarterly_target_q1`) AS `total_q1`, sum(`p`.`quarterly_target_q2`) AS `total_q2`, sum(`p`.`quarterly_target_q3`) AS `total_q3`, sum(`p`.`quarterly_target_q4`) AS `total_q4` FROM `operational_plan_full` AS `p` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `operational_plan_quarterly_sums_byd_name`
+--
+DROP TABLE IF EXISTS `operational_plan_quarterly_sums_byd_name`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_quarterly_sums_byd_name`  AS SELECT `p`.`development_area_name` AS `development_area_name`, sum(`p`.`quarterly_target_q1`) AS `total_q1`, sum(`p`.`quarterly_target_q2`) AS `total_q2`, sum(`p`.`quarterly_target_q3`) AS `total_q3`, sum(`p`.`quarterly_target_q4`) AS `total_q4` FROM `operational_plan_full` AS `p` GROUP BY `p`.`development_area_name` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `operational_plan_view`
 --
 DROP TABLE IF EXISTS `operational_plan_view`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view`  AS SELECT `opmm`.`id` AS `matrix_id`, `da`.`name` AS `development_area`, `o`.`name` AS `outcome`, `s`.`name` AS `strategy`, `p`.`name` AS `pap_name`, `opmm`.`performance_indicator` AS `performance_indicator`, `opmm`.`actual_accomplishments` AS `actual_accomplishments`, `opmm`.`variance` AS `variance`, `opmm`.`remarks` AS `remarks`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM ((((`operational_plan_monitoring_matrix` `opmm` join `development_area` `da` on(`opmm`.`development_area_id` = `da`.`id`)) join `outcome` `o` on(`opmm`.`outcome_id` = `o`.`id`)) join `strategy` `s` on(`opmm`.`strategy_id` = `s`.`id`)) join `pap` `p` on(`s`.`id` = `p`.`strategy_id`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `target_vs_actual_cost`
+--
+DROP TABLE IF EXISTS `target_vs_actual_cost`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `target_vs_actual_cost`  AS SELECT `operational_plan_full`.`development_area_name` AS `development_area_name`, sum(`operational_plan_full`.`quarterly_target_q1` + `operational_plan_full`.`quarterly_target_q2` + `operational_plan_full`.`quarterly_target_q3` + `operational_plan_full`.`quarterly_target_q4`) AS `target_cost`, sum(`operational_plan_full`.`total_estimated_cost`) AS `actual_cost` FROM `operational_plan_full` GROUP BY `operational_plan_full`.`development_area_name` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `total_cost_per_area`
+--
+DROP TABLE IF EXISTS `total_cost_per_area`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_cost_per_area`  AS SELECT `operational_plan_full`.`development_area_name` AS `development_area_name`, sum(`operational_plan_full`.`total_estimated_cost`) AS `total_cost` FROM `operational_plan_full` GROUP BY `operational_plan_full`.`development_area_name` ;
 
 --
 -- Indexes for dumped tables

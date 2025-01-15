@@ -108,15 +108,15 @@ if (isset($_GET['op_id'])) {
     <thead>
         <tr>
             <th scope="col">Development Area</th>
-            <th scope="col" colspan="12"><?= $row2['development_area_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['development_area_name'] ?> <button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button></th>
         </tr>
         <tr>
             <th scope="col">Outcome 1</th>
-            <th scope="col" colspan="12"><?= $row2['outcome_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['outcome_name'] ?> <button class='edit-btn btn btn-primary' onclick='editOC(this)'>Edit</button></th>
         </tr>
         <tr>
             <th scope="col">Strategy 1</th>
-            <th scope="col" colspan="12"><?= $row2['strategy_name'] ?></th>
+            <th scope="col" colspan="12"><?= $row2['strategy_name'] ?> <button class='edit-btn btn btn-primary' onclick='editST(this)'>Edit</button></th>
         </tr>
         <tr>
             <th rowspan="2">Program / Activity / Project</th>
@@ -185,6 +185,47 @@ if (isset($_GET['op_id'])) {
         
     </div>
     <script>
+function editDA(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[1].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="dname" value="${cell1}"> <button type="submit" name="dname_btn" class="btn btn-success" >Save Data</button>`;
+
+        }
+
+        
+function editOC(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[1].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="outc" value="${cell1}"> <button type="submit" name="outc_btn" class="btn btn-success" >Save Data</button>`;
+
+        }
+
+        
+function editST(button) {
+            // Get the row where the button was clicked
+            var row = button.parentElement.parentElement;
+
+            // Get the current values of the row
+            var cell1 = row.cells[1].innerText;
+            
+
+            // Replace the current row values with input fields
+            row.cells[1].innerHTML = `<input type="text" name="strat" value="${cell1}"> <button type="submit" name="strat_btn" class="btn btn-success" >Save Data</button>`;
+
+        }
+
  function editRow(button) {
             // Get the row where the button was clicked
             var row = button.parentElement.parentElement;
