@@ -59,10 +59,7 @@ if (isset($_GET['pap_id'])) {
 
     // Fetch data from the operational_plan_view
     try {
-        $query = "SELECT 
-                    *
-                  FROM operational_plan_view
-                  WHERE matrix_id = :pap_id";
+        $query = "SELECT * FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid WHERE operational_plan_full.unique_id = :pap_id";
 
         $stmt = $pdo->prepare($query); // Use prepare instead of query
         $stmt->bindParam(':pap_id', $pap_id, PDO::PARAM_STR);
@@ -94,7 +91,8 @@ if (isset($_GET['pap_id'])) {
                                     <thead>
                                         <tr>
                                             <th scope="col">Development Area</th>
-                                            <th scope="col" colspan="7"><?= $row2['development_area'] ?></th>
+                                            <th scope="col" colspan="6"><?= $row2['development_area_name'] ?></th>
+                                            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button></th>
                                             
                                         </tr>
                                        
@@ -122,9 +120,9 @@ if (isset($_GET['pap_id'])) {
 
             // Print data row
             echo "<tr>
-                <td>" . htmlspecialchars($row['outcome']) . "</td>
-                <td>" . htmlspecialchars($row['strategy']) . "</td>
-                <td>" . htmlspecialchars($row['pap_name']) . "</td>
+                <td>" . htmlspecialchars($row['outcome_id']) . " - " . htmlspecialchars($row['outcome_name']) . "</td>
+                <td>" . htmlspecialchars($row['strategy_id']) . " - " . htmlspecialchars($row['strategy_name']) . "</td>
+                <td>" . htmlspecialchars($row['pap_id']) . " - " . htmlspecialchars($row['pap_name']) . "</td>
                 <td>" . htmlspecialchars($row['performance_indicator']) . "</td>
                 <td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>
                 <td>" . htmlspecialchars($row['variance']) . "</td>

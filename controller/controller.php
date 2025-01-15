@@ -103,7 +103,6 @@ function display_pmm_data($pdo) {
                 echo "<td>" . htmlspecialchars($row['development_area_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['outcome_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
                 echo "<td><a href='view-oppm.php?op_id={$row['unique_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
@@ -119,7 +118,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_view group by development_area";
+        $sql = "SELECT *, operational_plan_monitoring_matrix.id as matrix_id  FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid group by development_area_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -131,10 +130,11 @@ function display_pmm_data_matrix($pdo) {
             foreach ($data as $row) {
                 echo "<tr>";
                 echo "<td>" . htmlspecialchars($row['matrix_id']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['development_area']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['outcome']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['strategy']) . "</td>";
-                echo "<td><a href='view-oppm-matrix.php?pap_id={$row['matrix_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "<td>" . htmlspecialchars($row['development_area_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['outcome_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
+                echo "<td><a href='view-oppm-matrix.php?pap_id={$row['unique_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
         } else {
@@ -209,6 +209,48 @@ function get_admin_count($pdo) {
         // Return 0 in case of an error
         return 0;
     }
+}
+
+
+try {
+    // Fetch data from the database
+    $developmentAreasStmt = $pdo->query("SELECT id, name FROM development_area");
+    $outcomesStmt = $pdo->query("SELECT id, name as outcome FROM outcome");
+    $strategiesStmt = $pdo->query("SELECT id, name as strategy FROM strategy");
+    $papStmt = $pdo->query("SELECT id, name FROM pap");
+
+    $developmentAreas = $developmentAreasStmt->fetchAll(PDO::FETCH_ASSOC);
+    $outcomes = $outcomesStmt->fetchAll(PDO::FETCH_ASSOC);
+    $strategies = $strategiesStmt->fetchAll(PDO::FETCH_ASSOC);
+    $pap = $papStmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error fetching data: " . $e->getMessage());
+}
+
+function getValueBeforeHyphen($string) {
+    if (strpos($string, '-') !== false) {
+        $parts = explode('-', $string);
+    // Return the value before the first hyphen
+    return trim($parts[0]);
+    }
+        else{
+            return $string;
+        }
+    // Use explode to split the string at the first hyphen
+    
+}
+
+function getValueAfterHyphen($string) {
+    if (strpos($string, '-') !== false) {
+        $parts = explode('-', $string);
+    // Return the value after the hyphen
+    return trim($parts[1]);
+    }
+        else{
+            return $string;
+        }
+    // Use explode to split the string at the first hyphen
+    
 }
 
 ?>

@@ -13,20 +13,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php");
     
-    try {
-        // Fetch data from the database
-        $developmentAreasStmt = $pdo->query("SELECT id, name FROM development_area");
-        $outcomesStmt = $pdo->query("SELECT id, name as outcome FROM outcome");
-        $strategiesStmt = $pdo->query("SELECT id, name as strategy FROM strategy");
-        $papStmt = $pdo->query("SELECT id, name FROM pap");
-    
-        $developmentAreas = $developmentAreasStmt->fetchAll(PDO::FETCH_ASSOC);
-        $outcomes = $outcomesStmt->fetchAll(PDO::FETCH_ASSOC);
-        $strategies = $strategiesStmt->fetchAll(PDO::FETCH_ASSOC);
-        $pap = $papStmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        die("Error fetching data: " . $e->getMessage());
-    }
+   
     ?>
     
     <link href="dist/css/style.min.css" rel="stylesheet">
@@ -37,31 +24,7 @@
 
   
 <?php
-function getValueBeforeHyphen($string) {
-    if (strpos($string, '-') !== false) {
-        $parts = explode('-', $string);
-    // Return the value before the first hyphen
-    return trim($parts[0]);
-    }
-        else{
-            return $string;
-        }
-    // Use explode to split the string at the first hyphen
-    
-}
 
-function getValueAfterHyphen($string) {
-    if (strpos($string, '-') !== false) {
-        $parts = explode('-', $string);
-    // Return the value after the hyphen
-    return trim($parts[1]);
-    }
-        else{
-            return $string;
-        }
-    // Use explode to split the string at the first hyphen
-    
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     

@@ -37,12 +37,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Employees</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM Matrix</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Employee Accounts</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM Matrix</li>
                                 </ol>
                             </nav>
                         </div>
@@ -68,6 +68,7 @@
                     <th>Development Area</th>
                     <th>Outcome</th>
                     <th>Strategy</th>
+                    <th>PAP Name</th>
              
 
                 <th>Action</th>
