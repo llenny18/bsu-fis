@@ -75,31 +75,31 @@
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>First Name</label>
-                                                        <input type="text" value="<?= $row['first_name'] ?>" class="form-control" >
+                                                        <input required  type="text" value="<?= $row['first_name'] ?>" class="form-control" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Middle Name</label>
-                                                    <input type="text" value="<?= $row['middle_name'] ?>" class="form-control" >
+                                                    <input required  type="text" value="<?= $row['middle_name'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Last Name</label>
-                                                    <input type="text" value="<?= $row['last_name'] ?>" class="form-control" >
+                                                    <input required  type="text" value="<?= $row['last_name'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Sex</label>
-                                                    <input type="text" value="<?= $row['sex'] ?>" class="form-control" >
+                                                    <input required  type="text" value="<?= $row['sex'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Age</label>
-                                                    <input type="text" value="<?= $row['age'] ?>" class="form-control" >
+                                                    <input required  type="text" value="<?= $row['age'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                            
@@ -108,13 +108,13 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Date of Birth</label>
-                                                    <input type="date" value="<?= $row['date_of_birth'] ?>" class="form-control" >
+                                                    <input required  type="date" value="<?= $row['date_of_birth'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Place of Origin</label>
-                                                    <input type="text" value="<?= $row['place_of_origin'] ?>" class="form-control" >
+                                                    <input required  type="text" value="<?= $row['place_of_origin'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
@@ -134,13 +134,13 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Contact No.</label>
-                                                    <input type="text"  value="<?= $row['contact_number'] ?>" class="form-control" >
+                                                    <input required  type="text"  value="<?= $row['contact_number'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Email Address</label>
-                                                    <input type="email" value="<?= $row['email'] ?>" class="form-control" >
+                                                    <input required  type="email" value="<?= $row['email'] ?>" class="form-control" >
                                                 </div>
                                             </div>
                                            
@@ -181,13 +181,13 @@ if ($employee_id > 0) {
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Institution</label>
-                        <input type="text" value="<?= htmlspecialchars($row2['Institution']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row2['Institution']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Degree</label>
-                        <input type="text" value="<?= htmlspecialchars($row2['Degree']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row2['Degree']) ?>" class="form-control">
                     </div>
                 </div>
             </div>
@@ -195,19 +195,19 @@ if ($employee_id > 0) {
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Major/Specialization</label>
-                        <input type="text" value="<?= htmlspecialchars($row2['Major_Specialization']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row2['Major_Specialization']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Year Graduated</label>
-                        <input type="text" value="<?= htmlspecialchars($row2['Year_Graduated']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row2['Year_Graduated']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Units Earned</label>
-                        <input type="text" value="<?= htmlspecialchars($row2['Units_Earned']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row2['Units_Earned']) ?>" class="form-control">
                     </div>
                 </div>
             </div>
@@ -235,13 +235,13 @@ if ($employee_id > 0) {
         <div class="col-md-4">
             <div class="form-group">
                 <label>Institution</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label>Degree</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
     </div>
@@ -249,19 +249,19 @@ if ($employee_id > 0) {
         <div class="col-md-4">
             <div class="form-group">
                 <label>Major/Specialization</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label>Year Graduated</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label>Units Earned</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
     </div>
@@ -310,17 +310,17 @@ if ($employee_id > 0) {
                 echo '<div class="row">';
                 echo '    <div class="col-md-4">';
                 echo '        <div class="form-group">';
-                echo '            <input type="text" class="form-control" value="' . htmlspecialchars($row1['Type']) . '" >';
+                echo '            <input required  type="text" class="form-control" value="' . htmlspecialchars($row1['Type']) . '" >';
                 echo '        </div>';
                 echo '    </div>';
                 echo '    <div class="col-md-4">';
                 echo '        <div class="form-group">';
-                echo '            <input type="text" class="form-control" value="' . htmlspecialchars($row1['Name']) . '" >';
+                echo '            <input required  type="text" class="form-control" value="' . htmlspecialchars($row1['Name']) . '" >';
                 echo '        </div>';
                 echo '    </div>';
                 echo '    <div class="col-md-4">';
                 echo '        <div class="form-group">';
-                echo '            <input type="text" class="form-control" value="View | Edit | Delete" >';
+                echo '            <input required  type="text" class="form-control" value="View | Edit | Delete" >';
                 echo '        </div>';
                 echo '    </div>';
                 echo '</div>';
@@ -333,17 +333,17 @@ if ($employee_id > 0) {
         echo '<div class="row">';
         echo '    <div class="col-md-4">';
         echo '        <div class="form-group">';
-        echo '            <input type="text" class="form-control" value="">';
+        echo '            <input required  type="text" class="form-control" value="">';
         echo '        </div>';
         echo '    </div>';
         echo '    <div class="col-md-4">';
         echo '        <div class="form-group">';
-        echo '            <input type="text" class="form-control" value="">';
+        echo '            <input required  type="text" class="form-control" value="">';
         echo '        </div>';
         echo '    </div>';
         echo '    <div class="col-md-4">';
         echo '        <div class="form-group">';
-        echo '            <input type="text" class="form-control" value="">';
+        echo '            <input required  type="text" class="form-control" value="">';
         echo '        </div>';
         echo '    </div>';
         echo '</div>';
@@ -376,13 +376,13 @@ if ($employee_id > 0) {
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Academic Load Units</label>
-                        <input type="text" value="<?= htmlspecialchars($row3['Academic_Load_Units']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row3['Academic_Load_Units']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>General Education Units</label>
-                        <input type="text" value="<?= htmlspecialchars($row3['General_Education_Units']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row3['General_Education_Units']) ?>" class="form-control">
                     </div>
                 </div>
             </div>
@@ -401,19 +401,19 @@ if ($employee_id > 0) {
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Course Code</label>
-                        <input type="text" value="<?= htmlspecialchars($row3['Course_Code']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row3['Course_Code']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Course Title</label>
-                        <input type="text" value="<?= htmlspecialchars($row3['Course_Title']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row3['Course_Title']) ?>" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Units</label>
-                        <input type="text" value="<?= htmlspecialchars($row3['Units']) ?>" class="form-control">
+                        <input required  type="text" value="<?= htmlspecialchars($row3['Units']) ?>" class="form-control">
                     </div>
                 </div>
             </div>
@@ -430,13 +430,13 @@ if ($employee_id > 0) {
         <div class="col-md-6">
             <div class="form-group">
                 <label>Academic Load Units</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label>General Education Units</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
     </div>
@@ -455,19 +455,19 @@ if ($employee_id > 0) {
         <div class="col-md-3">
             <div class="form-group">
                 <label>Course Code</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label>Course Title</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label>Units</label>
-                <input type="text" value="" class="form-control">
+                <input required  type="text" value="" class="form-control">
             </div>
         </div>
     </div>
@@ -486,13 +486,13 @@ if ($employee_id > 0) {
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Date of Appointment</label>
-                                                        <input type="text" value="<?= $row['Date_of_Appointment'] ?>"  class="form-control" >
+                                                        <input required  type="text" value="<?= $row['Date_of_Appointment'] ?>"  class="form-control" >
                                                     </div>
                                                 </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Years in Service</label>
-                                                    <input type="text" value="<?= $row['Years_in_Service'] ?>"  class="form-control" >
+                                                    <input required  type="text" value="<?= $row['Years_in_Service'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -518,13 +518,13 @@ if ($employee_id > 0) {
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Designation</label>
-                                                    <input type="text" value="<?= $row['Designation'] ?>"  class="form-control" >
+                                                    <input required  type="text" value="<?= $row['Designation'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>Annual Salary</label>
-                                                    <input type="text" value="<?= $row['Annual_Salary'] ?>"  class="form-control" >
+                                                    <input required  type="text" value="<?= $row['Annual_Salary'] ?>"  class="form-control" >
                                                 </div>
                                             </div>
                                            

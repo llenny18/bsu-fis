@@ -37,7 +37,7 @@ if (isset($_GET['op_id'])) {
                     mitigating_activities
                   FROM operational_plan_full
                   WHERE unique_id = :op_id
-                  ORDER BY development_area_name, outcome_name, strategy_name";
+                  ORDER BY development_area_name, outcome_name, strategy_name, pap_name";
 
         $stmt = $pdo->prepare($query); // Use prepare instead of query
         $stmt->bindParam(':op_id', $op_id, PDO::PARAM_STR);
@@ -425,39 +425,55 @@ if(isset($_POST['strategy_btn'])){
         </tr>
     </thead>
     <tbody>
-        <?php
-        $currentDevArea = '';
-        $currentOutcome = '';
-        $currentStrategy = '';
+    <?php
+   function countPAPRows($data, $papName)
+   {
+       $count = 0;
+       foreach ($data as $row) {
+           if ($row['pap_name'] === $papName) {
+               $count++;
+           }
+       }
+       return $count;
+   }
 
-        foreach ($data as $row) {
-            // Print Development Area only if it changes
-        
+    $lastPAP = ''; // To track the last rendered PAP name
 
-            // Print data row
-            echo "<tr>
-                <td>" . htmlspecialchars($row['pap_id']) . "- " . htmlspecialchars($row['pap_name']) . "</td>
-                <td>" . htmlspecialchars($row['performance_indicator']) . "</td>
-                <td>" . htmlspecialchars($row['personnel_office_concerned']) . "</td>
-                <td>" . htmlspecialchars($row['quarterly_target_q1']) . "</td>
-                <td>" . htmlspecialchars($row['quarterly_target_q2']) . "</td>
-                <td>" . htmlspecialchars($row['quarterly_target_q3']) . "</td>
-                <td>" . htmlspecialchars($row['quarterly_target_q4']) . "</td>
-                <td>" . htmlspecialchars($row['total_estimated_cost']) . "</td>
-                <td>" . htmlspecialchars($row['funding_source']) . "</td>
-                <td>" . htmlspecialchars($row['risks']) . "</td>
-                <td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>
-                <td>" . htmlspecialchars($row['mitigating_activities']) . "</td>
-                <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button> ";
-                findPAP($pdo, $row['pap_id'], $_GET['op_id']);
+    foreach ($data as $row) {
+        // Check if the current PAP is the same as the last one
+        $isSamePAP = ($row['pap_name'] === $lastPAP);
+        echo "<tr>";
 
-                
-                
-                echo "</td>
-            </tr>";
+        // Render PAP name only if it's different from the last one
+        if (!$isSamePAP) {
+            echo "<td rowspan='" . countPAPRows($data, $row['pap_name']) . "'>" . htmlspecialchars($row['pap_name']) . "</td>";
+            $lastPAP = $row['pap_name']; // Update the last rendered PAP
         }
-        ?>
-    </tbody>
+
+        // Render other columns
+        echo "<td>" . htmlspecialchars($row['performance_indicator']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['personnel_office_concerned']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['quarterly_target_q1']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['quarterly_target_q2']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['quarterly_target_q3']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['quarterly_target_q4']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['total_estimated_cost']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['funding_source']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['risks']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['mitigating_activities']) . "</td>";
+        echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>";
+
+        echo "</tr>";
+    }
+
+    /**
+     * Helper function to count the number of rows for a specific PAP.
+     */
+ 
+    ?>
+</tbody>
+
 </table>
 </form>
 <?php } else { ?>
