@@ -13,45 +13,59 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php") ?>
     
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="dist/css/style.min.css" rel="stylesheet">
    
 </head>
-<?php
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get the username and password from the POST request
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-
-    try {
-        // Prepare the SQL query to find the user
-        $stmt = $pdo->prepare("SELECT id, username, password_hashed,  full_name FROM admin_accounts WHERE username = :username");
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->execute();
-
-        // Fetch the user
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user &&  ($password== decryptPassword($user['password_hashed']))) {
-            // Valid credentials, create session variables
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['user_type'] = 'administrator';
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['full_name'] = $user['full_name'] ;
-
-            // Redirect to index.php
-            echo "<script>alert('Login Success!'); window.location.href='index.php'</script>";
-            exit();
-        } else {
-            // Invalid credentials
-            echo "<script>alert('Invalid username or password!'); window.location.href='a-login.php' </script>";
-        }
-    } catch (PDOException $e) {
-        // Handle any errors
-        echo "<script>alert('".$e->getMessage()."'); </script>";
-    }
-}
-?>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $username = $_POST['username'] ?? '';
+                $password = $_POST['password'] ?? '';
+    
+                try {
+                    $stmt = $pdo->prepare("SELECT id, username, password_hashed, full_name FROM admin_accounts WHERE username = :username");
+                    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+                    $stmt->execute();
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                    if ($user && ($password == decryptPassword($user['password_hashed']))) {
+                        $_SESSION['id'] = $user['id'];
+                        $_SESSION['user_type'] = 'administrator';
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['full_name'] = $user['full_name'];
+    
+                        // Successful login, show SweetAlert and redirect
+                        echo "Swal.fire({
+                            icon: 'success',
+                            title: 'Login Successful',
+                            text: 'You have successfully logged in!',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            window.location.href = 'index.php';
+                        });";
+                    } else {
+                        // Invalid credentials
+                        echo "Swal.fire({
+                            icon: 'error',
+                            title: 'Invalid Credentials',
+                            text: 'The username or password you entered is incorrect.',
+                            confirmButtonText: 'Try Again'
+                        });";
+                    }
+                } catch (PDOException $e) {
+                    echo "Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: '" . $e->getMessage() . "'
+                    });";
+                }
+            }
+            ?>
+        });
+    </script>
 <body>
     <div class="main-wrapper">
 

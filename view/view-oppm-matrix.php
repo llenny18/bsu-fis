@@ -12,6 +12,7 @@
     
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php") ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <link href="dist/css/style.min.css" rel="stylesheet">
    
@@ -51,7 +52,16 @@
         
             // Check if any rows were updated
             if ($stmt->rowCount() > 0) {
-                echo "<script>alert('Matrix updated successfully!')</script>";
+                echo "<script>
+                Swal.fire({
+                icon: 'success',
+                title: 'Update Success',
+                text: 'Matrix updated successfully!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = window.location.href;
+            });</script>";
             }
         }
         
@@ -85,7 +95,17 @@ if(isset($_POST['matrix_new'])){
     
     // Check if the update was successful
     if ($stmt->rowCount() > 0) {
-        echo "<script>window.location.href='view-oppm-matrix.php?pap_id=".$_GET['pap_id']."';alert('Matrix inserted successfully!'); </script>";
+        echo "<script>window.location.href='view-oppm-matrix.php?pap_id=".$_GET['pap_id']."';
+        Swal.fire({
+                icon: 'success',
+                title: 'Update Success',
+                text: 'Matrix inserted successfully!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = window.location.href;
+            });
+        </script>";
     }
 }
 
@@ -227,7 +247,7 @@ function editDA(button) {
             
 
             // Replace the current row values with input fields
-            row.cells[1].innerHTML = `<input type="text" name="dname" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[1].innerHTML = `<input required type="text" name="dname" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
             row.cells[2].innerHTML = `<button type="submit" name="dname_btn" class="btn btn-success" >Save</button>`;
 
         }
@@ -241,7 +261,7 @@ function editOC(button) {
             
 
             // Replace the current row values with input fields
-            row.cells[1].innerHTML = `<input type="text" name="outcome" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[1].innerHTML = `<input required type="text" name="outcome" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
             row.cells[2].innerHTML = `<button type="submit" name="outcome_btn" class="btn btn-success" >Save</button>`;
         }
 
@@ -255,7 +275,7 @@ function editST(button) {
             
 
             // Replace the current row values with input fields
-            row.cells[1].innerHTML = `<input type="text" name="strategy" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
+            row.cells[1].innerHTML = `<input required type="text" name="strategy" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell1}"> `;
             row.cells[2].innerHTML = `<button type="submit" name="strategy_btn" class="btn btn-success" >Save</button>`;
         }
 
@@ -271,10 +291,10 @@ function editST(button) {
     var cell8 = row.cells[8].innerText;
 
     // Replace the current row values with input fields
-    row.cells[0].innerHTML = `<input type="hidden" name="m_id[]" value="${cell1}">`;
-    row.cells[5].innerHTML = `<input type="text" name="accomplished[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
-    row.cells[6].innerHTML = `<input type="text" name="variance[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
-    row.cells[7].innerHTML = `<input type="text" name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell7}">`;
+    row.cells[0].innerHTML = `<input required type="hidden" name="m_id[]" value="${cell1}">`;
+    row.cells[5].innerHTML = `<input required type="text" name="accomplished[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
+    row.cells[6].innerHTML = `<input required type="text" name="variance[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
+    row.cells[7].innerHTML = `<input required type="text" name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell7}">`;
     row.cells[8].innerHTML = `<button type="submit" name="edit_matrix" class="btn btn-success">Save Data</button>`;
 }
 
@@ -326,13 +346,13 @@ if (isset($_GET['new_id'])) {
                     var cell8 = newRow.insertCell(7);
 
                     // Add text input for each cell
-                    cell1.innerHTML = '<input type="text" name="outcome" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['outcome_name']) ?>" readonly>';
-                    cell2.innerHTML = '<input type="text" name="strategy" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['strategy_name']) ?>" readonly>';
-                    cell3.innerHTML = '<input type="text" name="pap_name" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['pap_name']) ?>" readonly>';
-                    cell4.innerHTML = '<input type="text" name="performance" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['performance_indicator']) ?>" readonly>';
-                    cell5.innerHTML = '<input type="text" name="accomplished" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Actual accomplishments here">';
-                    cell6.innerHTML = '<input type="text" name="variance" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Variance">';
-                    cell7.innerHTML = '<input type="text" name="remarks" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Remarks here">';
+                    cell1.innerHTML = '<input required type="text" name="outcome" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['outcome_name']) ?>" readonly>';
+                    cell2.innerHTML = '<input required type="text" name="strategy" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['strategy_name']) ?>" readonly>';
+                    cell3.innerHTML = '<input required type="text" name="pap_name" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['pap_name']) ?>" readonly>';
+                    cell4.innerHTML = '<input required type="text" name="performance" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="<?= htmlspecialchars($row_new['performance_indicator']) ?>" readonly>';
+                    cell5.innerHTML = '<input required type="text" name="accomplished" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Actual accomplishments here">';
+                    cell6.innerHTML = '<input required type="text" name="variance" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Variance">';
+                    cell7.innerHTML = '<input required type="text" name="remarks" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" placeholder="Remarks here">';
                     cell8.innerHTML = '<button type="submit" class="btn btn-success" name="matrix_new">Insert Data</button>';
                 </script>
 <?php

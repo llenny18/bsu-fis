@@ -163,7 +163,7 @@ if($_SESSION['user_type'] == "employee"){
                                         class="svg-icon mr-2 ml-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php"><i data-feather="power"
+                                <a class="dropdown-item" href="logout.php" id="logoutButton"><i data-feather="power"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Logout</a>
                               

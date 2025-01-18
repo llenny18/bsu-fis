@@ -14,9 +14,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php") ?>
     
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="dist/css/style.min.css" rel="stylesheet">
    
 </head>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -42,19 +45,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['full_name'] = $user['first_name'] . " " . $user['middle_name']. " " .$user['last_name'];
 
             // Redirect to index.php
-            echo "<script>alert('Login Success!'); window.location.href='index.php'</script>";
-            exit();
+            echo "Swal.fire({
+                icon: 'success',
+                title: 'Login Successful',
+                text: 'You have successfully logged in!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'index.php';
+            });";
         } else {
             // Invalid credentials
-            echo "<script>alert('Invalid username or password!'); </script>";
+            echo "Swal.fire({
+                icon: 'error',
+                title: 'Invalid Credentials',
+                text: 'The username or password you entered is incorrect.',
+                confirmButtonText: 'Try Again'
+            });";
         }
     } catch (PDOException $e) {
-        // Handle any errors
-        echo "<script>alert('".$e->getMessage()."'); </script>";
+        echo "Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '" . $e->getMessage() . "'
+        });";
     }
 }
 ?>
-
+        });
+</script>
 <body>
     <div class="main-wrapper">
 
@@ -82,13 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-lg-12">
             <div class="form-group">
                 <label class="text-dark" for="uname">Username</label>
-                <input class="form-control" id="uname" name="username" type="text" placeholder="Enter your username" required>
+                <input required class="form-control" id="uname" name="username" type="text" placeholder="Enter your username" required>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="form-group">
                 <label class="text-dark" for="pwd">Password</label>
-                <input class="form-control" id="pwd" name="password" type="password" placeholder="Enter your password" required>
+                <input required class="form-control" id="pwd" name="password" type="password" placeholder="Enter your password" required>
             </div>
         </div>
         <div class="col-lg-12 text-center mb-3">

@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php") ?>
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -39,26 +40,50 @@ if (isset($_GET['a_id'])) {
         exit;
     }
 }
-
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
     $full_name = $_POST['full_name'];
     $username = $_POST['username'];
-    $password =  encryptPassword($_POST['password']) ;
+    $password = encryptPassword($_POST['password']);
 
     if (isset($a_id)) {
         // Update the existing record
         $stmt = $pdo->prepare("UPDATE admin_accounts SET full_name = :full_name, username = :username, password_hashed = :password WHERE id = :a_id");
         $stmt->execute(['full_name' => $full_name, 'username' => $username, 'password' => $password, 'a_id' => $a_id]);
-        echo "Record updated successfully!";
+
+        // Display success alert
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Record Updated',
+                text: 'The record has been updated successfully!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'admins.php';
+            });
+        </script>";
     } else {
         // Insert a new record
         $stmt = $pdo->prepare("INSERT INTO admin_accounts (full_name, username, password_hashed) VALUES (:full_name, :username, :password)");
         $stmt->execute(['full_name' => $full_name, 'username' => $username, 'password' => $password]);
-        echo "Record inserted successfully!";
+
+        // Display success alert
+        echo "<script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Record Added',
+                text: 'The record has been added successfully!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'admins.php';
+            });
+        </script>";
     }
 }
+
 ?>
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <?php include("./nav.php") ?>
@@ -94,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Full Name</label>
-                                                    <input type="text" name="full_name" class="form-control" placeholder="Full Name here" value="<?php echo isset($admin) ? $admin['full_name'] : ''; ?>" required>
+                                                    <input required type="text" name="full_name" class="form-control" placeholder="Full Name here" value="<?php echo isset($admin) ? $admin['full_name'] : ''; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,13 +127,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Username</label>
-                                                    <input type="text" name="username" class="form-control" placeholder="Username here" value="<?php echo isset($admin) ? $admin['username'] : ''; ?>" required>
+                                                    <input required type="text" name="username" class="form-control" placeholder="Username here" value="<?php echo isset($admin) ? $admin['username'] : ''; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Password</label>
-                                                    <input type="text" name="password" class="form-control" placeholder="Password here" value="<?php echo isset($admin) ? decryptPassword($admin['password_hashed']) : ''; ?>" required>
+                                                    <input required type="text" name="password" class="form-control" placeholder="Password here" value="<?php echo isset($admin) ? decryptPassword($admin['password_hashed']) : ''; ?>" required>
                                                 </div>
                                             </div>
                                           
