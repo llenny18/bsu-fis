@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 06:44 AM
+-- Generation Time: Jan 18, 2025 at 07:52 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,9 +28,6 @@ SET time_zone = "+00:00";
 -- (See below for the actual view)
 --
 CREATE TABLE `actual_accomplishments_vs_variance` (
-`development_area` varchar(255)
-,`total_accomplishments` double
-,`total_variance` decimal(32,2)
 );
 
 -- --------------------------------------------------------
@@ -74,8 +71,6 @@ INSERT INTO `admin_accounts` (`id`, `full_name`, `username`, `password_hashed`) 
 -- (See below for the actual view)
 --
 CREATE TABLE `count_by_remarks` (
-`remarks` text
-,`remark_count` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -98,7 +93,8 @@ INSERT INTO `development_area` (`id`, `name`) VALUES
 (2, 'Healthcare Improvement'),
 (3, 'Environmental Sustainability'),
 (4, 'Education Quality'),
-(5, 'Infrastructure Development');
+(5, 'Infrastructure Development'),
+(9, '2');
 
 -- --------------------------------------------------------
 
@@ -267,10 +263,9 @@ CREATE TABLE `operational_plan_full` (
 
 CREATE TABLE `operational_plan_monitoring_matrix` (
   `id` int(11) NOT NULL,
-  `development_area_id` int(11) NOT NULL,
-  `outcome_id` int(11) NOT NULL,
-  `strategy_id` int(11) NOT NULL,
+  `opmm_fid` varchar(455) NOT NULL,
   `performance_indicator` varchar(255) DEFAULT NULL,
+  `m_pap_id` int(11) NOT NULL,
   `actual_accomplishments` text DEFAULT NULL,
   `variance` decimal(10,2) DEFAULT NULL,
   `remarks` text DEFAULT NULL
@@ -280,13 +275,14 @@ CREATE TABLE `operational_plan_monitoring_matrix` (
 -- Dumping data for table `operational_plan_monitoring_matrix`
 --
 
-INSERT INTO `operational_plan_monitoring_matrix` (`id`, `development_area_id`, `outcome_id`, `strategy_id`, `performance_indicator`, `actual_accomplishments`, `variance`, `remarks`) VALUES
-(1, 1, 1, 1, 'Number of businesses funded', '40', 10.00, 'Underperformed in Q1'),
-(2, 2, 3, 3, 'Number of clinics upgraded', '3', 1.00, 'On track for expansion'),
-(3, 3, 4, 4, 'Amount of energy saved', '650', 150.00, 'Ahead of schedule'),
-(4, 4, 5, 5, 'Number of students enrolled', '400', 100.00, 'On track for digital expansion'),
-(5, 5, 2, 2, 'Number of people enrolled', '1100', 100.00, 'Meeting Q2 targets'),
-(6, 5, 2, 2, 'Count of people enrolled', '1100', 100.00, 'Meeting Q2 targets');
+INSERT INTO `operational_plan_monitoring_matrix` (`id`, `opmm_fid`, `performance_indicator`, `m_pap_id`, `actual_accomplishments`, `variance`, `remarks`) VALUES
+(1, '1-1-1', 'Number of businesses funded', 1, '40', 10.00, 'Underperformed in Q1'),
+(2, '1-2-2', 'Number of clinics upgraded', 2, '3', 1.00, 'On track for expansion'),
+(3, '2-3-3', 'Amount of energy saved', 3, '650', 150.00, 'Ahead of schedule'),
+(4, '1-2-2', 'Number of students enrolled', 4, '400', 100.00, 'On track for digital expansion'),
+(5, '4-5-5', 'Number of people enrolled', 5, '1100', 100.00, 'Meeting Q2 targets'),
+(6, '9-9-9', 'Count of people enrolled', 9, '1100', 100.00, 'Meeting Q2 targets'),
+(7, '1-1-1', 'Number of businesses funded', 6, '40', 10.00, 'Underperformed in Q1');
 
 -- --------------------------------------------------------
 
@@ -322,25 +318,6 @@ CREATE TABLE `operational_plan_quarterly_sums_byd_name` (
 -- (See below for the actual view)
 --
 CREATE TABLE `operational_plan_view` (
-`matrix_id` int(11)
-,`development_area` varchar(255)
-,`outcome` varchar(255)
-,`strategy` varchar(255)
-,`pap_name` varchar(255)
-,`performance_indicator` varchar(255)
-,`actual_accomplishments` text
-,`variance` decimal(10,2)
-,`remarks` text
-,`personnel_office_concerned` varchar(255)
-,`quarterly_target_q1` int(11)
-,`quarterly_target_q2` int(11)
-,`quarterly_target_q3` int(11)
-,`quarterly_target_q4` int(11)
-,`total_estimated_cost` decimal(10,2)
-,`funding_source` varchar(255)
-,`risks` text
-,`assessment_of_risk` text
-,`mitigating_activities` text
 );
 
 -- --------------------------------------------------------
@@ -364,7 +341,8 @@ INSERT INTO `outcome` (`id`, `development_area_id`, `name`) VALUES
 (2, 1, 'Poverty Reduction'),
 (3, 2, 'Access to Healthcare'),
 (4, 3, 'Carbon Footprint Reduction'),
-(5, 4, 'Improved Literacy Rates');
+(5, 4, 'Improved Literacy Rates'),
+(9, 9, '3');
 
 -- --------------------------------------------------------
 
@@ -399,7 +377,11 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 2000, 4000, 4000, 5000, 30000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
 (4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', 500, 600, 700, 800, 10000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
 (5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 300, 400, 500, 600, 15000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
-(6, 1, 'S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 600, 70, 80, 500.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications');
+(6, 1, 'S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', 50, 600, 70, 80, 500.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
+(54, 9, '', '4', '6', 7, 7, 8, 9, 6.00, '666', '6', '7', '6'),
+(55, 5, '', '1', '2', 3, 4, 5, 6, 7.00, '8', '9', '10', '11'),
+(56, 1, 'papname', '11', '12', 11, 11, 11, 11, 111.00, '11', '11', '11', '11'),
+(57, 1, 'palagaymuna', '3423', '4234234', NULL, 423, 234, 423423, 234.00, '234', '4234', '23423', '234234');
 
 -- --------------------------------------------------------
 
@@ -422,7 +404,8 @@ INSERT INTO `strategy` (`id`, `outcome_id`, `name`) VALUES
 (2, 2, 'Increase Social Safety Nets'),
 (3, 3, 'Improve Rural Health Clinics'),
 (4, 4, 'Adopt Renewable Energy'),
-(5, 5, 'Implement Digital Learning Tools');
+(5, 5, 'Implement Digital Learning Tools'),
+(9, 9, '3');
 
 -- --------------------------------------------------------
 
@@ -567,7 +550,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `operational_plan_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view`  AS SELECT `opmm`.`id` AS `matrix_id`, `da`.`name` AS `development_area`, `o`.`name` AS `outcome`, `s`.`name` AS `strategy`, `p`.`name` AS `pap_name`, `opmm`.`performance_indicator` AS `performance_indicator`, `opmm`.`actual_accomplishments` AS `actual_accomplishments`, `opmm`.`variance` AS `variance`, `opmm`.`remarks` AS `remarks`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM ((((`operational_plan_monitoring_matrix` `opmm` join `development_area` `da` on(`opmm`.`development_area_id` = `da`.`id`)) join `outcome` `o` on(`opmm`.`outcome_id` = `o`.`id`)) join `strategy` `s` on(`opmm`.`strategy_id` = `s`.`id`)) join `pap` `p` on(`s`.`id` = `p`.`strategy_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view`  AS SELECT `opmm`.`development_area_id` AS `development_area_id`, `opmm`.`outcome_id` AS `outcome_id`, `opmm`.`strategy_id` AS `strategy_id`, `opmm`.`id` AS `matrix_id`, `p`.`id` AS `pap_id`, `da`.`name` AS `development_area`, `o`.`name` AS `outcome`, `s`.`name` AS `strategy`, `p`.`name` AS `pap_name`, `opmm`.`performance_indicator` AS `performance_indicator`, `opmm`.`actual_accomplishments` AS `actual_accomplishments`, `opmm`.`variance` AS `variance`, `opmm`.`remarks` AS `remarks`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM ((((`operational_plan_monitoring_matrix` `opmm` join `development_area` `da` on(`opmm`.`development_area_id` = `da`.`id`)) join `outcome` `o` on(`opmm`.`outcome_id` = `o`.`id`)) join `strategy` `s` on(`opmm`.`strategy_id` = `s`.`id`)) join `pap` `p` on(`s`.`id` = `p`.`strategy_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -627,10 +610,7 @@ ALTER TABLE `licensesandorganizations`
 -- Indexes for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `development_area_id` (`development_area_id`),
-  ADD KEY `outcome_id` (`outcome_id`),
-  ADD KEY `strategy_id` (`strategy_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `outcome`
@@ -681,7 +661,7 @@ ALTER TABLE `admin_accounts`
 -- AUTO_INCREMENT for table `development_area`
 --
 ALTER TABLE `development_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `education`
@@ -705,25 +685,25 @@ ALTER TABLE `licensesandorganizations`
 -- AUTO_INCREMENT for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `outcome`
 --
 ALTER TABLE `outcome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pap`
 --
 ALTER TABLE `pap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `strategy`
 --
 ALTER TABLE `strategy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `teachingload`
@@ -752,14 +732,6 @@ ALTER TABLE `education`
 --
 ALTER TABLE `licensesandorganizations`
   ADD CONSTRAINT `licensesandorganizations_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee_accounts` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `operational_plan_monitoring_matrix`
---
-ALTER TABLE `operational_plan_monitoring_matrix`
-  ADD CONSTRAINT `operational_plan_monitoring_matrix_ibfk_1` FOREIGN KEY (`development_area_id`) REFERENCES `development_area` (`id`),
-  ADD CONSTRAINT `operational_plan_monitoring_matrix_ibfk_2` FOREIGN KEY (`outcome_id`) REFERENCES `outcome` (`id`),
-  ADD CONSTRAINT `operational_plan_monitoring_matrix_ibfk_3` FOREIGN KEY (`strategy_id`) REFERENCES `strategy` (`id`);
 
 --
 -- Constraints for table `outcome`

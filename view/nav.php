@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION['id'])){
-echo "<script>window.location.href='login.php'</script>";
+echo "<script>window.location.href='../'</script>";
 }
 $edituserlink = "";
 if($_SESSION['user_type'] == "administrator"){

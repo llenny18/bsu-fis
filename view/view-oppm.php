@@ -163,68 +163,69 @@ if(isset($_POST['outcome_btn'])){
 }
 
                   
-if(isset($_POST['pap_btn'])){
 
-    $sql = "UPDATE pap SET name = :name, 
-    performance_indicator = :performance_indicator, 
-    personnel_office_concerned = :personnel_office_concerned, 
-    quarterly_target_q1 = :quarterly_target_q1,
-     quarterly_target_q2 = :quarterly_target_q2, 
-     quarterly_target_q3 = :quarterly_target_q3, 
-     quarterly_target_q4 = :quarterly_target_q4, 
-     total_estimated_cost = :total_estimated_cost,
-      funding_source = :funding_source, 
-      risks = :risks, 
-      assessment_of_risk = :assessment_of_risk, 
-      mitigating_activities = :mitigating_activities
-        WHERE id = :id";
-    
-    // Prepare the query
-    $stmt = $pdo->prepare($sql);
-    
-    $pap_values = explode("-", $_POST['pap_name']);
+if(isset($_POST['pap_btn'])) {
+    // Ensure values are received as arrays
+    $ids = $_POST['pap_name'];  // Array of PAP IDs
+    $performance_indicators = $_POST['p_indicator'];  // Array of performance indicators
+    $personnel_offices = $_POST['personnel'];  // Array of personnel
+    $q1_values = $_POST['q1'];  // Array of Q1 values
+    $q2_values = $_POST['q2'];  // Array of Q2 values
+    $q3_values = $_POST['q3'];  // Array of Q3 values
+    $q4_values = $_POST['q4'];  // Array of Q4 values
+    $total_estimates = $_POST['t_estimate'];  // Array of total estimates
+    $funding_sources = $_POST['f_resource'];  // Array of funding sources
+    $risks = $_POST['risk'];  // Array of risks
+    $assessments = $_POST['r_assesment'];  // Array of assessments
+    $mitigations = $_POST['m_activity'];  // Array of mitigating activities
 
-    // Assign values to variables
-    $pap_vid = $pap_values[0]; 
-    $pap_vname = $pap_values[1]; 
+    // Loop through each submitted row
+    foreach($ids as $index => $pap_vid) {
+        // Prepare the update SQL statement
+        $sql = "UPDATE pap SET 
+            name = :name, 
+            performance_indicator = :performance_indicator, 
+            personnel_office_concerned = :personnel_office_concerned, 
+            quarterly_target_q1 = :quarterly_target_q1,
+            quarterly_target_q2 = :quarterly_target_q2, 
+            quarterly_target_q3 = :quarterly_target_q3, 
+            quarterly_target_q4 = :quarterly_target_q4, 
+            total_estimated_cost = :total_estimated_cost,
+            funding_source = :funding_source, 
+            risks = :risks, 
+            assessment_of_risk = :assessment_of_risk, 
+            mitigating_activities = :mitigating_activities
+            WHERE id = :id";
 
-    // Bind parameters
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':performance_indicator', $performance_indicator);
-    $stmt->bindParam(':personnel_office_concerned', $personnel_office_concerned);
-    $stmt->bindParam(':quarterly_target_q1', $quarterly_target_q1);
-    $stmt->bindParam(':quarterly_target_q2', $quarterly_target_q2);
-    $stmt->bindParam(':quarterly_target_q3', $quarterly_target_q3);
-    $stmt->bindParam(':quarterly_target_q4', $quarterly_target_q4);
-    $stmt->bindParam(':total_estimated_cost', $total_estimated_cost);
-    $stmt->bindParam(':funding_source', $funding_source);
-    $stmt->bindParam(':risks', $risks);
-    $stmt->bindParam(':assessment_of_risk', $assessment_of_risk);
-    $stmt->bindParam(':mitigating_activities', $mitigating_activities);
-    $stmt->bindParam(':id', $pap_id);
-    
-    // Set values for the parameters (for example purposes)
-    $name = $pap_vname; // The new username
-    $performance_indicator = $_POST['p_indicator']; // The new username
-    $personnel_office_concerned = $_POST['personnel']; // The new username
-    $quarterly_target_q1 = $_POST['q1']; // The new username
-    $quarterly_target_q2 = $_POST['q2']; // The new username
-    $quarterly_target_q3 = $_POST['q3']; // The new username
-    $quarterly_target_q4 = $_POST['q4']; // The new username
-    $total_estimated_cost = $_POST['t_estimate']; // The new username
-    $funding_source = $_POST['f_resource']; // The new username
-    $risks = $_POST['risk']; // The new username
-    $assessment_of_risk = $_POST['r_assesment']; // The new username
-    $mitigating_activities = $_POST['m_activity']; // The new username
-    $pap_id = $pap_vid; // The user ID to update
-    
-    // Execute the query
-    $stmt->execute();
-    
-    // Check if the update was successful
-    if ($stmt->rowCount() > 0) {
-        echo "<script>alert('PAP Details Name updated successfully!')</script>";
+        // Prepare the query
+        $stmt = $pdo->prepare($sql);
+
+        // Bind parameters for each row
+        $stmt->bindParam(':name', $_POST['pap_name'][$index]);
+        $stmt->bindParam(':performance_indicator', $_POST['p_indicator'][$index]);
+        $stmt->bindParam(':personnel_office_concerned', $_POST['personnel'][$index]);
+        $stmt->bindParam(':quarterly_target_q1', $_POST['q1'][$index]);
+        $stmt->bindParam(':quarterly_target_q2', $_POST['q2'][$index]);
+        $stmt->bindParam(':quarterly_target_q3', $_POST['q3'][$index]);
+        $stmt->bindParam(':quarterly_target_q4', $_POST['q4'][$index]);
+        $stmt->bindParam(':total_estimated_cost', $_POST['t_estimate'][$index]);
+        $stmt->bindParam(':funding_source', $_POST['f_resource'][$index]);
+        $stmt->bindParam(':risks', $_POST['risk'][$index]);
+        $stmt->bindParam(':assessment_of_risk', $_POST['r_assesment'][$index]);
+        $stmt->bindParam(':mitigating_activities', $_POST['m_activity'][$index]);
+        $stmt->bindParam(':id', $pap_vid);  // PAP ID for the current row
+
+        // Execute the query
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            // Handle any errors
+            echo "Error: " . $e->getMessage();
+        }
     }
+
+    // Confirm the update success
+    echo "<script>window.location.href='view-oppm.php?op_id=".$_GET['op_id']."';alert('PAP Details updated successfully!')</script>";
 }
 
 
@@ -391,7 +392,12 @@ if(isset($_POST['strategy_btn'])){
                 <td>" . htmlspecialchars($row['risks']) . "</td>
                 <td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>
                 <td>" . htmlspecialchars($row['mitigating_activities']) . "</td>
-                <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>
+                <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button> ";
+                findPAP($pdo, $row['pap_id'], $_GET['op_id']);
+
+                
+                
+                echo "</td>
             </tr>";
         }
         ?>
@@ -477,19 +483,19 @@ function editST(button) {
             var cell13 = row.cells[12].innerText;
 
             // Replace the current row values with input fields
-            row.cells[0].innerHTML = `<input type="text" name="pap_name" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;"  value="${cell1}">`;
-            row.cells[1].innerHTML = `<input type="text" name="p_indicator" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell2}">`;
-            row.cells[2].innerHTML = `<input type="text" name="personnel" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell3}">`;
-            row.cells[3].innerHTML = `<input type="text" name="q1" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell4}">`;
-            row.cells[4].innerHTML = `<input type="text" name="q2" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
-            row.cells[5].innerHTML = `<input type="text" name="q3" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
-            row.cells[6].innerHTML = `<input type="text" name="q4" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell7}">`;
-            row.cells[7].innerHTML = `<input type="text" name="t_estimate" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell8}">`;
-            row.cells[8].innerHTML = `<input type="text" name="f_resource" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell9}">`;
-            row.cells[9].innerHTML = `<input type="text" name="risk" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell10}">`;
-            row.cells[10].innerHTML = `<input type="text" name="r_assesment" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell11}">`;
-            row.cells[11].innerHTML = `<input type="text" name="m_activity" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell12}">`;
-            row.cells[12].innerHTML = `<button type="submit" name="pap_btn" class="btn btn-success" >Save Data</button>`;
+            row.cells[0].innerHTML = `<input type="text" name="pap_name[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;"  value="${cell1}">`;
+            row.cells[1].innerHTML = `<input type="text" name="p_indicator[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell2}">`;
+            row.cells[2].innerHTML = `<input type="text" name="personnel[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell3}">`;
+            row.cells[3].innerHTML = `<input type="text" name="q1[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell4}">`;
+            row.cells[4].innerHTML = `<input type="text" name="q2[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
+            row.cells[5].innerHTML = `<input type="text" name="q3[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
+            row.cells[6].innerHTML = `<input type="text" name="q4[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell7}">`;
+            row.cells[7].innerHTML = `<input type="text" name="t_estimate[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell8}">`;
+            row.cells[8].innerHTML = `<input type="text" name="f_resource[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell9}">`;
+            row.cells[9].innerHTML = `<input type="text" name="risk[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell10}">`;
+            row.cells[10].innerHTML = `<input type="text" name="r_assesment[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell11}">`;
+            row.cells[11].innerHTML = `<input type="text" name="m_activity[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell12}">`;
+            row.cells[12].innerHTML = `<button type="submit" name="pap_btn[]" class="btn btn-success" >Save Data</button>`;
 
            
         }
