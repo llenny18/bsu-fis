@@ -492,7 +492,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-primary .text-white</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-primary text-white">
                                             <tr>
                                                 <th>#</th>
@@ -533,7 +533,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-success .text-white</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-success text-white">
                                             <tr>
                                                 <th>#</th>
@@ -577,7 +577,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-info .text-whit</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-info text-white">
                                             <tr>
                                                 <th>#</th>
@@ -618,7 +618,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-warning .text-white</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-warning text-white">
                                             <tr>
                                                 <th>#</th>
@@ -662,7 +662,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-danger .text-white</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-danger text-white">
                                             <tr>
                                                 <th>#</th>
@@ -703,7 +703,7 @@
                                 <h6 class="card-subtitle">To use add class <code>.bg-inverse .text-white</code> in the
                                     <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-inverse text-white">
                                             <tr>
                                                 <th>#</th>
@@ -748,7 +748,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-primary</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-primary text-white">
                                             <tr>
                                                 <th>#</th>
@@ -790,7 +790,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-success</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-success text-white">
                                             <tr>
                                                 <th>#</th>
@@ -835,7 +835,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-info</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-info text-white">
                                             <tr>
                                                 <th>#</th>
@@ -877,7 +877,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-warning</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-warning text-white">
                                             <tr>
                                                 <th>#</th>
@@ -922,7 +922,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-danger</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-danger text-white">
                                             <tr>
                                                 <th>#</th>
@@ -964,7 +964,7 @@
                                     <code>&lt;thead&gt;</code> and add class <code>.border .border-dark</code> in
                                     <code>&lt;tbody&gt;</code></h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead class="bg-inverse text-white">
                                             <tr>
                                                 <th>#</th>
@@ -1009,7 +1009,7 @@
                                     <code>.table-hover .table-primary</code> and add class
                                     <code>.bg-primary .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-primary">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-primary">
                                         <thead class="bg-primary text-white">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1050,7 +1050,7 @@
                                     <code>.table-hover .table-success</code> and add class
                                     <code>.bg-success .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-success">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-success">
                                         <thead class="bg-success text-white">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1094,7 +1094,7 @@
                                     <code>.table-hover .table-info</code> and add class
                                     <code>.bg-info .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-info">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-info">
                                         <thead class="bg-info text-white">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1135,7 +1135,7 @@
                                     <code>.table-hover .table-warning</code> and add class
                                     <code>.bg-warning .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-warning">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-warning">
                                         <thead class="bg-warning text-white">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1179,7 +1179,7 @@
                                     <code>.table-hover .table-danger</code> and add class
                                     <code>.bg-danger .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-danger">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-danger">
                                         <thead class="bg-danger text-white">
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1220,7 +1220,7 @@
                                     <code>.table-hover .table-dark</code> and add class
                                     <code>.bg-dark .text-white</code> in the <code>&lt;thead&gt;</code>.</h6>
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-dark">
+                                    <table  style="color: #2e2d2d;"  class="table table-hover table-dark">
                                         <thead class="bg-dark text-white">
                                             <tr>
                                                 <th scope="col">#</th>

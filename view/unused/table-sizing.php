@@ -489,7 +489,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Default Size Light Table</h4>
                             </div>
-                            <table class="table mb-0">
+                            <table  style="color: #2e2d2d;"  class="table mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -526,7 +526,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Default Size Dark Table</h4>
                             </div>
-                            <table class="table table-dark mb-0">
+                            <table  style="color: #2e2d2d;"  class="table table-dark mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -563,7 +563,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Small Size Light Table</h4>
                             </div>
-                            <table class="table table-sm mb-0">
+                            <table  style="color: #2e2d2d;"  class="table table-sm mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -599,7 +599,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Small Size Dark Table</h4>
                             </div>
-                            <table class="table table-sm table-dark mb-0">
+                            <table  style="color: #2e2d2d;"  class="table table-sm table-dark mb-0">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>

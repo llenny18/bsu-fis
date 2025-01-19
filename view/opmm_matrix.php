@@ -35,14 +35,15 @@
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM Matrix</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Plan Matrix</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM Matrix</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Operational Plan Matrix Records</li>
                                 </ol>
                             </nav>
                         </div>
@@ -60,7 +61,7 @@
                             <div class="card-body">
                                
                                 <div class="table-responsive">
-                                    <table id="multi_col_order"
+                                    <table  style="color: #2e2d2d;"  id="multi_col_order"
                                         class="table table-striped table-bordered display no-wrap" style="width:100%">
                                         <thead>
                                             <tr>

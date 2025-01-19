@@ -19,6 +19,19 @@ output {
   background-color: #dc4747; /* Set the color */
 }
 
+table, th, td {
+  border: 2px solid #1f1d1d;
+
+}
+.red-hr-design{
+  border: none; /* Remove default border */
+  height: 5px;
+  background-color: #dc4747; /* Set the color */
+ 
+}
+
+
+
 #edata-title{
   color: #dc4747; /* Set the color */
 

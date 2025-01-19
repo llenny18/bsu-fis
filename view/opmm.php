@@ -35,14 +35,15 @@
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM  <a href="new-oppm.php" class="btn btn-primary"> + Add new OPMM</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM  <a href="new-oppm.php" class="btn btn-primary"> + Add new Operational Plan</a></h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM List</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Operational Plan Records</li>
                                 </ol>
                             </nav>
                         </div>
@@ -60,7 +61,7 @@
                             <div class="card-body">
                                
                                 <div class="table-responsive">
-                                    <table id="multi_col_order"
+                                    <table  style="color: #2e2d2d;"  id="multi_col_order"
                                         class="table table-striped table-bordered display no-wrap" style="width:100%">
                                         <thead>
                                             <tr>

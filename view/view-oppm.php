@@ -78,14 +78,15 @@ if (isset($_GET['op_id'])) {
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Record Full Data</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Operational Record Full Data</li>
                                 </ol>
                             </nav>
                         </div>
@@ -388,7 +389,7 @@ if(isset($_POST['strategy_btn'])){
 <!-- HTML and Table Structure -->
 <?php if (!empty($data)) { ?>
     <form method="post"> 
-<table class="table table-bordered table-responsive-lg" id="opmm-table">
+<table  style="color: #2e2d2d;"   class="table table-bordered table-responsive-lg" id="opmm-table">
     <thead>
         <tr>
             <th scope="col">Development Area</th>

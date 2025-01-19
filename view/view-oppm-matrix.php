@@ -114,14 +114,15 @@ if(isset($_POST['matrix_new'])){
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM Matrix</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Plan Matrix Data</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM Matrix</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Operational Plan Matrix Data</li>
                                 </ol>
                             </nav>
                         </div>
@@ -173,7 +174,7 @@ if (isset($_GET['pap_id'])) {
                             
                             <div class="table-responsive p-1">
                                 <form action="" method="post">
-                                <table class="table table-bordered table-responsive-lg" id="opmm-table">
+                                <table  style="color: #2e2d2d;"  class="table table-bordered table-responsive-lg" id="opmm-table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Development Area</th>

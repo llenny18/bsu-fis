@@ -90,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
         <div class="page-wrapper">
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Administrator Details</h4>

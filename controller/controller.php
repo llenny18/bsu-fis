@@ -153,7 +153,7 @@ function display_pmm_data_matrix($pdo) {
 function get_pmm_data_matrix_count($pdo) {
     try {
         // Query to count the rows grouped by development_area
-        $countSql = "SELECT COUNT(*) as row_count FROM (SELECT development_area FROM operational_plan_view GROUP BY development_area) as grouped_data";
+        $countSql = "SELECT COUNT(*) as row_count FROM operational_plan_monitoring_matrix";
         $countStmt = $pdo->prepare($countSql);
         $countStmt->execute();
 

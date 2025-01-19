@@ -496,7 +496,7 @@
                                         class="mr-1 font-18 mdi mdi-numeric-1-box-multiple-outline"></i> Table With
                                     Outside Padding</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -532,7 +532,7 @@
                                     Outside Padding</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table  style="color: #2e2d2d;"  class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -573,7 +573,7 @@
                                     make <code>&lt;thead&gt;</code>s appear light.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table  style="color: #2e2d2d;"  class="table">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
@@ -614,7 +614,7 @@
                                     table row within the <code>&lt;tbody&gt;</code>.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table  style="color: #2e2d2d;"  class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -655,7 +655,7 @@
                                     the table and cells.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered">
+                                <table  style="color: #2e2d2d;"  class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -695,7 +695,7 @@
                                     rows within a <code>&lt;tbody&gt;</code>.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table  style="color: #2e2d2d;"  class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -735,7 +735,7 @@
                                     cells.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table  style="color: #2e2d2d;"  class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">Class</th>
@@ -807,7 +807,7 @@
                                     table. It helps users with screen readers to find a table and understand what it’s
                                     about and decide if they want to read it.</h6>
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <caption>List of users</caption>
                                         <thead>
                                             <tr>
@@ -853,7 +853,7 @@
                                     <code>.table-responsive{-sm|-md|-lg|-xl}</code>.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table  style="color: #2e2d2d;"  class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -929,7 +929,7 @@
                                 </table>
                             </div>
                             <div class="table-responsive mt-3">
-                                <table class="table table-bordered table-responsive-lg">
+                                <table  style="color: #2e2d2d;"  class="table table-bordered table-responsive-lg">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -982,7 +982,7 @@
                                     to create responsive tables up to a particular breakpoint. From that breakpoint and
                                     up, the table will behave normally and not scroll horizontally.</h6>
                                 <div class="table-responsive-sm">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1022,7 +1022,7 @@
                                     </table>
                                 </div>
                                 <div class="table-responsive-md">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1062,7 +1062,7 @@
                                     </table>
                                 </div>
                                 <div class="table-responsive-lg">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -1102,7 +1102,7 @@
                                     </table>
                                 </div>
                                 <div class="table-responsive-xl">
-                                    <table class="table">
+                                    <table  style="color: #2e2d2d;"  class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>

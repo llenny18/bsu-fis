@@ -496,7 +496,7 @@
                                 </p>
 
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped mb-0">
+                                    <table  style="color: #2e2d2d;"  class="table table-bordered table-striped mb-0">
                                         <thead>
                                             <tr>
                                                 <th></th>

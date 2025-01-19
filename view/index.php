@@ -48,7 +48,9 @@
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
+           
                     <div class="col-7 align-self-center">
                         <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning <?= $_SESSION['full_name'] ?>!</h3>
                         <div class="d-flex align-items-center">
@@ -63,7 +65,6 @@
                    
                 </div>
             </div>
-           
             <div class="container-fluid">
                
                 <div class="card-group">
@@ -127,7 +128,23 @@
                         </div>
                     </div>
                 </div>
-            
+                <div class="row">
+                    <div class="col-md-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start">
+                                    <h4 class="card-title mb-0">Overall Monthly Total Estimated Costs</h4>
+                                    
+                                </div>
+                                <div class="pl-4 mb-5">
+                                    <div class="stats ct-charts position-relative" style="height: 358px;"></div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+          
+                </div>
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
@@ -158,23 +175,7 @@
                     </div>
                 </div>
              
-                <div class="row">
-                    <div class="col-md-6 col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Overall Monthly Total Estimated COsts</h4>
-                                    
-                                </div>
-                                <div class="pl-4 mb-5">
-                                    <div class="stats ct-charts position-relative" style="height: 358px;"></div>
-                                </div>
-                            
-                            </div>
-                        </div>
-                    </div>
-          
-                </div>
+                
            
              
               

@@ -35,6 +35,7 @@
         <div class="page-wrapper">
           
             <div class="page-breadcrumb">
+            <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Administrator <a href="manage_admin.php" class="btn btn-primary"> + Register New Administrator</a></h4>
@@ -60,7 +61,7 @@
                             <div class="card-body">
                               
                                 <div class="table-responsive">
-                                    <table id="multi_col_order"
+                                    <table  style="color: #2e2d2d;"  id="multi_col_order"
                                         class="table table-striped table-bordered display no-wrap" style="width:100%">
                                         <thead>
                                             <tr>

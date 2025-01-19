@@ -492,7 +492,7 @@
                                     backgrounds—with <code> .table-inverse</code>.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-dark mb-0">
+                                <table  style="color: #2e2d2d;"  class="table table-dark mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -533,7 +533,7 @@
                                     within the <code>&lt;tbody&gt;</code>.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped table-dark mb-0">
+                                <table  style="color: #2e2d2d;"  class="table table-striped table-dark mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -574,7 +574,7 @@
                                     the table and cells.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-dark mb-0">
+                                <table  style="color: #2e2d2d;"  class="table table-bordered table-dark mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -615,7 +615,7 @@
                                     styles.</h6>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-dark mb-0">
+                                <table  style="color: #2e2d2d;"  class="table table-dark mb-0">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>

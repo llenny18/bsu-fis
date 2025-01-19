@@ -529,7 +529,7 @@
                                     <!-- Column -->
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                                    <table  style="color: #2e2d2d;"  id="zero_config" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
                                                 <th>Status</th>

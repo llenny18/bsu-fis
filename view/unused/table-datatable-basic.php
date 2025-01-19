@@ -496,7 +496,7 @@
                                     function:<code> $().DataTable();</code>. You can refer full documentation from here
                                     <a href="https://datatables.net/">Datatables</a></h6>
                                 <div class="table-responsive">
-                                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                                    <table  style="color: #2e2d2d;"  id="zero_config" class="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -992,7 +992,7 @@
                                     initialisation parameter, you can set the table to display the data in exactly the
                                     order that you want.</h6>
                                 <div class="table-responsive">
-                                    <table id="default_order" class="table table-striped table-bordered display no-wrap"
+                                    <table  style="color: #2e2d2d;"  id="default_order" class="table table-striped table-bordered display no-wrap"
                                         style="width:100%">
                                         <thead>
                                             <tr>
@@ -1488,7 +1488,7 @@
                                     then a secondary column if the data in the first column is identical), through the
                                     <code> columns.orderData</code> option.</h6>
                                 <div class="table-responsive">
-                                    <table id="multi_col_order"
+                                    <table  style="color: #2e2d2d;"  id="multi_col_order"
                                         class="table table-striped table-bordered display no-wrap" style="width:100%">
                                         <thead>
                                             <tr>

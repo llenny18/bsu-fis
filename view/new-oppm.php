@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- HTML and Table Structure -->
 
     <form method="post"> 
-<table class="table table-bordered table-responsive-lg" id="opmm-table">
+<table  style="color: #2e2d2d;"  class="table table-bordered table-responsive-lg" id="opmm-table">
     <thead>
     <tr>
     <th scope="col">Development Area</th>
