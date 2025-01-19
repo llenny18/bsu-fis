@@ -9,21 +9,20 @@ while ($row_total_cost_per_area = $stmt_total_cost_per_area->fetch(PDO::FETCH_AS
 // Convert the PHP array to a JavaScript-compatible array
 $total_cost_per_area = implode(',', $data_total_cost_per_area);
 
-$query_accomplishments_vs_variance = "
-    SELECT * FROM `target_vs_actual_cost`
-";
+// New query to fetch data
+$query_outcomes = "SELECT count(outcome_name) as count, outcome_name FROM `operational_plan_full` GROUP BY outcome_name";
 
-$stmt_accomplishments_vs_variance = $pdo->query($query_accomplishments_vs_variance);
-$data_accomplishments_vs_variance = [];
+$stmt_outcomes = $pdo->query($query_outcomes);
+$data_outcomes = [];
 
-while ($row_accomplishments_vs_variance = $stmt_accomplishments_vs_variance->fetch(PDO::FETCH_ASSOC)) {
-    // Add each row to the data array, formatted as a JavaScript-compatible array
-    $data_accomplishments_vs_variance[] = "['{$row_accomplishments_vs_variance['development_area_name']}', {$row_accomplishments_vs_variance['target_cost']}, {$row_accomplishments_vs_variance['actual_cost']}]";
+// Fetch the query results and format them for JavaScript
+while ($row_outcomes = $stmt_outcomes->fetch(PDO::FETCH_ASSOC)) {
+    // Format each row as ['outcome_name', count]
+    $data_outcomes[] = "['{$row_outcomes['outcome_name']}', {$row_outcomes['count']}]";
 }
 
-// Convert the PHP array to a JavaScript-compatible array
-$accomplishments_vs_variance = implode(',', $data_accomplishments_vs_variance);
-
+// Convert PHP array to JavaScript-compatible array
+$outcomes_js_data = implode(',', $data_outcomes);
 
 $query_count_by_remarks = "SELECT * FROM `count_by_remarks` ";
 $stmt_count_by_remarks = $pdo->query($query_count_by_remarks);
@@ -77,27 +76,28 @@ while ($row = $stmt_quarterly_sums_bydname->fetch(PDO::FETCH_ASSOC)) {
 }
 
 
+// Query the month_year_costs view to get the monthly sums
+$query_month_year_costs = "SELECT month_year, total_estimated_cost FROM month_year_costs";
+$stmt_month_year_costs = $pdo->query($query_month_year_costs);
+
+// Initialize arrays to store the months and costs
+$months = [];
+$costs = [];
+
+// Fetch the data
+while ($row = $stmt_month_year_costs->fetch(PDO::FETCH_ASSOC)) {
+    $months[] = $row['month_year'];
+    $costs[] = (float)$row['total_estimated_cost'];
+}
+
+// Find the highest value to set chart scale
+$highest_value = max($costs);
+$highest_value_plus_1000 = $highest_value + 1000;
 
 ?>
 
 
 <script>
-
-
-var dataAccomplishmentsVsVariance = [
-    <?php echo $accomplishments_vs_variance; ?>
-];
-
-// Prepare data for the radar chart
-var labels = [];
-var accomplishments = [];
-var variances = [];
-
-dataAccomplishmentsVsVariance.forEach(function(item) {
-    labels.push(item[0]); // Development area (X-axis)
-    accomplishments.push(item[1]); // Total accomplishments (Y-axis)
-    variances.push(item[2]); // Total variance (Y-axis)
-});
 
 
 
@@ -170,27 +170,38 @@ var e = {
     color: { pattern: ["#C96868", "#5f76e8", "#ff4f70", "#01caf1", "#C96868" ] },
   });
 
-  new Chartist.Bar(
-  ".net-income",
-  {
-    labels: ["Economic Development", "Education Quality", "Environmental Sustainability", "Healthcare Improvement", "Infrastructure Development"],
-    series: [
-      accomplishments,
-      variances
-    ]
-  },
-  {
-    seriesBarDistance: 30,
-    axisX: {
-      labelInterpolationFnc: function (e) {
-        return e;
-      }
+  // Data prepared from PHP
+var dataOutcomes = [
+    <?php echo $outcomes_js_data; ?>
+];
+
+// Prepare data for the chart
+var labels = [];
+var counts = [];
+
+dataOutcomes.forEach(function(item) {
+    labels.push(item[0]); // Outcome name (X-axis)
+    counts.push(item[1]); // Count of occurrences (Y-axis)
+});
+
+// Update the chart
+new Chartist.Bar(
+    ".net-income",
+    {
+        labels: labels, // Use dynamic labels from the query
+        series: [counts] // Use dynamic counts from the query
     },
-   
-    plugins: [
-      Chartist.plugins.tooltip() // Enable tooltips on hover
-    ]
-  }
+    {
+        seriesBarDistance: 30,
+        axisX: {
+            labelInterpolationFnc: function(e) {
+                return e;
+            }
+        },
+        plugins: [
+            Chartist.plugins.tooltip() // Enable tooltips on hover
+        ]
+    }
 ),
     jQuery("#visitbylocate").vectorMap({
       map: "world_mill_en",
@@ -252,28 +263,29 @@ jQuery("#visitbylocate").vectorMap({
   },
 });
 
-  var t = new Chartist.Line(
+var t = new Chartist.Line(
     ".stats",
     {
-      labels: ["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"],
-    series: [<?= json_encode($quarterly_sums) ?>],
+        labels: <?= json_encode($months) ?>, // Use months from PHP query
+        series: [<?= json_encode($costs) ?>], // Use costs from PHP query
     },
     {
-      low: 2000,
-      high: <?= $highest_value ?>,
-      showArea: !0,
-      fullWidth: !0,
-      plugins: [Chartist.plugins.tooltip()],
-      axisY: {
-        onlyInteger: !0,
-        scaleMinSpace: 40,
-        offset: 20,
-        labelInterpolationFnc: function (e) {
-          return e / 1 + "k";
+        low: 0,
+        high: <?= $highest_value_plus_1000 ?>, // Adjusted high value for scale
+        showArea: true,
+        fullWidth: true,
+        plugins: [Chartist.plugins.tooltip()],
+        axisY: {
+            onlyInteger: true,
+            scaleMinSpace: 40,
+            offset: 20,
+            labelInterpolationFnc: function (e) {
+                return e / 1000 + "k"; // Formatting as 'k' for thousands
+            },
         },
-      },
     }
-  );
+);
+
   
   t.on("draw", function (e) {
     "area" === e.type && e.element.attr({ x1: e.x1 + 0.001 });

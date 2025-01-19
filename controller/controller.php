@@ -32,7 +32,7 @@ function decryptPassword($encryptedPassword) {
 function display_admin_accounts($pdo) {
     try {
         // Query to fetch admin accounts
-        $adminQuery = "SELECT id, full_name, username, password_hashed FROM admin_accounts";
+        $adminQuery = "SELECT id, full_name, username, password_hashed FROM admin_accounts WHERE status= 'saved'";
         $stmtAdmin = $pdo->prepare($adminQuery);
         $stmtAdmin->execute();
         $adminResults = $stmtAdmin->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@ function display_admin_accounts($pdo) {
 function display_employee_accounts($pdo) {
     try {
         // Query to fetch employee accounts
-        $employeeQuery = "SELECT * FROM employee_accounts";
+        $employeeQuery = "SELECT * FROM employee_accounts WHERE status= 'saved'";
         $stmtEmployee = $pdo->prepare($employeeQuery);
         $stmtEmployee->execute();
         $employeeResults = $stmtEmployee->fetchAll(PDO::FETCH_ASSOC);
@@ -93,7 +93,7 @@ if($employee['e_type']== "teaching"){ echo "e_data.php"; }else{ echo "e_data_n.p
 function display_pmm_data($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_full GROUP BY unique_id";
+        $sql = "SELECT * FROM operational_plan_full  WHERE status= 'saved' GROUP BY unique_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -123,7 +123,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT *, operational_plan_monitoring_matrix.id as matrix_id  FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid group by development_area_id";
+        $sql = "SELECT *, operational_plan_monitoring_matrix.id as matrix_id  FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid  WHERE operational_plan_full.status= 'saved' group by development_area_id";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 

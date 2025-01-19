@@ -294,13 +294,29 @@ function editST(button) {
     row.cells[0].innerHTML = `<input required type="hidden" name="m_id[]" value="${cell1}">`;
     row.cells[5].innerHTML = `<input required type="text" name="accomplished[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell5}">`;
     row.cells[6].innerHTML = `<input required type="text" name="variance[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell6}">`;
-    row.cells[7].innerHTML = `<input required type="text" name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell7}">`;
+
+    // Replace the remarks cell with a select box that reflects the current value
+    row.cells[7].innerHTML = `
+        <select name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
+            <option value="">Select...</option>
+            <option value="Met" ${cell7 === 'Met' ? 'selected' : ''}>Met</option>
+            <option value="Partially Met" ${cell7 === 'Partially Met' ? 'selected' : ''}>Partially Met</option>
+            <option value="Ongoing" ${cell7 === 'Ongoing' ? 'selected' : ''}>Ongoing</option>
+            <option value="Unmet" ${cell7 === 'Unmet' ? 'selected' : ''}>Unmet</option>
+            <option value="Not Applicable" ${cell7 === 'Not Applicable' ? 'selected' : ''}>Not Applicable</option>
+        </select>
+    `;
+
     row.cells[8].innerHTML = `<button type="submit" name="edit_matrix" class="btn btn-success">Save Data</button>`;
 }
 
 
 
-   
+
+
+
+
+
     </script>
 
 

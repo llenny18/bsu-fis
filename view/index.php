@@ -150,7 +150,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Target Vs Actual Cost</h4>
+                                <h4 class="card-title">Operational Plan Counts</h4>
                                 <div class="net-income mt-4 position-relative" style="height:384px;"></div>
                               
                             </div>
@@ -159,21 +159,12 @@
                 </div>
              
                 <div class="row">
-                    <div class="col-md-6 col-lg-8">
+                    <div class="col-md-6 col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">Operational Plan Quarterly Target Total Sum</h4>
-                                    <div class="ml-auto">
-                                        <div class="dropdown sub-dropdown">
-                                            <button class="btn btn-link text-muted dropdown-toggle" type="button"
-                                                id="dd1" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                <i data-feather="more-vertical"></i>
-                                            </button>
-                                           
-                                        </div>
-                                    </div>
+                                    <h4 class="card-title mb-0">Overall Monthly Total Estimated COsts</h4>
+                                    
                                 </div>
                                 <div class="pl-4 mb-5">
                                     <div class="stats ct-charts position-relative" style="height: 358px;"></div>
@@ -182,17 +173,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Quarterly Target Sum Per Development Area Name</h4>
-                                <div class="mt-4 activity">
-                                <div id="campaign-v3" class="mt-2" style="height:398px; width:100%;"></div>
-                        
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          
                 </div>
            
              

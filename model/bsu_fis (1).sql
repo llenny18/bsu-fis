@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2025 at 10:15 AM
+-- Generation Time: Jan 19, 2025 at 10:28 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -291,15 +291,26 @@ CREATE TABLE `operational_plan_monitoring_matrix` (
 --
 
 INSERT INTO `operational_plan_monitoring_matrix` (`id`, `opmm_fid`, `m_pap_id`, `actual_accomplishments`, `variance`, `remarks`) VALUES
-(1, '1-1-1', 1, 'one accomp', '56756767', 'Ongoing'),
-(2, '1-2-2', 2, '3', '1.00', 'Unmet'),
-(3, '2-3-3', 3, '65034', '150.00', 'Met'),
-(4, '1-2-2', 4, '400', '100.00', 'Not Applicable'),
-(5, '4-5-5', 5, '1100', '100.00', 'Met'),
-(6, '9-9-9', 9, '1100', '100.00', 'Partially Met'),
-(7, '1-1-1', 6, '567567', '6756756', 'Met'),
-(9, '1-1-1', 58, 'retaa', 'retvv', 'Unmet'),
-(10, '1-1-1', 56, '12312', 'werewr', 'Not Applicable');
+(10, '1-1-1', 7, '200 tasks completed', '100.00', 'Met'),
+(11, '1-2-2', 8, '15 training sessions', '80.00', 'Ongoing'),
+(12, '2-3-3', 9, '450 participants engaged', '50.00', 'Partially Met'),
+(13, '4-5-5', 10, '1000 units delivered', '0.00', 'Met'),
+(14, '9-9-9', 11, 'Project halted', '200.00', 'Unmet'),
+(15, '1-1-1', 12, 'Site inspections conducted', '100.00', 'Met'),
+(16, '1-2-2', 13, 'Reports finalized', '10.00', 'Unmet'),
+(17, '2-3-3', 14, 'Testing phases executed', '20.00', 'Partially Met'),
+(18, '4-5-5', 15, 'Deliverables reviewed', '30.00', 'Ongoing'),
+(19, '9-9-9', 16, 'Materials sourced', '5.00', 'Met'),
+(20, '1-1-1', 17, 'Data analysis completed', '12.00', 'Met'),
+(21, '1-2-2', 18, 'Stakeholder meetings held', '15.00', 'Partially Met'),
+(22, '2-3-3', 19, 'Marketing campaigns launched', '7.00', 'Ongoing'),
+(23, '4-5-5', 20, 'Workshops facilitated', '100.00', 'Met'),
+(24, '9-9-9', 21, 'Baseline surveys completed', '0.00', 'Not Applicable'),
+(25, '1-1-1', 22, 'Technical evaluations done', '25.00', 'Unmet'),
+(26, '1-2-2', 23, 'Budget utilization assessed', '40.00', 'Partially Met'),
+(27, '2-3-3', 24, 'Community outreach conducted', '100.00', 'Met'),
+(28, '4-5-5', 25, 'Infrastructure upgraded', '70.00', 'Ongoing'),
+(29, '9-9-9', 26, 'Policy reviews completed', '0.00', 'Met');
 
 -- --------------------------------------------------------
 
@@ -416,18 +427,26 @@ CREATE TABLE `pap` (
 --
 
 INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `personnel_office_concerned`, `quarterly_target_q1`, `quarterly_target_q2`, `quarterly_target_q3`, `quarterly_target_q4`, `total_estimated_cost`, `funding_source`, `risks`, `assessment_of_risk`, `mitigating_activities`) VALUES
-(1, 1, 'Small Business Grants', '1Number of businesses funded', 'Economic Development Office', '5456456', '60', '70', '802', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
-(2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', '1000', '1200', '1400', '1600', 20000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors'),
-(3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', '2000', '4000', '4000', '5000', 30000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
-(4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', '500', '600', '700', '800', 10000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
-(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', '300', '400', '500', '600', 15000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
-(6, 1, '6- 6- 6- S2mall Business Grants', 'Number of businesses funded', 'Economic Development Office', '2344', '600', '70', '80', 500.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
-(54, 9, '', '4', '6', '7', '7', '8', '9', 6.00, '666', '6', '7', '6'),
-(55, 5, '', '1', '2', '3', '4', '5', '6', 7.00, '8', '9', '10', '11'),
-(56, 1, 'papname', '11', '12', '11', '11', '11', '11', 111.00, '11', '11', '11', '11'),
-(57, 1, 'palagaymuna', '3423', '4234234', NULL, '423', '234', '423423', 234.00, '234', '4234', '23423', '234234'),
-(58, 1, 'try new', 'Number of businesses funded', 'Economic Development Office', '50', '600', '70', '80', 500.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
-(59, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', '5456456', '60', '70', '802', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications');
+(1, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Identify 50 eligible businesses', 'Approve 40 grants', 'Disburse funds to 35 businesses', 'Monitor performance of grantees', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications'),
+(2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', 'Launch outreach campaigns', 'Register 200 individuals', 'Enroll 300 new beneficiaries', 'Evaluate program impact', 20000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors'),
+(3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 'Assess 10 clinics', 'Complete upgrades for 5 clinics', 'Initiate upgrades for 5 more clinics', 'Conduct quality checks', 30000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors'),
+(4, 4, 'Install Solar Panels', 'Amount of energy saved', 'Environment Office', 'Identify 10 locations', 'Install panels in 5 sites', 'Expand to 10 additional sites', 'Train local staff on maintenance', 10000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government'),
+(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 'Develop curriculum', 'Train 50 teachers', 'Enroll 200 students', 'Evaluate student progress', 15000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs'),
+(6, 1, 'Small Business Grants Phase 2', 'Number of businesses funded', 'Economic Development Office', 'Advertise program', 'Shortlist 30 businesses', 'Disburse grants to 20 businesses', 'Gather feedback', 6000.00, 'Private Sector', 'Limited funding', 'Moderate', 'Engage more private donors'),
+(7, 3, 'Healthcare Training Programs', 'Number of healthcare workers trained', 'Healthcare Department', 'Design training modules', 'Conduct workshops for 50 workers', 'Expand to 100 workers', 'Assess skill improvement', 12000.00, 'Government', 'Lack of participation', 'Moderate', 'Offer incentives for attendance'),
+(8, 4, 'Community Tree Planting', 'Number of trees planted', 'Environment Office', 'Coordinate with local NGOs', 'Plant 500 saplings', 'Maintain planted areas', 'Conduct growth assessment', 8000.00, 'Community Fund', 'Low community participation', 'Low', 'Organize awareness drives'),
+(9, 2, 'Food Distribution Drives', 'Number of families supported', 'Social Welfare Office', 'Identify 100 families', 'Distribute food packs to 50 families', 'Expand to 150 families', 'Evaluate distribution impact', 10000.00, 'NGO Donations', 'Logistical challenges', 'Moderate', 'Partner with local suppliers'),
+(10, 5, 'Digital Literacy Programs', 'Number of participants trained', 'Education Department', 'Recruit 100 participants', 'Conduct 5 workshops', 'Certify 80 participants', 'Collect feedback for improvement', 14000.00, 'Private Sector', 'Limited resources', 'Low', 'Collaborate with tech companies'),
+(11, 1, 'Startup Incubation Support', 'Number of startups supported', 'Economic Development Office', 'Select 10 startups', 'Provide funding for 5 startups', 'Mentor 10 startups', 'Track startup growth', 18000.00, 'Venture Capital', 'High dropout rate', 'Moderate', 'Provide additional mentoring'),
+(12, 2, 'Senior Citizen Welfare', 'Number of senior citizens assisted', 'Social Welfare Office', 'Survey 100 senior citizens', 'Provide services to 50 seniors', 'Expand to 150 seniors', 'Analyze feedback', 12000.00, 'Government', 'Low awareness', 'Low', 'Run awareness campaigns'),
+(13, 3, 'Rural Health Clinics', 'Number of clinics operationalized', 'Healthcare Department', 'Identify rural locations', 'Set up 3 clinics', 'Train 10 staff per clinic', 'Evaluate patient feedback', 25000.00, 'Health Ministry', 'High operational costs', 'High', 'Optimize resource allocation'),
+(14, 4, 'Water Conservation Programs', 'Amount of water saved', 'Environment Office', 'Conduct surveys', 'Install water-saving devices in 10 homes', 'Expand to 20 homes', 'Monitor usage patterns', 11000.00, 'International Aid', 'Community resistance', 'Moderate', 'Provide incentives for participation'),
+(15, 5, 'School Meal Programs', 'Number of students fed', 'Education Department', 'Identify 5 schools', 'Distribute meals to 200 students', 'Expand to 500 students', 'Collect nutritional data', 20000.00, 'Government', 'Food supply issues', 'Moderate', 'Partner with local farms'),
+(16, 1, 'Business Loan Program', 'Number of loans issued', 'Economic Development Office', 'Advertise program', 'Approve 30 applications', 'Disburse 20 loans', 'Monitor loan repayment', 15000.00, 'Banking Sector', 'Loan defaults', 'High', 'Provide financial literacy training'),
+(17, 2, 'Emergency Relief Fund', 'Number of people assisted', 'Social Welfare Office', 'Set up helpline', 'Disburse funds to 50 families', 'Expand to 100 families', 'Audit fund usage', 18000.00, 'Government', 'Misuse of funds', 'High', 'Implement strict monitoring'),
+(18, 3, 'Vaccination Drives', 'Number of people vaccinated', 'Healthcare Department', 'Identify target groups', 'Administer 500 vaccines', 'Expand to 1000 vaccines', 'Evaluate vaccination rates', 22000.00, 'Health Ministry', 'Vaccine hesitancy', 'Moderate', 'Run public awareness campaigns'),
+(19, 4, 'Recycling Initiatives', 'Amount of waste recycled', 'Environment Office', 'Launch recycling campaign', 'Install 5 recycling bins', 'Collect and process waste', 'Report outcomes', 8000.00, 'Private Sector', 'Low participation', 'Low', 'Engage schools and communities'),
+(20, 5, 'Teacher Training Programs', 'Number of teachers trained', 'Education Department', 'Identify training needs', 'Train 50 teachers', 'Expand training to 100 teachers', 'Assess teaching outcomes', 13000.00, 'Government', 'Limited budget', 'Moderate', 'Apply for grants');
 
 -- --------------------------------------------------------
 
@@ -736,7 +755,7 @@ ALTER TABLE `licensesandorganizations`
 -- AUTO_INCREMENT for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `outcome`
