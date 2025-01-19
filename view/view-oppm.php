@@ -463,7 +463,11 @@ if(isset($_POST['strategy_btn'])){
         echo "<td>" . htmlspecialchars($row['risks']) . "</td>";
         echo "<td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>";
         echo "<td>" . htmlspecialchars($row['mitigating_activities']) . "</td>";
-        echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>";
+        echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>
+        ";
+        findPAP($pdo, $row['pap_id'], $_GET['op_id']);
+        echo"
+        </td>";
 
         echo "</tr>";
     }

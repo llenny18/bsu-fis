@@ -21,6 +21,7 @@ function decryptPassword($encryptedPassword) {
 }
 
 
+
 // Encrypt the password
 // $encryptedPassword = encryptPassword($plainPassword);
 // echo "Encrypted Password: " . $encryptedPassword . PHP_EOL;

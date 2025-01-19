@@ -167,7 +167,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Operational Plan Counts</h4>
+                                <h4 class="card-title">Operational Plan Outcome Counts</h4>
                                 <div class="net-income mt-4 position-relative" style="height:384px;"></div>
                               
                             </div>
