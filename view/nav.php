@@ -12,6 +12,9 @@ if($_SESSION['user_type'] == "employee"){
 
 }
 
+
+$current_page = basename($_SERVER['PHP_SELF']);
+
 ?>
 
 <header class="topbar" data-navbarbg="skin6">
@@ -217,7 +220,7 @@ if($_SESSION['user_type'] == "employee"){
                         </li>
                         <?php
 }  ?>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="employees.php"
+                        <li class="sidebar-item"> <a class="sidebar-link  <?php if ($current_page == 'e_data.php') { echo 'active'; } ?>" href="employees.php"
                                 aria-expanded="false"><i class="fas fa-users"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Employee
                                 </span></a>

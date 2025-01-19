@@ -37,7 +37,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Employees</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Employees <a href="e_data.php" class="btn btn-primary"> + Register New Teaching Employee</a> | <a href="e_data_n.php" class="btn btn-primary"> + Register New Non-Teaching Employee</a></h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">

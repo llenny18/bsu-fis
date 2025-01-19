@@ -202,77 +202,6 @@
 
 
 
-            // TEACHING LOAD INFORMATION
-            $tload_ids = $_POST['tload_id'];  // Array of teaching load IDs
-            $t_ctype = $_POST['t_ctype'];    // Array of course types
-            $t_ccode = $_POST['t_ccode'];    // Array of course codes
-            $t_ctitle = $_POST['t_ctitle'];  // Array of course titles
-            $t_units = $_POST['t_units'];    // Array of units
-            $t_loads = $_POST['t_loads'];    // Array of academic load units
-            $t_gunits = $_POST['t_gunits'];  // Array of general education units
-
-            // Loop through each submitted row
-            foreach ($tload_ids as $index => $tload_id) {
-                // Check if the tload_id exists in the database
-                $sql_check = "SELECT COUNT(*) FROM `teachingload` WHERE `id` = :tload_id";
-                $stmt_check = $pdo->prepare($sql_check);
-                $stmt_check->bindParam(':tload_id', $tload_id);
-                $stmt_check->execute();
-                $exists = $stmt_check->fetchColumn();
-
-                if ($exists > 0) {
-                    // If tload_id exists, update the record
-                    $sql_update = "UPDATE `teachingload` 
-                        SET 
-                            `Course_Type` = :t_ctype,
-                            `Course_Code` = :t_ccode, 
-                            `Course_Title` = :t_ctitle, 
-                            `Units` = :t_units, 
-                            `Academic_Load_Units` = :t_loads, 
-                            `General_Education_Units` = :t_gunits 
-                        WHERE `id` = :tload_id";
-
-                    // Prepare the update query
-                    $stmt_update = $pdo->prepare($sql_update);
-                    $stmt_update->bindParam(':t_ctype', $t_ctype[$index]);
-                    $stmt_update->bindParam(':t_ccode', $t_ccode[$index]);
-                    $stmt_update->bindParam(':t_ctitle', $t_ctitle[$index]);
-                    $stmt_update->bindParam(':t_units', $t_units[$index]);
-                    $stmt_update->bindParam(':t_loads', $t_loads);
-                    $stmt_update->bindParam(':t_gunits', $t_gunits);
-                    $stmt_update->bindParam(':tload_id', $tload_id);
-
-                    try {
-                        $stmt_update->execute();
-                    } catch (PDOException $e) {
-                        // Handle any errors during update
-                        echo "Error updating teaching load ID $tload_id: " . $e->getMessage() . "<br>";
-                    }
-                } else {
-                    // If tload_id does not exist, insert a new record
-                    $sql_insert = "INSERT INTO `teachingload` 
-                        (`employee_id` ,`Course_Type`, `Course_Code`, `Course_Title`, `Units`, `Academic_Load_Units`, `General_Education_Units`) 
-                        VALUES (:em_id, :t_ctype, :t_ccode, :t_ctitle, :t_units, :t_loads, :t_gunits)";
-
-                    // Prepare the insert query
-                    $stmt_insert = $pdo->prepare($sql_insert);
-                    $stmt_insert->bindParam(':em_id', $_GET['e_id']);
-                    $stmt_insert->bindParam(':t_ctype', $t_ctype[$index]);
-                    $stmt_insert->bindParam(':t_ccode', $t_ccode[$index]);
-                    $stmt_insert->bindParam(':t_ctitle', $t_ctitle[$index]);
-                    $stmt_insert->bindParam(':t_units', $t_units[$index]);
-                    $stmt_insert->bindParam(':t_loads', $t_loads);
-                    $stmt_insert->bindParam(':t_gunits', $t_gunits);
-
-                    try {
-                        $stmt_insert->execute();
-                    } catch (PDOException $e) {
-                        // Handle any errors during insert
-                        echo "Error inserting teaching load for course " . $t_ctitle[$index] . ": " . $e->getMessage() . "<br>";
-                    }
-                }
-            }
-
 
 
             // WORK INFORMATION
@@ -387,30 +316,6 @@ VALUES
                 ]);
             }
 
-            // Insert teaching load information
-            $t_ctype = $_POST['t_ctype'];
-            $t_ccode = $_POST['t_ccode'];
-            $t_ctitle = $_POST['t_ctitle'];
-            $t_units = $_POST['t_units'];
-            $t_loads = $_POST['t_loads'];
-            $t_gunits = $_POST['t_gunits'];
-
-            foreach ($t_ctype as $index => $ctype) {
-                $stmt = $pdo->prepare("INSERT INTO teachingload 
-    (employee_id, Course_Type, Course_Code, Course_Title, Units, Academic_Load_Units, General_Education_Units) 
-    VALUES 
-    (:employee_id, :course_type, :course_code, :course_title, :units, :academic_load, :gen_education_units)");
-                $stmt->execute([
-                    'employee_id' => $employee_id,
-                    'course_type' => $ctype,
-                    'course_code' => $t_ccode[$index],
-                    'course_title' => $t_ctitle[$index],
-                    'units' => $t_units[$index],
-                    'academic_load' => $t_loads[$index],
-                    'gen_education_units' => $t_gunits[$index],
-                ]);
-            }
-
             // Insert work information
             $stmt = $pdo->prepare("INSERT INTO workinfo 
 (employee_id, Date_of_Appointment, Years_in_Service, Appointment_Status, Tenure_of_Employment, 
@@ -475,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Teaching
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Non-Teaching
                                         Employee Information</li>
                                 </ol>
                             </nav>
@@ -854,168 +759,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
                                         <br>
-                                        <h4 class="card-title mt-5" id="edata-title">Teaching Load</h4>
-                                        <hr class="red-hr">
-
-                                        <?php
-
-                                        if ($employee_id > 0) {
-                                            // Prepare the SQL statement
-                                            $query3 = "SELECT * FROM teachingload WHERE employee_id = :employee_id";
-                                            $stmt3 = $pdo->prepare($query3);
-                                            $stmt3->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-                                            $stmt3->execute();
-
-                                            // Fetch all results
-                                            $results3 = $stmt3->fetchAll(PDO::FETCH_ASSOC);
-
-
-                                            $queryunitsRow = "SELECT * FROM teachingload WHERE employee_id = :employee_id";
-                                            $stmtunitsRow = $pdo->prepare($queryunitsRow);
-                                            $stmtunitsRow->bindParam(':employee_id', $employee_id, PDO::PARAM_INT);
-                                            $stmtunitsRow->execute();
-
-                                            // Fetch all results
-                                            $unitsRow = $stmtunitsRow->fetch(PDO::FETCH_ASSOC);
-
-
-                                            if ($unitsRow) {
-                                        ?>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">Academic Load Units</label>
-                                                            <input required type="text" name="t_loads"
-                                                                value="<?= htmlspecialchars($unitsRow['Academic_Load_Units']) ?>"
-                                                                class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">General Education Units</label>
-                                                            <input required type="text" name="t_gunits"
-                                                                value="<?= htmlspecialchars($unitsRow['General_Education_Units']) ?>"
-                                                                class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="box-form">
-                                                    <?php
-                                                }
-
-                                                if ($results3) {
-                                                    // Loop through each row and generate the HTML structure
-                                                    foreach ($results3 as $row3) {
-                                                    ?>
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <input required type="text" name="tload_id[]"
-                                                                        value="<?= htmlspecialchars($row3['id']) ?>"
-                                                                        class="form-control" style="display:none">
-                                                                    <label class="input-label-e">Course Type</label>
-                                                                    <select class="form-control" required name="t_ctype[]">
-                                                                        <option value="" <?= htmlspecialchars($row3['Course_Type']) == '' ? 'selected' : '' ?>>Select...</option>
-                                                                        <option value="Academic"
-                                                                            <?= htmlspecialchars($row3['Course_Type']) == 'Academic' ? 'selected' : '' ?>>Academic</option>
-                                                                        <option value="General"
-                                                                            <?= htmlspecialchars($row3['Course_Type']) == 'General' ? 'selected' : '' ?>>General</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label class="input-label-e">Course Code</label>
-                                                                    <input required type="text" name="t_ccode[]"
-                                                                        value="<?= htmlspecialchars($row3['Course_Code']) ?>"
-                                                                        class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label class="input-label-e">Course Title</label>
-                                                                    <input required type="text" name="t_ctitle[]"
-                                                                        value="<?= htmlspecialchars($row3['Course_Title']) ?>"
-                                                                        class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-group">
-                                                                    <label class="input-label-e">Units</label>
-                                                                    <input required type="text" name="t_units[]"
-                                                                        value="<?= htmlspecialchars($row3['Units']) ?>"
-                                                                        class="form-control">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                <?php
-                                                    }
-                                                } else {
-                                                    echo '<p>No teaching load records found for Employee ID: ' . htmlspecialchars($employee_id) . '</p>';
-                                                }
-                                            } else {
-                                                // If no employee_id is selected, display empty input fields
-                                                ?>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">Academic Load Units</label>
-                                                            <input required type="text" name="t_loads[]" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">General Education Units</label>
-                                                            <input required type="text" name="t_gunits[]" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <input required type="text" name="tload_id[]"
-                                                                value="<?= rand(999, 9999) ?>"
-                                                                class="form-control" style="display:none">
-                                                            <label class="input-label-e">Course Type</label>
-                                                            <select class="form-control" required name="t_ctype[]">
-                                                                <option value="" selected>Select...</option>
-                                                                <option value="Academic">Academic</option>
-                                                                <option value="General">General</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">Course Code</label>
-                                                            <input required type="text" name="t_ccode[]" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">Course Title</label>
-                                                            <input required type="text" name="t_ctitle[]" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label class="input-label-e">Units</label>
-                                                            <input required type="text" name="t_units[]" value="" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                            }
-
-                                            ?>
-                                            <div id="tload"></div>
-                                                </div>
-                                                <button type="button" onclick="addTeachLoad()" class="btn btn-info">+ Add New</button>
-
+                                       
                                                 <br>
                                                 <h4 class="card-title mt-5" id="edata-title">Work Information</h4>
                                                 <hr class="red-hr">

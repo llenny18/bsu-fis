@@ -75,11 +75,14 @@ function display_employee_accounts($pdo) {
                
               
                 <td>
-                    <a href='e_data.php?e_id={$employee['id']}' class='btn btn-success'>View Full Data</a>
+                    <a href='";
+if($employee['e_type']== "teaching"){ echo "e_data.php"; }else{ echo "e_data_n.php"; }
+                    echo "?e_id={$employee['id']}' class='btn btn-success'>View Full Data</a>
                     <button class='btn btn-danger'>Delete</button>
                 </td>
                   </tr>";
-        }
+        
+    }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
