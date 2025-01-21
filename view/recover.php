@@ -16,7 +16,7 @@ if (isset($_GET['table']) && isset($_GET['id_name']) && isset($_GET['id_value'])
 
 if (!empty($table) && !empty($id_name) && !empty($id_value)) {
     // Build the SQL query
-    $sql = "UPDATE $table SET status = 'archived'  WHERE $id_name = :id_value";
+    $sql = "UPDATE $table SET status = 'saved'  WHERE $id_name = :id_value";
 
     // Prepare the statement
     $stmt = $pdo->prepare($sql);
@@ -31,12 +31,12 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
     
           Swal.fire({
             icon: 'success',
-            title: 'Archive Successful',
-            text: 'Records is successfully Archived!',
+            title: 'Recover Successful',
+            text: 'Records is successfully Restored',
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
           });
         
     
@@ -52,12 +52,12 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
 
       Swal.fire({
         icon: 'error',
-        title: 'Archive unsuccessful',
+        title: 'Recover unsuccessful',
         text: 'Failed to delete the record.',
         timer: 2000,
         showConfirmButton: false
       }).then(() => {
-        window.location.href = '<?=  $link?>'; // Redirect to login page or another page
+        window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
       });
     
 
@@ -74,12 +74,12 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
     
           Swal.fire({
             icon: 'error',
-            title: 'Archive unsuccessful',
+            title: 'Recover unsuccessful',
             text: 'Table name, id_name, or id_value missing.',
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
           });
         
     
@@ -96,12 +96,12 @@ echo "";
     
           Swal.fire({
             icon: 'error',
-            title: 'Archive unsuccessful',
+            title: 'Recover unsuccessful',
             text: 'Table, id_name, or id_value parameter missing.',
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
           });
         
     

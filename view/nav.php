@@ -121,29 +121,31 @@ $current_page = basename($_SERVER['PHP_SELF']);
 }  ?>
                         <li class="nav-small-cap"><span class="hide-menu">User Accounts</span></li>
                         
-                        <?php if($_SESSION['user_type'] == "administrator"){
- ?>
+                        <?php if($_SESSION['user_type'] == "administrator"){?>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="admins.php"
                                 aria-expanded="false"><i class="fas fa-user-circle" class="feather-icon"  style="font-size: 1.2em;"></i><span
                                     class="hide-menu">Administrators
                                 </span></a>
                         </li>
-                        <?php
-}  ?>
+ 
                         <li class="sidebar-item"> <a class="sidebar-link  <?php if ($current_page == 'e_data.php') { echo 'active'; } ?>" href="employees.php"
                                 aria-expanded="false"><i class="fas fa-users"  style="font-size: 1.2em;" class="feather-icon"></i><span
                                     class="hide-menu">Employee
                                 </span></a>
                         </li>
-                        <?php if($_SESSION['user_type'] == "administrator"){
- ?>
-                        <li class="list-divider"></li>
+               
 
-                      
-                        <?php 
+                        <?php  }  ?>
 
-}  ?>
+<?php if($_SESSION['user_type'] == "employee"){ ?>
+    <li class="sidebar-item"> <a class="sidebar-link  " href="e_data.php?e_id=<?=$_SESSION['id'] ?>"
+                                aria-expanded="false"><i class="fas fa-user"  style="font-size: 1.2em;" class="feather-icon"></i><span
+                                    class="hide-menu">My Information
+                                </span></a>
+                        </li>
+    <?php  }  ?>
                        
+    <li class="list-divider"></li>
 
                     </ul>
                 </nav>

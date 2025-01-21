@@ -37,8 +37,8 @@ if (isset($_GET['op_id'])) {
                     status,
                     mitigating_activities
                   FROM operational_plan_full
-                  WHERE unique_id = :op_id
-                  ORDER BY development_area_name, outcome_name, strategy_name, pap_name";
+                  WHERE unique_id = :op_id 
+                  ORDER BY development_area_name, outcome_name, strategy_name, pap_name ";
 
         $stmt = $pdo->prepare($query); // Use prepare instead of query
         $stmt->bindParam(':op_id', $op_id, PDO::PARAM_STR);
@@ -82,7 +82,7 @@ if (isset($_GET['op_id'])) {
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Record Full Data <a href="view-oppm_a.php?op_id=<?= $_GET['op_id'] ?>" class="btn btn-success"> View Archive</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Record Full Data  <a href="view-oppm.php?op_id=<?= $_GET['op_id'] ?>" class="btn btn-success"> Return to list</a></h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -105,8 +105,7 @@ if (isset($_GET['op_id'])) {
                             
                             
                             <div class="table-responsive p-1">
-                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button> | 
-                <a href="view-oppm-print.php?op_id=<?= $_GET['op_id'] ?>" target="_blank" class="btn btn-primary m-3">Print</a>
+                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button>
                             <?php
 
 $op_id_parts = explode("-", $_GET['op_id']);
@@ -445,7 +444,7 @@ if(isset($_POST['strategy_btn'])){
     $lastPAP = ''; // To track the last rendered PAP name
 
     foreach ($data as $row) {
-        if($row['status'] == "saved"){
+        if($row['status'] == "archived"){
         
         
 

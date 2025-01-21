@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Prepare the SQL query to find the user
-        $stmt = $pdo->prepare("SELECT id, username, password_hashed, e_type, first_name, middle_name, last_name FROM employee_accounts WHERE username = :username");
+        $stmt = $pdo->prepare("SELECT id, username, password_hashed, e_type, first_name, middle_name, last_name FROM employee_accounts WHERE username = :username  AND status= 'saved'");
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
 

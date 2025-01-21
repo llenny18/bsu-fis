@@ -16,7 +16,7 @@
     
      if (isset($_SESSION['id'])){
         if($_SESSION['user_type'] == "employee"){
-            echo "<script>window.location.href='employees.php'</script>";
+            echo "<script>window.location.href='e_data.php?e_id={$_SESSION['id']}'</script>";
         }
         
         }?>

@@ -25,7 +25,7 @@
                 $password = $_POST['password'] ?? '';
     
                 try {
-                    $stmt = $pdo->prepare("SELECT id, username, password_hashed, full_name FROM admin_accounts WHERE username = :username");
+                    $stmt = $pdo->prepare("SELECT id, username, password_hashed, full_name FROM admin_accounts WHERE username = :username  AND status= 'saved'");
                     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
                     $stmt->execute();
                     $user = $stmt->fetch(PDO::FETCH_ASSOC);

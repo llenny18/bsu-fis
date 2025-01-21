@@ -38,12 +38,12 @@
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Administrator <a href="manage_admin.php" class="btn btn-primary"> + Register New Administrator</a> |  <a href="admins_a.php" class="btn btn-success"> View Archive</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Archived Administrator  <a href="admins.php" class="btn btn-success"> Return to List</a> </h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Admin Accounts </li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Admin Accounts</li>
                                 </ol>
                             </nav>
                         </div>
@@ -74,7 +74,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           <?php display_admin_accounts($pdo); ?>
+                                           <?php display_admin_accounts_a($pdo); ?>
                                         </tbody>
                                     </table>
                                 </div>

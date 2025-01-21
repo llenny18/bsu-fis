@@ -117,7 +117,7 @@ if(isset($_POST['matrix_new'])){
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Plan Matrix Data  <a href="view-oppm-matrix_a.php?pap_id=<?= $_GET['pap_id'] ?>" class="btn btn-success"> View Archive</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Plan Matrix Data</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -127,7 +127,15 @@ if(isset($_POST['matrix_new'])){
                             </nav>
                         </div>
                     </div>
-                 
+                    <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
            
@@ -208,10 +216,7 @@ if (isset($_GET['pap_id'])) {
                                                     <td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>
                                                     <td>" . htmlspecialchars($row['variance']) . "</td>
                                                     <td>" . htmlspecialchars($row['remarks']) . "</td>
-                                                    <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>
-                                                    <hr>
-                                                    <a href='archive.php?id_value={$row['id']}&id_name=id&table=operational_plan_monitoring_matrix&link=view-oppm-matrix.php?pap_id=".$_GET['pap_id']."' class='btn btn-danger'>Archive</a>
-                                                    </td>
+                                                    <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button></td>
                                             
                                                 </tr>";
                                             }

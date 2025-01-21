@@ -82,7 +82,7 @@ if (isset($_GET['op_id'])) {
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Record Full Data <a href="view-oppm_a.php?op_id=<?= $_GET['op_id'] ?>" class="btn btn-success"> View Archive</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Operational Record Full Data</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -105,8 +105,7 @@ if (isset($_GET['op_id'])) {
                             
                             
                             <div class="table-responsive p-1">
-                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button> | 
-                <a href="view-oppm-print.php?op_id=<?= $_GET['op_id'] ?>" target="_blank" class="btn btn-primary m-3">Print</a>
+                <button onclick="printNow()" class="btn btn-success m-3">Print</button>
                             <?php
 
 $op_id_parts = explode("-", $_GET['op_id']);
@@ -392,22 +391,19 @@ if(isset($_POST['strategy_btn'])){
 <!-- HTML and Table Structure -->
 <?php if (!empty($data)) { ?>
     <form method="post"> 
-<table  style="color: #2e2d2d;"   class="table table-bordered table-responsive-lg" id="opmm-table">
+<table  style="color: #2e2d2d;"   class="table table-bordered " id="opmm-table">
     <thead>
         <tr>
             <th scope="col">Development Area</th>
             <th scope="col" colspan="12"><?= $row2['development_area_name'] ?> </th>
-            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button></th>
             </tr>
         <tr>
             <th scope="col">Outcome </th>
             <th scope="col" colspan="12"><?= $row2['outcome_name'] ?> </th>
-            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editOC(this)'>Edit</button> </th>
             </tr>
         <tr>
             <th scope="col">Strategy </th>
             <th scope="col" colspan="12"><?= $row2['strategy_name'] ?> </th>
-            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editST(this)'>Edit</button> </th>
             </tr>
         <tr>
             <th rowspan="2">Program / Activity / Project</th>
@@ -419,8 +415,6 @@ if(isset($_POST['strategy_btn'])){
             <th rowspan="2">Risks</th>
             <th rowspan="2">Assessment of Risk</th>
             <th rowspan="2">Mitigating Activities</th>
-            <th rowspan="2">ID</th>
-            <th rowspan="2">Action</th>
         </tr>
         <tr>
             <th>Q1</th>
@@ -446,11 +440,19 @@ if(isset($_POST['strategy_btn'])){
 
     foreach ($data as $row) {
         if($row['status'] == "saved"){
+        // Check if the current PAP is the same as the last one
+        $isSamePAP = ($row['pap_name'] === $lastPAP);
+        echo "<tr>";
+
+        // Render PAP name only if it's different from the last one
+        if (!$isSamePAP) {
+            echo "<td rowspan='" . countPAPRows($data, $row['pap_name']) . "'>" . htmlspecialchars($row['pap_name']) . "</td>";
+            $lastPAP = $row['pap_name']; // Update the last rendered PAP
+        }
         
         
 
         // Render other columns
-        echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
         echo "<td>" . htmlspecialchars($row['performance_indicator']) . "</td>";
         echo "<td>" . htmlspecialchars($row['personnel_office_concerned']) . "</td>";
         echo "<td>" . htmlspecialchars($row['quarterly_target_q1']) . "</td>";
@@ -462,14 +464,6 @@ if(isset($_POST['strategy_btn'])){
         echo "<td>" . htmlspecialchars($row['risks']) . "</td>";
         echo "<td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>";
         echo "<td>" . htmlspecialchars($row['mitigating_activities']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['pap_id']) . "</td>";
-        echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>
-        <hr>
-        <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm.php?op_id=1-1-1' class='btn btn-danger'>Archive</a>
-        ";
-        findPAP($pdo, $row['pap_id'], $_GET['op_id']);
-        echo"
-        </td>";
 
         echo "</tr>";
     }
@@ -636,6 +630,16 @@ function editST(button) {
     <script src="dist/js/sidebarmenu.js"></script>
     
     <script src="dist/js/custom.min.js"></script>
+    
+ <script>
+    function printNow(){
+        var restorepage = $('body').html();
+var printcontent = $('#opmm-table').clone();
+$('body').empty().html(printcontent);
+window.print();
+
+    }
+  </script>
 </body>
 
 </html>
