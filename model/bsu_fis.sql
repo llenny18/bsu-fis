@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2025 at 02:47 PM
+-- Generation Time: Jan 21, 2025 at 05:51 PM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,12 +40,10 @@ CREATE TABLE `admin_accounts` (
 --
 
 INSERT INTO `admin_accounts` (`id`, `full_name`, `username`, `password_hashed`, `status`) VALUES
-(1, 'Fname12', 'admin1', 'ZFVoU1lTcFBreTAvVW9QanpPY2hyUT09OjoYqj8sGcDBsx14ui2i9zDA', 'saved'),
+(1, 'Fname12', 'admin1', 'ZFVoU1lTcFBreTAvVW9QanpPY2hyUT09OjoYqj8sGcDBsx14ui2i9zDA', 'archived'),
 (2, 'Fname2', 'admin2', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
 (3, 'Fname3', 'admin3', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
 (4, 'Fname4', 'admin4', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
-(5, 'Fname5', 'admin5', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
-(6, 'Fname6', 'admin6', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
 (7, 'Fname7', 'admin7', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
 (8, 'Fname8', 'admin8', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
 (9, 'Fname9', 'admin9', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'saved'),
@@ -151,7 +149,7 @@ CREATE TABLE `employee_accounts` (
 INSERT INTO `employee_accounts` (`id`, `username`, `password_hashed`, `first_name`, `middle_name`, `last_name`, `sex`, `age`, `date_of_birth`, `place_of_origin`, `civil_status`, `contact_number`, `email`, `e_type`, `status`) VALUES
 (1, 'employee1', 'd3RtUmhscGVHdnBGODcyQXc2TVJpUT09OjoQzzGxx8PFH5rlg3wAwuW8', 'John', 'A', 'Doe', 'Male', 12, '1900-01-01', 'Unknown', 'Single', '1234567890', 'john.doe@example.com', 'teaching', 'saved'),
 (2, 'employee2', 'cjNTc0Zucm9CZ3lLdEtDMlgwazRwUT09OjoDliekFBWujxB+7iokE91y', 'Jane', 'B', 'Smith', 'Male', 45, '1900-01-01', 'Unknown', 'Single', '2345678901', 'jane.smith@example.com', 'non-teaching', 'saved'),
-(3, 'employee3', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'Mike', 'C', 'Johnson', 'Male', 23, '1900-01-01', 'Unknown', 'Single', '3456789012', 'mike.johnson@example.com', 'teaching', 'saved'),
+(3, 'employee3', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'Mike', 'C', 'Johnson', 'Male', 23, '1900-01-01', 'Unknown', 'Single', '3456789012', 'mike.johnson@example.com', 'teaching', 'archived'),
 (4, 'employee4', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'Emily', 'D', 'Williams', 'Female', 6, '1900-01-01', 'Unknown', 'Single', '4567890123', 'emily.williams@example.com', 'teaching', 'saved'),
 (5, 'employee5', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'David', 'E', 'Brown', 'Other', 3, '1900-01-01', 'Unknown', 'Single', '5678901234', 'david.brown@example.com', 'teaching', 'saved');
 
@@ -287,14 +285,15 @@ CREATE TABLE `operational_plan_monitoring_matrix` (
 --
 
 INSERT INTO `operational_plan_monitoring_matrix` (`id`, `opmm_fid`, `m_pap_id`, `actual_accomplishments`, `variance`, `remarks`, `timestamp`, `status`) VALUES
-(2, '1-2-2', 2, 'Delivered 3 units', '1.00%', 'Unmet', '2024-10-09 09:44:09', 'saved'),
+(2, '1-2-2', 2, 'Delivered 3 units', '1.00%', 'Unmet', '2024-10-09 09:44:09', 'archived'),
 (3, '2-3-3', 3, 'Completed 65 tasks', '150.00%', 'Met', '2024-10-04 09:44:09', 'saved'),
 (4, '1-2-2', 4, 'Achieved 400 milestones', '100.00%', 'Not Applicable', '2025-01-19 09:44:09', 'saved'),
 (5, '4-5-5', 5, 'Delivered 1,100 units', '100.00%', 'Met', '2024-07-09 09:44:09', 'saved'),
 (6, '9-9-9', 9, 'Processed 1,100 applications', '100.00%', 'Met', '2025-01-19 09:44:09', 'saved'),
 (9, '1-1-1', 58, 'Reviewed 12 reports', '8.50%', 'Unmet', '2024-11-06 09:44:09', 'saved'),
 (10, '1-1-1', 56, 'Validated 1,231 entries', '7.50%', 'Not Applicable', '2024-10-02 09:44:09', 'saved'),
-(30, '1-1-1', 64, 'try', 'try', 'try', '2025-01-19 13:35:51', 'saved');
+(30, '1-1-1', 64, 'try', 'try', 'try', '2025-01-19 13:35:51', 'saved'),
+(31, '1-2-2', 60, 'Delivered 5 units', '51.00%', 'Met', '2024-10-09 09:44:09', 'saved');
 
 -- --------------------------------------------------------
 
@@ -421,7 +420,7 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (6, 1, 'Small Business Grants - Phase 2', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 100 businesses', 'Target 2: 200 businesses', 'Target 3: 300 businesses', 'Target 4: 400 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-11-11 10:21:16', 'saved'),
 (54, 9, 'Community Health Initiative', 'Number of health screenings conducted', 'Healthcare Department', 'Target 1: 100 screenings', 'Target 2: 150 screenings', 'Target 3: 200 screenings', 'Target 4: 250 screenings', 6000.00, 'Government', 'Lack of participation', 'Moderate', 'Increase community outreach', '2024-09-17 10:21:16', 'saved'),
 (55, 5, 'School Infrastructure Upgrades', 'Number of classrooms renovated', 'Education Department', 'Target 1: 5 classrooms', 'Target 2: 10 classrooms', 'Target 3: 15 classrooms', 'Target 4: 20 classrooms', 7000.00, 'Government', 'Supply chain delays', 'Low', 'Secure additional suppliers', '2024-11-03 10:21:16', 'saved'),
-(56, 1, 'Business Development Support', 'Number of businesses receiving support', 'Economic Development Office', 'Target 1: 20 businesses', 'Target 2: 30 businesses', 'Target 3: 40 businesses', 'Target 4: 50 businesses', 11000.00, 'Private Sector', 'Market volatility', 'High', 'Develop contingency plans', '2024-12-16 10:21:16', 'saved'),
+(56, 1, 'Business Development Support', 'Number of businesses receiving support', 'Economic Development Office', 'Target 1: 20 businesses', 'Target 2: 30 businesses', 'Target 3: 40 businesses', 'Target 4: 50 businesses', 11000.00, 'Private Sector', 'Market volatility', 'High', 'Develop contingency plans', '2024-12-16 10:21:16', 'archived'),
 (57, 1, 'Skills Development Programs', 'Number of people trained', 'Labor and Employment Office', 'Target 1: 500 people', 'Target 2: 600 people', 'Target 3: 700 people', 'Target 4: 800 people', 24000.00, 'Government', 'Inadequate training resources', 'Moderate', 'Partner with training providers', '2024-12-23 10:21:16', 'saved'),
 (58, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 70 businesses', 'Target 2: 150 businesses', 'Target 3: 200 businesses', 'Target 4: 250 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-12-09 10:21:16', 'saved'),
 (59, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 60 businesses', 'Target 2: 150 businesses', 'Target 3: 200 businesses', 'Target 4: 250 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-11-03 10:21:16', 'saved'),
@@ -429,7 +428,7 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (61, 3, 'Upgrade Hospitals', 'Number of hospitals upgraded', 'Healthcare Department', 'Target 1: 5 hospitals', 'Target 2: 10 hospitals', 'Target 3: 15 hospitals', 'Target 4: 20 hospitals', 40000.00, 'Health Ministry', 'Supply chain disruptions', 'High', 'Source from multiple suppliers', '2024-05-10 02:21:16', 'saved'),
 (62, 4, 'Clean Energy Projects', 'Energy produced (kWh)', 'Environment Office', 'Target 1: 5000 kWh', 'Target 2: 10000 kWh', 'Target 3: 15000 kWh', 'Target 4: 20000 kWh', 20000.00, 'Private Sector', 'Regulatory challenges', 'Moderate', 'Work closely with local authorities', '2024-06-02 02:21:16', 'saved'),
 (63, 5, 'Teacher Training Programs', 'Number of teachers trained', 'Education Department', 'Target 1: 100 teachers', 'Target 2: 200 teachers', 'Target 3: 300 teachers', 'Target 4: 400 teachers', 12000.00, 'Government', 'Low engagement', 'Moderate', 'Provide incentives for participation', '2024-07-15 02:21:16', 'saved'),
-(64, 1, 'Community Outreach Programs', 'Number of communities reached', 'Economic Development Office', 'Target 1: 10 communities', 'Target 2: 20 communities', 'Target 3: 30 communities', 'Target 4: 40 communities', 5000.00, 'Government', 'Low participation', 'Moderate', 'Enhance communication strategies', '2024-08-10 02:21:16', 'saved'),
+(64, 1, 'Community Outreach Prograams', 'Number of communities reached', 'Economic Development Office', 'Target 1: 10 communities', 'Target 2: 20 communities', 'Target 3: 30 communities', 'Target 4: 40 communities', 5000.00, 'Government', 'Low participation', 'Moderate', 'Enhance communication strategies', '2024-08-10 02:21:16', 'archived'),
 (65, 3, 'Digital Literacy Training', 'Number of people trained', 'Education Department', 'Target 1: 500 people', 'Target 2: 1000 people', 'Target 3: 1500 people', 'Target 4: 2000 people', 8000.00, 'Private Sector', 'Lack of resources', 'Low', 'Collaborate with tech companies', '2024-09-05 02:21:16', 'saved'),
 (66, 4, 'Water Conservation Projects', 'Amount of water saved (liters)', 'Environment Office', 'Target 1: 10000 liters', 'Target 2: 20000 liters', 'Target 3: 30000 liters', 'Target 4: 40000 liters', 15000.00, 'Government', 'Limited access to water sources', 'Moderate', 'Develop local partnerships', '2024-09-20 02:21:16', 'saved'),
 (67, 2, 'Youth Empowerment Programs', 'Number of youth enrolled', 'Social Welfare Office', 'Target 1: 200 youth', 'Target 2: 300 youth', 'Target 3: 400 youth', 'Target 4: 500 youth', 10000.00, 'International Aid', 'Cultural resistance', 'Moderate', 'Engage with local leaders', '2024-10-10 02:21:16', 'saved'),
@@ -748,7 +747,7 @@ ALTER TABLE `licensesandorganizations`
 -- AUTO_INCREMENT for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `outcome`
