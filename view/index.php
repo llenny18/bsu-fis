@@ -20,12 +20,13 @@
         }
         
         }?>
-    
     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     
     <link href="dist/css/style.min.css" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
 </head>
 
@@ -209,11 +210,15 @@
     <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
 
     
-    <?php  include("dist/js/pages/dashboards/dashboard1.min.php"); ?>
     
 
     <script src="dist/js/pages/chartjs/chartjs.init.js"></script>
     <script src="assets/libs/chart.js/dist/Chart.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js"></script>
+
+    <?php  include("dist/js/pages/dashboards/dashboard1.min.php"); ?>
+
     </body>
 
 </html>
