@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <?php include("./title.php");
@@ -27,6 +28,7 @@
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
     
         // Handle the form data for development area, outcome, strategy, and pap
         $developmentAreaName = isset($_POST['selected_development_area']) ? getValueAfterHyphen($_POST['d_name']) : $_POST['d_name'];
@@ -38,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $strategyName = isset($_POST['selected_strategy']) ? getValueAfterHyphen($_POST['strategy']) : $_POST['strategy'];
         $selectedStrategyId = isset($_POST['selected_strategy']) ?  getValueBeforeHyphen($_POST['selected_strategy']) :  null;
 
-        $papName = isset($_POST['selected_pap']) ? getValueAfterHyphen($_POST['pap']) : $_POST['pap'];
+        $papName = $_POST['pap'];
         $selectedPapId = isset($_POST['selected_pap']) ?  getValueBeforeHyphen($_POST['selected_pap']) : null;
 
         // Other form data
@@ -55,81 +57,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mitigatingActivities = $_POST['m_activity'] ?? null;
 
         // Initialize PDO transaction
-        try {
             // Insert or fetch Development Area
-            if (!isset($_POST['selected_development_area'])) {
+            if ($_POST['selected_development_area'] == '') {
                 $stmt = $pdo->prepare("INSERT INTO development_area (name) VALUES (:name)");
                 $stmt->execute([':name' => $developmentAreaName]);
                 $developmentAreaId = $pdo->lastInsertId();
             } else {
                 $developmentAreaId = $selectedDevelopmentAreaId;
             }
-        } catch (Exception $e) {
-            echo "Error inserting Development Area: " . $e->getMessage();
-            exit;
-        }
         
-        try {
             // Insert or fetch Outcome
-            if (!isset($_POST['selected_outcome'])) {
+            if ($_POST['selected_outcome'] == '') {
                 $stmt = $pdo->prepare("INSERT INTO outcome (name, development_area_id) VALUES (:name, :development_area_id)");
                 $stmt->execute([':name' => $outcomeName, ':development_area_id' => $developmentAreaId]);
                 $outcomeId = $pdo->lastInsertId();
             } else {
                 $outcomeId = $selectedOutcomeId;
             }
-        } catch (Exception $e) {
-            echo "Error inserting Outcome: " . $e->getMessage();
-            exit;
-        }
-        
-        try {
+      
             // Insert or fetch Strategy
-            if (!isset($_POST['selected_strategy'])) {
+            if ($_POST['selected_strategy']  == '') {
                 $stmt = $pdo->prepare("INSERT INTO strategy (name, outcome_id) VALUES (:name, :outcome_id)");
                 $stmt->execute([':name' => $strategyName, ':outcome_id' => $outcomeId]);
                 $strategyId = $pdo->lastInsertId();
             } else {
                 $strategyId = $selectedStrategyId;
             }
-        } catch (Exception $e) {
-            echo "Error inserting Strategy: " . $e->getMessage();
-            exit;
-        }
-        echo "<script>alert('no dn: {$strategyId}');</script>";
+       
         
        
 
-        try {
-            // Insert data into the OPMM table
+            // Prepare the insert statement once
             $stmt = $pdo->prepare("
                 INSERT INTO pap (
                     strategy_id, name, performance_indicator, personnel_office_concerned, quarterly_target_q1, quarterly_target_q2, quarterly_target_q3, quarterly_target_q4, total_estimated_cost, funding_source, risks, assessment_of_risk, mitigating_activities
                 ) VALUES (
-                     :strategy_id,:papname, :performance_indicator, :personnel, :q1, :q2, :q3, :q4, :total_estimate, :funding_source, :risk, :risk_assessment, :mitigating_activities
+                    :strategy_id, :papname, :performance_indicator, :personnel, :q1, :q2, :q3, :q4, :total_estimate, :funding_source, :risk, :risk_assessment, :mitigating_activities
                 )
             ");
-            $stmt->execute([
-               
-                ':strategy_id' => $strategyId,
-                ':papname' => $papName,
-                ':performance_indicator' => $performanceIndicator,
-                ':personnel' => $personnel,
-                ':q1' => $q1,
-                ':q2' => $q2,
-                ':q3' => $q3,
-                ':q4' => $q4,
-                ':total_estimate' => $totalEstimate,
-                ':funding_source' => $fundingSource,
-                ':risk' => $risk,
-                ':risk_assessment' => $riskAssessment,
-                ':mitigating_activities' => $mitigatingActivities,
-            ]);
-            echo "Data successfully inserted into OPMM.";
+        
+            // Loop through the arrays to insert multiple records
+            foreach ($papName as $key => $value) {
+                 if($_POST['selected_pap'] != '') {  $papName[$key] = getValueAfterHyphen($_POST['pap']); } else { $papName[$key] = $papName[$key]; }  
+                $stmt->execute([
+                    ':strategy_id' => $strategyId,
+                    ':papname' => $papName[$key],
+                    ':performance_indicator' => $performanceIndicator[$key],
+                    ':personnel' => $personnel[$key],
+                    ':q1' => $q1[$key],
+                    ':q2' => $q2[$key],
+                    ':q3' => $q3[$key],
+                    ':q4' => $q4[$key],
+                    ':total_estimate' => $totalEstimate[$key],
+                    ':funding_source' => $fundingSource[$key],
+                    ':risk' => $risk[$key],
+                    ':risk_assessment' => $riskAssessment[$key],
+                    ':mitigating_activities' => $mitigatingActivities[$key],
+                ]);
+            }
+        
+            echo "<script>Swal.fire({
+                icon: 'success',
+                title: 'Data successfully inserted into OPMM',
+                text: 'you can now make a matrix for it!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = 'opmm.php';
+            });</script>";
         } catch (Exception $e) {
-            echo "Error inserting OPMM data: " . $e->getMessage();
+            echo "<script>Swal.fire({
+                icon: 'error',
+                title: 'Error inserting OPMM data',
+                text: '".$e->getMessage()."',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = window.location.href;
+            });</script>";
             exit;
         }
+        
         
         
 }
@@ -230,7 +238,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <th rowspan="2">Risks</th>
             <th rowspan="2">Assessment of Risk</th>
             <th rowspan="2">Mitigating Activities</th>
-            <th rowspan="2">Action</th>
         </tr>
         <tr>
             <th>Q1</th>
@@ -249,23 +256,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </select>
         <hr>
-        <textarea type="text" name="pap" id="pap" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="p_indicator" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="personnel" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="q1" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="q2" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="q3" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="q4" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="t_estimate" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="f_resource" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="risk" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="r_assesment" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><textarea type="text" name="m_activity" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
-    <td><button type="submit">Save</button></td>
+        <textarea type="text" name="pap[]" id="pap" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="p_indicator[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="personnel[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="q1[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="q2[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="q3[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="q4[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="number" id="number-only"  name="t_estimate[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="f_resource[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="risk[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="r_assesment[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
+    <td><textarea type="text" name="m_activity[]" id="" style="width: 250px; border: 1px solid darkred;"></textarea></td>
 </tr>
      
     </tbody>
 </table>
+<button class="btn btn-success" type="submit"> Register Data</button>
 </form>
 
 
@@ -312,24 +319,22 @@ function selectValue(inputId, selectElement) {
             var cell13 = row.cells[12].innerText;
 
             // Replace the current row values with input fields
-            row.cells[0].innerHTML = `<input type="text" value="${cell1}">`;
-            row.cells[1].innerHTML = `<input type="text" value="${cell2}">`;
-            row.cells[2].innerHTML = `<input type="text" value="${cell3}">`;
-            row.cells[3].innerHTML = `<input type="text" value="${cell4}">`;
-            row.cells[4].innerHTML = `<input type="text" value="${cell5}">`;
-            row.cells[5].innerHTML = `<input type="text" value="${cell6}">`;
-            row.cells[6].innerHTML = `<input type="text" value="${cell7}">`;
-            row.cells[7].innerHTML = `<input type="text" value="${cell8}">`;
-            row.cells[8].innerHTML = `<input type="text" value="${cell9}">`;
-            row.cells[9].innerHTML = `<input type="text" value="${cell10}">`;
-            row.cells[10].innerHTML = `<input type="text" value="${cell11}">`;
-            row.cells[11].innerHTML = `<input type="text" value="${cell12}">`;
+            row.cells[0].innerHTML = `<input type="text" value="${cell1}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[1].innerHTML = `<input type="text" value="${cell2}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[2].innerHTML = `<input type="text" value="${cell3}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[3].innerHTML = `<input type="text" value="${cell4}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[4].innerHTML = `<input type="text" value="${cell5}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[5].innerHTML = `<input type="text" value="${cell6}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[6].innerHTML = `<input type="text" value="${cell7}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[7].innerHTML = `<input type="text" value="${cell8}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[8].innerHTML = `<input type="text" value="${cell9}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[9].innerHTML = `<input type="text" value="${cell10}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[10].innerHTML = `<input type="text" value="${cell11}" style="width: 250px; border: 1px solid darkred;">`;
+            row.cells[11].innerHTML = `<input type="text" value="${cell12}" style="width: 250px; border: 1px solid darkred;">`;
             row.cells[12].innerHTML = `<button type="submit" class="btn btn-success" >Save Data</button>`;
 
            
         }
-
-
         function addRow() {
             // Get the table body
             var table = document.getElementById("opmm-table").getElementsByTagName('tbody')[0];
@@ -350,23 +355,27 @@ function selectValue(inputId, selectElement) {
             var cell10 = newRow.insertCell(9);
             var cell11 = newRow.insertCell(10);
             var cell12 = newRow.insertCell(11);
-            var cell13 = newRow.insertCell(12);
 
             // Add text input for each cell
-            cell1.innerHTML = '<input type="text" placeholder="Enter Name">';
-            cell2.innerHTML = '<input type="number" placeholder="Enter Age">';
-            cell3.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell4.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell5.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell6.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell7.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell8.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell9.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell10.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell11.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell12.innerHTML = '<input type="text" placeholder="Enter City">';
-            cell13.innerHTML = '<button type="submit" class="btn btn-success" >Insert Data</button>';
+            cell1.innerHTML = '<input type="text"  name="pap[]"  placeholder="Enter Pap name" style="width: 250px; border: 1px solid darkred;">';
+            cell2.innerHTML = '<input type="text" name="p_indicator[]"  placeholder="Enter performance indicator" style="width: 250px; border: 1px solid darkred;">';
+            cell3.innerHTML = '<input type="text" name="personnel[]" placeholder="Enter personnel" style="width: 250px; border: 1px solid darkred;">';
+            cell4.innerHTML = '<input type="text" name="q1[]" placeholder="Enter target quarter 1" style="width: 250px; border: 1px solid darkred;">';
+            cell5.innerHTML = '<input type="text" name="q2[]" placeholder="Enter  target quarter 2" style="width: 250px; border: 1px solid darkred;">';
+            cell6.innerHTML = '<input type="text" name="q3[]" placeholder="Enter  target quarter 3" style="width: 250px; border: 1px solid darkred;">';
+            cell7.innerHTML = '<input type="text" name="q4[]" placeholder="Enter  target quarter 4" style="width: 250px; border: 1px solid darkred;">';
+            cell8.innerHTML = '<input type="number" name="t_estimate[]" placeholder="Enter total estimate" style="width: 250px; border: 1px solid darkred;">';
+            cell9.innerHTML = '<input type="text" name="f_resource[]" placeholder="Enter funding resource" style="width: 250px; border: 1px solid darkred;">';
+            cell10.innerHTML = '<input type="text" name="risk[]"  placeholder="Enter risks" style="width: 250px; border: 1px solid darkred;">';
+            cell11.innerHTML = '<input type="text" name="r_assesment[]" placeholder="risk assesment City" style="width: 250px; border: 1px solid darkred;">';
+            cell12.innerHTML = '<input type="text" name="m_activity[]" placeholder="Enter mitigating activities" style="width: 250px; border: 1px solid darkred;">';
         }
+
+        document.getElementById('number-only').addEventListener('input', function(event) {
+    // Remove non-numeric characters
+    this.value = this.value.replace(/[^0-9]/g, '');
+});
+
     </script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     

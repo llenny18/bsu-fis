@@ -590,6 +590,8 @@ function editST(button) {
             // Create a new row
             var newRow = table.insertRow();
 
+            var randomNumber = Math.floor(Math.random() * 1000); 
+
             // Insert new cells and add data
             var cell1 = newRow.insertCell(0);
             var cell2 = newRow.insertCell(1);
@@ -604,6 +606,7 @@ function editST(button) {
             var cell11 = newRow.insertCell(10);
             var cell12 = newRow.insertCell(11);
             var cell13 = newRow.insertCell(12);
+            var cell14 = newRow.insertCell(13);
 
             // Add text input for each cell
             cell1.innerHTML = '<input required type="text" name="pap_namea" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
@@ -618,8 +621,16 @@ function editST(button) {
             cell10.innerHTML = '<input required type="text" name="riska" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell11.innerHTML = '<input required type="text" name="r_assesmenta" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell12.innerHTML = '<input required type="text" name="m_activitya" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
-            cell13.innerHTML = '<button type="submit" class="btn btn-success" name="pap_new" >Insert Data</button>';
+            cell13.innerHTML = '<input required type="text" name="pap_ida" value="'+randomNumber+'" readonly class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell14.innerHTML = '<button type="submit" class="btn btn-success" name="pap_new" >Insert Data</button> <hr> <td><button onclick="deleteRow(this)" class="btn btn-primary">Delete</button></td>';
         }
+
+        function deleteRow(button) {
+        // Get the row of the button that was clicked
+        var row = button.parentNode.parentNode;
+        // Remove the row from the table
+        row.parentNode.removeChild(row);
+    }
     </script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     

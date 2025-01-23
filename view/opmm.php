@@ -69,6 +69,7 @@
                     <th>Development Area</th>
                     <th>Outcome</th>
                     <th>Strategy</th>
+                    <th>Year</th>
 
                 <th>Action</th>
                                             </tr>

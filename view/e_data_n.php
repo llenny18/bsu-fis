@@ -27,7 +27,8 @@
 
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+        try {
+            
         if ($employee_id > 0) {
 
             // PERSONAL INFORMATION
@@ -349,6 +350,24 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>";
         }
+
+      
+        } catch (PDOException $e) {
+            // Handle any errors during insert
+            echo "<script>
+document.addEventListener('DOMContentLoaded', function () {
+    Swal.fire({
+        icon: 'error',
+        title: 'Error inserting data',
+        text: 'Recheck your inputs',
+        timer: 5000,
+        showConfirmButton: false
+    }).then(() => {
+        window.location.href = window.location.href;
+    });
+});
+</script>";
+        }
     }
     ?>
     <link href="dist/css/style.min.css" rel="stylesheet">
@@ -456,10 +475,11 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     </select>
                                                 </div>
                                             </div>
+                                           
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label class="input-label-e">Age</label>
-                                                    <input required type="number" name="p_age" value="<?= $row['age'] ?? '' ?>"
+                                                    <label class="input-label-e">Date of Birth</label>
+                                                    <input required type="date"   name="p_bday" id="birthDate" onchange="calculateAge()" value="<?= $row['date_of_birth'] ?? '' ?>"
                                                         class="form-control">
                                                 </div>
                                             </div>
@@ -467,12 +487,13 @@ document.addEventListener('DOMContentLoaded', function () {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label class="input-label-e">Date of Birth</label>
-                                                    <input required type="date" name="p_bday" value="<?= $row['date_of_birth'] ?? '' ?>"
+                                        <div class="form-group">
+                                                    <label class="input-label-e">Age</label>
+                                                    <input required type="number" readonly id="age" name="p_age"  value="<?= $row['age'] ?? '' ?>"
                                                         class="form-control">
                                                 </div>
                                             </div>
+                                        
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label class="input-label-e">Place of Origin</label>
@@ -497,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label class="input-label-e">Contact No.</label>
-                                                    <input required type="text" name="p_contact" value="<?= $row['contact_number'] ?? '' ?>"
+                                                    <input required type="text"  pattern="^09\d{9}$" name="p_contact" value="<?= $row['contact_number'] ?? '' ?>"
                                                         class="form-control">
                                                 </div>
                                             </div>
@@ -511,11 +532,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label class="input-label-e">Employee Type</label>
-                                                    <select class="form-control" required name="p_etype">
-                                                        <option value="" <?= ($row['e_type']  ?? '') == '' ? 'selected' : '' ?>>Select...</option>
-                                                        <option value="teaching" <?= ($row['e_type']  ?? '') == 'teaching' ? 'selected' : '' ?>>Teaching</option>
-                                                        <option value="non-teaching" <?= ($row['e_type']  ?? '') == 'non-teaching' ? 'selected' : '' ?>>Non-Teaching</option>
-                                                    </select>
+                                                    <input required type="text"  name="p_etype" value="non-teaching"
+                                                    class="form-control" readonly>
                                                 </div>
                                             </div>
 
@@ -674,21 +692,17 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <hr class="red-hr">
 
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="input-label-e">Type</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="input-label-e">Name</label>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="input-label-e">Actions</label>
-                                                </div>
-                                            </div>
+                                            
 
                                         </div>
 
@@ -706,21 +720,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                                 // Loop through each row and generate the HTML structure
                                                 foreach ($results1 as $row1) {
                                                     echo '<div class="row">';
-                                                    echo '    <div class="col-md-4">';
+                                                    echo '    <div class="col-md-6">';
                                                     echo '        <div class="form-group"> <input required type="text" name="licenseid[]"
                                                                     value="' . $row1['id'] . '"
                                                                     class="form-control" style="display:none">';
                                                     echo '            <input required name="l_type[]" type="text" class="form-control" value="' . htmlspecialchars($row1['Type']) . '" >';
                                                     echo '        </div>';
                                                     echo '    </div>';
-                                                    echo '    <div class="col-md-4">';
+                                                    echo '    <div class="col-md-6">';
                                                     echo '        <div class="form-group">';
                                                     echo '            <input required name="l_name[]"  type="text" class="form-control" value="' . htmlspecialchars($row1['Name']) . '" >';
-                                                    echo '        </div>';
-                                                    echo '    </div>';
-                                                    echo '    <div class="col-md-4">';
-                                                    echo '        <div class="form-group">';
-                                                    echo '            <input required name=""  type="text" class="form-control" value="View | Edit | Delete" >';
                                                     echo '        </div>';
                                                     echo '    </div>';
                                                     echo '</div>';
@@ -731,7 +740,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         } else {
                                         ?>
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <input required type="text" name="licenseid[]"
                                                             value="<?= rand(999, 99999) ?>"
@@ -739,14 +748,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                                         <input required type="text" name="l_type[]" class="form-control" value="">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <input required type="text" name="l_name[]" class="form-control" value="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <input required type="text" name="" class="form-control" value="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -776,7 +780,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="input-label-e">Years in Service</label>
-                                                            <input required type="text" name="w_yservice" value="<?= $row['Years_in_Service'] ?? '' ?>"
+                                                            <input required type="number" name="w_yservice" value="<?= $row['Years_in_Service'] ?? '' ?>"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -874,7 +878,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="input-label-e">Annual Salary</label>
-                                                            <input required type="text" name="w_asalary" value="<?= $row['Annual_Salary'] ?? '' ?>"
+                                                            <input required type="number" name="w_asalary" value="<?= $row['Annual_Salary'] ?? '' ?>"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -888,7 +892,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-actions">
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-success">Submit</button>
-                                            <button type="reset" class="btn btn-dark">Reset</button>
                                         </div>
                                     </div>
                                 </form>
@@ -903,151 +906,185 @@ document.addEventListener('DOMContentLoaded', function () {
 
     </div>
     <script>
-        function addEducation() {
-            // Get the education div
-            const educationDiv = document.getElementById("education");
+    function addEducation() {
+        const educationDiv = document.getElementById("education");
 
-            // Create the HTML structure
-            const educationHtml = `
-        <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                    <input required type="text" name="educ_id[]"
-                                                                        value="<?= rand(999, 99999) ?>"
-                                                                        class="form-control" style="display:none">
-                        <label class="input-label-e">Level</label>
-                        <select class="form-control" required name="e_level[]">
-                            <option value="" selected>Select...</option>
-                            <option value="Bachelors">Bachelor's</option>
-                            <option value="Masters">Master's</option>
-                            <option value="Doctorate">Doctorate</option>
-                        </select>
+        // Create the HTML structure with a delete button
+        const educationHtml = `
+            <div class="education-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input required type="text" name="educ_id[]" value="<?= rand(999, 99999) ?>" class="form-control" style="display:none">
+                            <label class="input-label-e">Level</label>
+                            <select class="form-control" required name="e_level[]">
+                                <option value="" selected>Select...</option>
+                                <option value="Bachelors">Bachelor's</option>
+                                <option value="Masters">Master's</option>
+                                <option value="Doctorate">Doctorate</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="input-label-e">Institution</label>
+                            <input required type="text" name="e_institution[]" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="input-label-e">Degree</label>
+                            <input required type="text" name="e_degree[]" value="" class="form-control">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="input-label-e">Institution</label>
-                        <input required type="text" name="e_institution[]" value="" class="form-control">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="input-label-e">Major/Specialization</label>
+                            <input required type="text" name="e_major[]" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="input-label-e">Year Graduated</label>
+                            <input required type="text" name="e_graduated[]" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="input-label-e">Units Earned</label>
+                            <input required type="text" name="e_units[]" class="form-control">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="input-label-e">Degree</label>
-                        <input required type="text" name="e_degree[]" value="" class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="input-label-e">Major/Specialization</label>
-                        <input required type="text" name="e_major[]" value="" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="input-label-e">Year Graduated</label>
-                        <input required type="text" name="e_graduated[]" value="" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label class="input-label-e">Units Earned</label>
-                        <input required type="text" name="e_units[]" class="form-control">
-                    </div>
-                </div>
+                <button type="button" class="btn btn-danger mt-2" onclick="this.parentElement.remove()">Delete</button>
+                <hr>
             </div>
         `;
 
-            // Append the structure to the education div
-            educationDiv.insertAdjacentHTML("beforeend", educationHtml);
-        }
+        educationDiv.insertAdjacentHTML("beforeend", educationHtml);
+    }
 
+    function addLicense() {
+        const licenseDiv = document.getElementById("licenses");
 
-        function addLicense() {
-
-            const licenseDiv = document.getElementById("licenses");
-
-            // Create the HTML structure
-            const licenseHtml = `
-        <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                    <input required type="text" name="licenseid[]"
-                                                                    value="<?= rand(999, 99999) ?>"
-                                                                    class="form-control" style="display:none">
-                                                        <input required  type="text" class="form-control" name="l_type[]" placeholder="License type here">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <input required  type="text" class="form-control" name="l_name[]" placeholder="License name here">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <input required  type="text" class="form-control" value="" placeholder="Actions here">
-                                                    </div>
-                                                </div>
-                                            </div>
+        // Create the HTML structure with a delete button
+        const licenseHtml = `
+            <div class="license-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input required type="text" name="licenseid[]" value="<?= rand(999, 99999) ?>" class="form-control" style="display:none">
+                            <input required type="text" class="form-control" name="l_type[]" placeholder="License type here">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input required type="text" class="form-control" name="l_name[]" placeholder="License name here">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger mt-2" onclick="this.parentElement.remove()">Delete</button>
+                <hr>
+            </div>
         `;
 
-            // Append the structure to the education div
-            licenseDiv.insertAdjacentHTML("beforeend", licenseHtml);
+        licenseDiv.insertAdjacentHTML("beforeend", licenseHtml);
+    }
 
+    function addTeachLoad() {
+        const tloadDiv = document.getElementById("tload");
+
+        // Create the HTML structure with a delete button
+        const tloadHtml = `
+            <div class="tload-section">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input required type="text" name="tload_id[]" value="<?= rand(999, 9999) ?>" class="form-control" style="display:none">
+                            <label class="input-label-e">Course Type</label>
+                            <select class="form-control" required name="t_ctype[]">
+                                <option value="" selected>Select...</option>
+                                <option value="Academic">Academic</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="input-label-e">Course Code</label>
+                            <input required type="text" name="t_ccode[]" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="input-label-e">Course Title</label>
+                            <input required type="text" name="t_ctitle[]" value="" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="input-label-e">Units</label>
+                            <input required type="number" name="t_units[]" value="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger mt-2" onclick="this.parentElement.remove()">Delete</button>
+                <hr>
+            </div>
+        `;
+
+        tloadDiv.insertAdjacentHTML("beforeend", tloadHtml);
+    }
+
+
+
+    function calculateAge() {
+    const birthDateInput = document.getElementById('birthDate');
+    const ageInput = document.getElementById('age');
+
+    // Ensure the birthDateInput has a value
+    if (birthDateInput.value) {
+        const today = new Date();
+        const birthDate = new Date(birthDateInput.value);
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+
+        // Adjust age if the birth date has not occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
         }
 
-        function addTeachLoad() {
+        ageInput.value = age;
+    } else {
+        ageInput.value = ''; // Clear the age field if no date is selected
+    }
+}
+    const dp = document.getElementById('birthDate');
 
-            const tloadDiv = document.getElementById("tload");
+    // Set the starting date to 2022-01-01
+    dp.value = '2002-01-01';
 
-            // Create the HTML structure
-            const tloadHtml = `
-<hr>
+    // Get today's date in the format YYYY-MM-DD
+    const today = new Date();
+    const todayFormatted = today.toISOString().split('T')[0];
+    dp.setAttribute('max', todayFormatted);
+
+    // Update the date range display
+    const maxDate = dp.getAttribute('max');
+    document.getElementById('dateRange').textContent = 
+        'Accepted Date Range: Starting from 2002-01-01 to ' + maxDate;
+
+    dp.addEventListener('change', function () {
+        const dateSelect = dp.value;
+        document.getElementById('selectedDate').textContent = 
+            'Selected Date: ' + dateSelect;
+    });
 
 
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                    <input required type="text" name="tload_id[]"
-                                                                        value="<?= rand(999, 9999) ?>"
-                                                                        class="form-control" style="display:none">
-                                                        <label class="input-label-e">Course Type</label>
-                                                        <select class="form-control" required name="t_ctype[]">
-                                                            <option value="" selected>Select...</option>
-                                                            <option value="Academic">Academic</option>
-                                                            <option value="General">General</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label class="input-label-e">Course Code</label>
-                                                        <input required type="text" name="t_ccode[]" value="" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label class="input-label-e">Course Title</label>
-                                                        <input required type="text" name="t_ctitle[]" value="" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label class="input-label-e">Units</label>
-                                                        <input required type="text" name="t_units[]" value="" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-`;
-
-            // Append the structure to the education div
-            tloadDiv.insertAdjacentHTML("beforeend", tloadHtml);
-
-        }
-    </script>
-
+</script>
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>

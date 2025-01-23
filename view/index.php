@@ -120,7 +120,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <h2 class="font-weight-medium text-primary"><?= get_pmm_data_matrix_count($pdo) ?></h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Operational Plan Monitoring Matrix</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total number of Targets</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
                                     <span class=" text-muted"><i class="fas fa-file-alt text-primary"  style="font-size: 1.5em;"></i></span>
