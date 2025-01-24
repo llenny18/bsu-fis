@@ -170,6 +170,7 @@ function display_pmm_data($pdo) {
                 echo "<td>" . htmlspecialchars($row['development_area_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['outcome_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['m_year']) . "</td>";
                 echo "<td><a href='view-oppm.php?op_id={$row['unique_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
@@ -185,7 +186,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT *, operational_plan_monitoring_matrix.id as matrix_id  FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid  WHERE operational_plan_full.status= 'saved' group by development_area_id";
+        $sql = "SELECT * FROM `operational_plan_summary_by_development_area`  WHERE status= 'saved' ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -196,12 +197,12 @@ function display_pmm_data_matrix($pdo) {
         if (!empty($data)) {
             foreach ($data as $row) {
                 echo "<tr>";
-                echo "<td>" . htmlspecialchars($row['matrix_id']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['development_area_id']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['development_area_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['outcome_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
-                echo "<td>" . htmlspecialchars($row['pap_name']) . "</td>";
-                echo "<td><a href='view-oppm-matrix.php?pap_id={$row['unique_id']}' class='btn btn-success'>View Full Data</a></td>";
+                echo "<td>" . htmlspecialchars($row['outcome_count']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['strategy_count']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['pap_count']) . "</td>";
+                echo "<td><a href='view-oppm-matrix.php?pap_id={$row['development_area_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }
         } else {

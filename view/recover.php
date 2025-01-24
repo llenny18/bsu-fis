@@ -36,7 +36,7 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
           });
         
     
@@ -57,7 +57,7 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
         timer: 2000,
         showConfirmButton: false
       }).then(() => {
-        window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
+        window.location.href = '<?=  $link?>'; // Redirect to login page or another page
       });
     
 
@@ -79,7 +79,7 @@ if (!empty($table) && !empty($id_name) && !empty($id_value)) {
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
           });
         
     
@@ -101,7 +101,7 @@ echo "";
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            window.location.href = '<?=  $link?>.php'; // Redirect to login page or another page
+            window.location.href = '<?=  $link?>'; // Redirect to login page or another page
           });
         
     

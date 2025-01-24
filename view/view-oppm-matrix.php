@@ -65,6 +65,44 @@
             }
         }
         
+
+        if (isset($_POST['saveAll'])) {
+            // Prepare SQL query for inserting multiple records
+            $sql = "INSERT INTO operational_plan_monitoring_matrix 
+                    (m_pap_id, id, actual_accomplishments, variance, remarks) 
+                    VALUES (:npid, :id, :actual_accomplishments, :variance, :remarks)";
+            
+            // Prepare the query
+            $stmt = $pdo->prepare($sql);
+        
+            // Loop through the arrays and execute inserts
+            foreach ($_POST['n_m_id'] as $key => $m_id) {
+                // Bind the parameters dynamically for each row
+                $stmt->bindParam(':id', $m_id);
+                $stmt->bindParam(':npid', $_POST['n_p_id'][$key]);
+                $stmt->bindParam(':actual_accomplishments', $_POST['accomplished'][$key]);
+                $stmt->bindParam(':variance', $_POST['variance'][$key]);
+                $stmt->bindParam(':remarks', $_POST['remarks'][$key]);
+        
+                // Execute the query
+                $stmt->execute();
+            }
+        
+            // Check if any rows were inserted
+            if ($stmt->rowCount() > 0) {
+                echo "<script>
+                Swal.fire({
+                icon: 'success',
+                title: 'Insert Success',
+                text: 'Matrix inserted successfully!',
+                timer: 2000,
+                showConfirmButton: false
+            }).then(() => {
+                window.location.href = window.location.href;
+            });</script>";
+            }
+        }
+        
         
                    
 if(isset($_POST['matrix_new'])){
@@ -138,7 +176,7 @@ if (isset($_GET['pap_id'])) {
 
     // Fetch data from the operational_plan_view
     try {
-        $query = "SELECT * FROM `operational_plan_monitoring_matrix` inner join operational_plan_full on operational_plan_full.unique_id = operational_plan_monitoring_matrix.opmm_fid WHERE operational_plan_full.unique_id = :pap_id AND operational_plan_monitoring_matrix.m_pap_id = operational_plan_full.pap_id AND operational_plan_monitoring_matrix.status = 'saved'";
+        $query = "SELECT * FROM `operational_plan_view_matrix`  WHERE development_area_id = :pap_id and pstatus='saved' GROUP BY pap_id";
 
         $stmt = $pdo->prepare($query); // Use prepare instead of query
         $stmt->bindParam(':pap_id', $pap_id, PDO::PARAM_STR);
@@ -171,7 +209,7 @@ if (isset($_GET['pap_id'])) {
                                         <tr>
                                             <th scope="col">Development Area</th>
                                             <th scope="col" colspan="6"><?= $row2['development_area_name'] ?></th>
-                                            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button></th>
+                                            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button><hr><button class='edit-btn btn btn-success' type="submit" name="saveAll">Insert All Data</button></th>
                                             
                                         </tr>
                                        
@@ -204,13 +242,18 @@ if (isset($_GET['pap_id'])) {
                                                     <td>" .  htmlspecialchars($row['outcome_name']) . "</td>
                                                     <td>" .htmlspecialchars($row['strategy_name']) . "</td>
                                                     <td>" . htmlspecialchars($row['pap_name']) . "</td>
-                                                    <td>" . htmlspecialchars($row['performance_indicator']) . "</td>
-                                                    <td>" . htmlspecialchars($row['actual_accomplishments']) . "</td>
-                                                    <td>" . htmlspecialchars($row['variance']) . "</td>
-                                                    <td>" . htmlspecialchars($row['remarks']) . "</td>
-                                                    <td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>
-                                                    <hr>
-                                                    <a href='archive.php?id_value={$row['id']}&id_name=id&table=operational_plan_monitoring_matrix&link=view-oppm-matrix.php?pap_id=".$_GET['pap_id']."' class='btn btn-danger'>Archive</a>
+                                                    <td>" . htmlspecialchars($row['performance_indicator']) . "</td>";
+                                                    if(empty($row['actual_accomplishments']) || empty($row['actual_accomplishments']) ||empty($row['remarks'])) { 
+                                                        echo "<td style ='display:none'>" . '<input required type="hidden" name="n_p_id[]" value="'.$row['pap_id'].'">' . '<input required type="hidden" name="n_m_id[]" value="'.$row['id'].'">' . "</td>";
+
+                                                     }
+
+                                                    if(empty($row['actual_accomplishments'])) { echo  ' <td> <input required type="text" name="accomplished[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" > </td> '; } else { echo "<td>". htmlspecialchars($row['actual_accomplishments']) . "</td>"; }
+                                                    if(empty($row['variance'])) { echo  ' <td> <input required type="text" name="variance[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['variance']) . "</td>"; }
+                                                    if(empty($row['remarks'])) { echo  ' <td> <input required type="text" name="remarks[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['remarks']) . "</td>"; }
+                                                    echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>";
+                                                    echo "<hr>
+                                                    <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm-matrix.php?pap_id=".$_GET['pap_id']."' class='btn btn-danger'>Archive</a>
                                                     </td>
                                             
                                                 </tr>";

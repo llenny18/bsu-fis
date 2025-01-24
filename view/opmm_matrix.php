@@ -67,9 +67,9 @@
                                             <tr>
                                             <th>ID</th>
                     <th>Development Area</th>
-                    <th>Outcome</th>
-                    <th>Strategy</th>
-                    <th>PAP Name</th>
+                    <th>Outcome Count</th>
+                    <th>Strategy Count</th>
+                    <th>PAP Name Count</th>
              
 
                 <th>Action</th>
