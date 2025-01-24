@@ -155,7 +155,7 @@ if($employee['e_type']== "teaching"){ echo "e_data.php"; }else{ echo "e_data_n.p
 function display_pmm_data($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_full  WHERE status= 'saved' GROUP BY unique_id";
+        $sql = "SELECT * FROM operational_plan_full  WHERE status= 'saved'  GROUP BY unique_id  ORDER BY m_year DESC";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -186,7 +186,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM `operational_plan_summary_by_development_area`  WHERE status= 'saved' ";
+        $sql = "SELECT * FROM `operational_plan_summary_by_development_area`  WHERE status= 'saved' ORDER BY m_year DESC ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -202,6 +202,7 @@ function display_pmm_data_matrix($pdo) {
                 echo "<td>" . htmlspecialchars($row['outcome_count']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['strategy_count']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['pap_count']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['m_year'] ?? 'NA') . "</td>";
                 echo "<td><a href='view-oppm-matrix.php?pap_id={$row['development_area_id']}' class='btn btn-success'>View Full Data</a></td>";
                 echo "</tr>";
             }

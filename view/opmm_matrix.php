@@ -59,9 +59,41 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                               
+                            <div class="filter-container mb-3">
+    <label for="yearFilter" class="form-label">Filter by Year:</label>
+    <select id="yearFilter" class="form-control">
+        <option value="">All Years</option>
+        <!-- Populate the years dynamically -->
+        <script>
+            const yearSelect = document.getElementById('yearFilter');
+            for (let year = 2000; year <= 2050; year++) {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearSelect.appendChild(option);
+            }
+        </script>
+    </select>
+</div>
+<hr>
+
+<script>
+    document.getElementById('yearFilter').addEventListener('change', function () {
+        const selectedYear = this.value;
+        const rows = document.querySelectorAll('#multi_col_order tbody tr');
+
+        rows.forEach(row => {
+            const yearCell = row.cells[5].textContent;
+            if (selectedYear === "" || yearCell === selectedYear) {
+                row.style.display = ""; // Show the row
+            } else {
+                row.style.display = "none"; // Hide the row
+            }
+        });
+    });
+</script>
                                 <div class="table-responsive">
-                                    <table  style="color: #2e2d2d;"  id="multi_col_order"
+                                    <table id="multi_col_order"  style="color: #2e2d2d;"  id="multi_col_order"
                                         class="table table-striped table-bordered display no-wrap" style="width:100%">
                                         <thead>
                                             <tr>
@@ -70,6 +102,7 @@
                     <th>Outcome Count</th>
                     <th>Strategy Count</th>
                     <th>PAP Name Count</th>
+                    <th>Year</th>
              
 
                 <th>Action</th>
