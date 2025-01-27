@@ -252,7 +252,7 @@ if (isset($_GET['pap_id'])) {
                                                     if(empty($row['variance'])) { echo  ' <td> <input required type="text" name="variance[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['variance']) . "</td>"; }
                                                     if(empty($row['remarks'])) { echo  '
                                                          <td> 
-                                                         <select name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
+                                                         <select name="remarks[]" required class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
             <option value="">Select...</option>
             <option value="Met" >Met</option>
             <option value="Partially Met" >Partially Met</option>
@@ -346,7 +346,7 @@ function editST(button) {
 
     // Replace the remarks cell with a select box that reflects the current value
     row.cells[7].innerHTML = `
-        <select name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
+        <select name="remarks[]" required class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
             <option value="">Select...</option>
             <option value="Met" ${cell7 === 'Met' ? 'selected' : ''}>Met</option>
             <option value="Partially Met" ${cell7 === 'Partially Met' ? 'selected' : ''}>Partially Met</option>

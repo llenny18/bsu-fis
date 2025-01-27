@@ -154,12 +154,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">OPMM</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">New Operational Plan</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.php" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">OPMM</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">New Operational Plan</li>
                                 </ol>
                             </nav>
                         </div>
@@ -185,8 +185,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="post"> 
 <table  style="color: #2e2d2d;"  class="table table-bordered table-responsive-lg" id="opmm-table">
     <thead>
-    <tr>
-    <th scope="col">Development Area</th>
     <tr>
     <th scope="col">Development Area</th>
     <th scope="col" colspan="12" style="white-space: nowrap;">
