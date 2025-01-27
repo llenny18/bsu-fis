@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
             // Loop through the arrays to insert multiple records
             foreach ($papName as $key => $value) {
-                 if($_POST['selected_pap'] != '') {  $papName[$key] = getValueAfterHyphen($_POST['pap']); } else { $papName[$key] = $papName[$key]; }  
+                 if($_POST['selected_pap'] != '') {  $papName[$key] = getValueAfterHyphen($_POST['pap'][$key] ); } else { $papName[$key] = $_POST['pap'][$key]; }  
                 $stmt->execute([
                     ':strategy_id' => $strategyId,
                     ':papname' => $papName[$key],

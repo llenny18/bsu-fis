@@ -614,7 +614,7 @@ function editST(button) {
             cell1.innerHTML = '<input required type="text" name="pap_namea" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell2.innerHTML = '<input required type="text" name="p_indicatora" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell3.innerHTML = '<input required type="text" name="personnela" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
-            cell4.innerHTML = '<input required type="text" name="q2a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
+            cell4.innerHTML = '<input required type="text" name="q1a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell5.innerHTML = '<input required type="text" name="q3a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell6.innerHTML = '<input required type="text" name="q2a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';
             cell7.innerHTML = '<input required type="text" name="q4a" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" >';

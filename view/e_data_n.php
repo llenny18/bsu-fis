@@ -607,9 +607,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
                                                                     <label class="input-label-e">Year Graduated</label>
-                                                                    <input required type="text" name="e_graduated[]"
-                                                                        value="<?= htmlspecialchars($row2['Year_Graduated']) ?>"
-                                                                        class="form-control">
+                                                                    <select  required name="e_graduated[]" value="" class="form-control">
+                                                            <?php
+                                                                $currentYear = date("Y"); // Get the current year
+                                                                for ($year = 1900; $year <= $currentYear; $year++) {
+                                                                    echo "<option value=\"$year\">$year</option>";
+                                                                }
+                                                            ?>
+                                                            </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -668,7 +673,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="input-label-e">Year Graduated</label>
-                                                            <input required type="text" name="e_graduated[]" value="" class="form-control">
+                                                            <select  required name="e_graduated[]" value="" class="form-control">
+                                                            <?php
+                                                                $currentYear = date("Y"); // Get the current year
+                                                                for ($year = 1900; $year <= $currentYear; $year++) {
+                                                                    echo "<option value=\"$year\">$year</option>";
+                                                                }
+                                                            ?>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
@@ -948,7 +960,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="input-label-e">Year Graduated</label>
-                            <input required type="text" name="e_graduated[]" value="" class="form-control">
+                            <select  required name="e_graduated[]" value="" class="form-control">
+                                                            <?php
+                                                                $currentYear = date("Y"); // Get the current year
+                                                                for ($year = 1900; $year <= $currentYear; $year++) {
+                                                                    echo "<option value=\"$year\">$year</option>";
+                                                                }
+                                                            ?>
+                                                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">

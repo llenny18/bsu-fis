@@ -64,15 +64,22 @@
     <select id="yearFilter" class="form-control">
         <option value="">All Years</option>
         <!-- Populate the years dynamically -->
-        <script>
-            const yearSelect = document.getElementById('yearFilter');
-            for (let year = 2000; year <= 2050; year++) {
-                const option = document.createElement('option');
-                option.value = year;
-                option.textContent = year;
-                yearSelect.appendChild(option);
-            }
-        </script>
+        <?php
+$sql = "SELECT DISTINCT m_year FROM operational_plan_view_matrix ORDER BY m_year ASC";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+// Start the <select> dropdown
+
+// Fetch and display each year as an <option>
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    if(!(empty($row['m_year']))){
+
+    echo '<option value="' . htmlspecialchars($row['m_year']) . '">' . htmlspecialchars($row['m_year']) . '</option>';
+}
+}
+
+?>
     </select>
 </div>
 <hr>

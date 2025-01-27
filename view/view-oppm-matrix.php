@@ -250,7 +250,17 @@ if (isset($_GET['pap_id'])) {
 
                                                     if(empty($row['actual_accomplishments'])) { echo  ' <td> <input required type="text" name="accomplished[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" > </td> '; } else { echo "<td>". htmlspecialchars($row['actual_accomplishments']) . "</td>"; }
                                                     if(empty($row['variance'])) { echo  ' <td> <input required type="text" name="variance[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['variance']) . "</td>"; }
-                                                    if(empty($row['remarks'])) { echo  ' <td> <input required type="text" name="remarks[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['remarks']) . "</td>"; }
+                                                    if(empty($row['remarks'])) { echo  '
+                                                         <td> 
+                                                         <select name="remarks[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;">
+            <option value="">Select...</option>
+            <option value="Met" >Met</option>
+            <option value="Partially Met" >Partially Met</option>
+            <option value="Ongoing" >Ongoing</option>
+            <option value="Unmet" >Unmet</option>
+            <option value="Not Applicable" >Not Applicable</option>
+        </select>
+                                                    </td> '; } else { echo "<td>". htmlspecialchars($row['remarks']) . "</td>"; }
                                                     echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>";
                                                     echo "<hr>
                                                     <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm-matrix.php?pap_id=".$_GET['pap_id']."' class='btn btn-danger'>Archive</a>

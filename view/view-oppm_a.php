@@ -105,7 +105,6 @@ if (isset($_GET['op_id'])) {
                             
                             
                             <div class="table-responsive p-1">
-                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button>
                             <?php
 
 $op_id_parts = explode("-", $_GET['op_id']);
@@ -462,11 +461,9 @@ if(isset($_POST['strategy_btn'])){
         echo "<td>" . htmlspecialchars($row['assessment_of_risk']) . "</td>";
         echo "<td>" . htmlspecialchars($row['mitigating_activities']) . "</td>";
         echo "<td>" . htmlspecialchars($row['pap_id']) . "</td>";
-        echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>
-        <hr>
-        <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm.php?op_id=1-1-1' class='btn btn-danger'>Archive</a>
+        echo "<td>
+        <a href='recover.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm.php?op_id=1-1-1' class='btn btn-danger'>Restore</a>
         ";
-        findPAP($pdo, $row['pap_id'], $_GET['op_id']);
         echo"
         </td>";
 

@@ -155,7 +155,7 @@ if($employee['e_type']== "teaching"){ echo "e_data.php"; }else{ echo "e_data_n.p
 function display_pmm_data($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM operational_plan_full  WHERE status= 'saved'  GROUP BY unique_id  ORDER BY m_year DESC";
+        $sql = "SELECT * FROM operational_plan_full  WHERE status= 'saved'  GROUP BY unique_id, m_year  ORDER BY m_year DESC";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -186,7 +186,7 @@ function display_pmm_data($pdo) {
 function display_pmm_data_matrix($pdo) {
     try {
         // Query to fetch data from the view
-        $sql = "SELECT * FROM `operational_plan_summary_by_development_area`  WHERE status= 'saved' ORDER BY m_year DESC ";
+        $sql = "SELECT * FROM `operational_plan_summary_by_development_area`  WHERE status= 'saved' GROUP BY development_area_id, m_year  ORDER BY m_year DESC ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 

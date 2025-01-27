@@ -770,7 +770,7 @@ window.location.href = window.location.href;
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="input-label-e">Year Graduated</label>
-                                                            <select name="year" required name="e_graduated[]" value="" class="form-control">
+                                                            <select  required name="e_graduated[]" value="" class="form-control">
                                                             <?php
                                                                 $currentYear = date("Y"); // Get the current year
                                                                 for ($year = 1900; $year <= $currentYear; $year++) {
@@ -1221,7 +1221,7 @@ window.location.href = window.location.href;
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="input-label-e">Year Graduated</label>
-                            <select name="year" required name="e_graduated[]" value="" class="form-control">
+                            <select  required name="e_graduated[]" value="" class="form-control">
                                                             <?php
                                                                 $currentYear = date("Y"); // Get the current year
                                                                 for ($year = 1900; $year <= $currentYear; $year++) {
