@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2025 at 05:51 PM
+-- Generation Time: Jan 27, 2025 at 06:04 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,20 +73,22 @@ CREATE TABLE `count_by_remarks` (
 
 CREATE TABLE `development_area` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `status` enum('saved','archived') NOT NULL,
+  `date_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `development_area`
 --
 
-INSERT INTO `development_area` (`id`, `name`) VALUES
-(1, 'Economic Development'),
-(2, 'Healthcare Improvement'),
-(3, 'Environmental Sustainability'),
-(4, 'Education Quality'),
-(5, 'Infrastructure Development'),
-(9, 'School Activities');
+INSERT INTO `development_area` (`id`, `name`, `status`, `date_time`) VALUES
+(1, 'Economic Development', 'saved', '2025-01-24 14:54:29'),
+(2, 'Healthcare Improvement', 'saved', '2025-01-24 14:54:29'),
+(3, 'Environmental Sustainability', 'saved', '2025-01-24 14:54:29'),
+(4, 'Education Quality', 'saved', '2025-01-24 14:54:29'),
+(9, 'School Activities', 'saved', '2025-01-24 14:54:29'),
+(21, '7897', 'saved', '2025-01-24 14:54:29');
 
 -- --------------------------------------------------------
 
@@ -116,7 +118,11 @@ INSERT INTO `education` (`id`, `employee_id`, `Level`, `Institution`, `Degree`, 
 (4, 4, 'Bachelors', 'University D', 'BA History', 'Modern History', '2016', 120),
 (5, 5, 'Masters', 'University E', 'MS Biology', 'Genetics', '2015', 40),
 (6, 1, 'Bachelors', 'University A', 'BS Computer Science', 'Software Engineering', '2018', 120),
-(12, 1, 'Bachelors', '345', '345', '435', '0000', 345);
+(12, 1, 'Bachelors', '345', '345', '435', '0000', 345),
+(18, 472515, 'Masters', '1', '1', '1', '2001', 1),
+(19, 54858, 'Doctorate', '2232', '23', '21', '0000', 123),
+(20, 54858, 'Doctorate', '345', '345', '435', '0000', 0),
+(21, 54858, 'Masters', 'rtyt', 'rty', 'tyrt', '0000', 342);
 
 -- --------------------------------------------------------
 
@@ -150,8 +156,10 @@ INSERT INTO `employee_accounts` (`id`, `username`, `password_hashed`, `first_nam
 (1, 'employee1', 'd3RtUmhscGVHdnBGODcyQXc2TVJpUT09OjoQzzGxx8PFH5rlg3wAwuW8', 'John', 'A', 'Doe', 'Male', 12, '1900-01-01', 'Unknown', 'Single', '1234567890', 'john.doe@example.com', 'teaching', 'saved'),
 (2, 'employee2', 'cjNTc0Zucm9CZ3lLdEtDMlgwazRwUT09OjoDliekFBWujxB+7iokE91y', 'Jane', 'B', 'Smith', 'Male', 45, '1900-01-01', 'Unknown', 'Single', '2345678901', 'jane.smith@example.com', 'non-teaching', 'saved'),
 (3, 'employee3', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'Mike', 'C', 'Johnson', 'Male', 23, '1900-01-01', 'Unknown', 'Single', '3456789012', 'mike.johnson@example.com', 'teaching', 'archived'),
-(4, 'employee4', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'Emily', 'D', 'Williams', 'Female', 6, '1900-01-01', 'Unknown', 'Single', '4567890123', 'emily.williams@example.com', 'teaching', 'saved'),
-(5, 'employee5', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'David', 'E', 'Brown', 'Other', 3, '1900-01-01', 'Unknown', 'Single', '5678901234', 'david.brown@example.com', 'teaching', 'saved');
+(4, 'employee4', 'aTc4MXhWOW1DN0dWUGhrWTVib3Vhdz09OjrN1tKX6OVBFOs3vvSaxJVP', 'Emily', 'D', 'Williams', 'Female', 6, '2002-01-01', 'Unknown', 'Single', '09762331122', 'emily.williams@example.com', 'teaching', 'saved'),
+(5, 'employee5', 'YzRpR0lSampybElPaXFUYVZ5eS9aZz09OjogiVxV7/ZeEqeeJBJATYpz', 'David', 'E', 'Brown', 'Other', 3, '1900-01-01', 'Unknown', 'Single', '5678901234', 'david.brown@example.com', 'teaching', 'saved'),
+(54858, 'rtrtyrrt', 'cGVXb2Z0eDVWbTVIVTVrbWIwaVh3QT09OjoeBS544TmmYcOzrW7boZ3b', '34', '324', '23423', 'Female', 324, '2025-01-03', '324', 'Divorced', '34', '34324@emai.com', 'teaching', 'saved'),
+(472515, '1', 'eHBZOXl6eDQ0dmpXNncyUWh6dWVrdz09OjqhXLePozrJCq/RnmtzB2R1', '1', '1', '1', 'Male', 1, '2025-01-09', '1', 'Married', '1', '12@email.com', 'non-teaching', 'saved');
 
 -- --------------------------------------------------------
 
@@ -220,7 +228,9 @@ INSERT INTO `licensesandorganizations` (`id`, `employee_id`, `Type`, `Name`) VAL
 (3, 3, 'License', 'Certified Public Accountant'),
 (4, 4, 'Organization', 'Education Faculty Association'),
 (5, 5, 'License', 'Medical License'),
-(6, 1, 'License222', 'Professional Educator License2');
+(6, 1, 'License222', 'Professional Educator License2'),
+(18, 472515, '1', '1'),
+(19, 54858, '1231111', '213');
 
 -- --------------------------------------------------------
 
@@ -261,6 +271,9 @@ CREATE TABLE `operational_plan_full` (
 ,`risks` text
 ,`assessment_of_risk` text
 ,`mitigating_activities` text
+,`d_status` enum('saved','archived')
+,`date_time` timestamp
+,`m_year` int(5)
 );
 
 -- --------------------------------------------------------
@@ -271,7 +284,7 @@ CREATE TABLE `operational_plan_full` (
 
 CREATE TABLE `operational_plan_monitoring_matrix` (
   `id` int(11) NOT NULL,
-  `opmm_fid` varchar(455) NOT NULL,
+  `opmm_fid` varchar(455) DEFAULT NULL,
   `m_pap_id` int(11) NOT NULL,
   `actual_accomplishments` varchar(455) DEFAULT NULL,
   `variance` varchar(455) DEFAULT NULL,
@@ -291,9 +304,11 @@ INSERT INTO `operational_plan_monitoring_matrix` (`id`, `opmm_fid`, `m_pap_id`, 
 (5, '4-5-5', 5, 'Delivered 1,100 units', '100.00%', 'Met', '2024-07-09 09:44:09', 'saved'),
 (6, '9-9-9', 9, 'Processed 1,100 applications', '100.00%', 'Met', '2025-01-19 09:44:09', 'saved'),
 (9, '1-1-1', 58, 'Reviewed 12 reports', '8.50%', 'Unmet', '2024-11-06 09:44:09', 'saved'),
-(10, '1-1-1', 56, 'Validated 1,231 entries', '7.50%', 'Not Applicable', '2024-10-02 09:44:09', 'saved'),
-(30, '1-1-1', 64, 'try', 'try', 'try', '2025-01-19 13:35:51', 'saved'),
-(31, '1-2-2', 60, 'Delivered 5 units', '51.00%', 'Met', '2024-10-09 09:44:09', 'saved');
+(31, '1-2-2', 60, 'Delivered 5 units', '51.00%', 'Met', '2024-10-09 09:44:09', 'saved'),
+(32, NULL, 62, '12', '121', '121212', '2025-01-24 12:51:06', 'saved'),
+(33, NULL, 66, '212', '12', '121', '2025-01-24 12:51:06', 'saved'),
+(34, NULL, 72, '12', '121', '212', '2025-01-24 12:51:06', 'saved'),
+(35, NULL, 77, '211', '212', '121', '2025-01-24 12:51:06', 'saved');
 
 -- --------------------------------------------------------
 
@@ -320,6 +335,22 @@ CREATE TABLE `operational_plan_quarterly_sums_byd_name` (
 ,`total_q2` double
 ,`total_q3` double
 ,`total_q4` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `operational_plan_summary_by_development_area`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_summary_by_development_area` (
+`development_area_id` int(11)
+,`development_area_name` varchar(255)
+,`status` enum('saved','archived')
+,`m_year` int(5)
+,`strategy_count` bigint(21)
+,`outcome_count` bigint(21)
+,`pap_count` bigint(21)
 );
 
 -- --------------------------------------------------------
@@ -360,6 +391,44 @@ CREATE TABLE `operational_plan_view` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `operational_plan_view_matrix`
+-- (See below for the actual view)
+--
+CREATE TABLE `operational_plan_view_matrix` (
+`id` int(11)
+,`opmm_fid` varchar(455)
+,`m_pap_id` int(11)
+,`actual_accomplishments` varchar(455)
+,`variance` varchar(455)
+,`remarks` varchar(455)
+,`development_area_id` int(11)
+,`development_area_name` varchar(255)
+,`outcome_id` int(11)
+,`outcome_name` varchar(255)
+,`strategy_id` int(11)
+,`strategy_name` varchar(255)
+,`unique_id` varchar(35)
+,`pap_id` int(11)
+,`pap_name` varchar(255)
+,`performance_indicator` varchar(255)
+,`personnel_office_concerned` varchar(255)
+,`quarterly_target_q1` varchar(455)
+,`quarterly_target_q2` varchar(455)
+,`quarterly_target_q3` varchar(455)
+,`quarterly_target_q4` varchar(455)
+,`total_estimated_cost` decimal(10,2)
+,`funding_source` varchar(255)
+,`risks` text
+,`assessment_of_risk` text
+,`mitigating_activities` text
+,`pstatus` enum('saved','archived')
+,`date_time` timestamp
+,`m_year` int(5)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `outcome`
 --
 
@@ -380,7 +449,7 @@ INSERT INTO `outcome` (`id`, `development_area_id`, `name`) VALUES
 (4, 3, 'Carbon Footprint Reduction'),
 (5, 4, 'Improved Literacy Rates'),
 (9, 9, 'Creative Illustrations'),
-(11, 5, 'Carbon Footprint Reduction');
+(21, 21, '979');
 
 -- --------------------------------------------------------
 
@@ -412,14 +481,12 @@ CREATE TABLE `pap` (
 --
 
 INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `personnel_office_concerned`, `quarterly_target_q1`, `quarterly_target_q2`, `quarterly_target_q3`, `quarterly_target_q4`, `total_estimated_cost`, `funding_source`, `risks`, `assessment_of_risk`, `mitigating_activities`, `date_time`, `status`) VALUES
-(1, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 60 businesses', 'Target 2: 150 businesses', 'Target 3: 200 businesses', 'Target 4: 250 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-11-06 10:21:16', 'saved'),
+(1, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 60 businesses', 'Target 2: 150 businesses', 'Target 3: 200 businesses', 'Target 4: 250 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-11-06 10:21:16', 'archived'),
 (2, 2, 'Expand Welfare Programs', 'Number of people enrolled', 'Social Welfare Office', 'Target 1: 1000 people', 'Target 2: 1200 people', 'Target 3: 1400 people', 'Target 4: 1600 people', 20000.00, 'International Aid', 'Underfunding', 'High', 'Seek additional donors', '2024-12-02 10:21:16', 'saved'),
 (3, 3, 'Upgrade Clinics', 'Number of clinics upgraded', 'Healthcare Department', 'Target 1: 10 clinics', 'Target 2: 15 clinics', 'Target 3: 20 clinics', 'Target 4: 25 clinics', 30000.00, 'Health Ministry', 'Construction delays', 'High', 'Secure early contractors', '2024-11-11 10:21:16', 'saved'),
 (4, 4, 'Install Solar Panels', 'Amount of energy saved (kWh)', 'Environment Office', 'Target 1: 5000 kWh', 'Target 2: 6000 kWh', 'Target 3: 7000 kWh', 'Target 4: 8000 kWh', 10000.00, 'Private Sector', 'Regulatory hurdles', 'Moderate', 'Engage with local government', '2024-12-30 10:21:16', 'saved'),
-(5, 5, 'Online Learning Platforms', 'Number of students enrolled', 'Education Department', 'Target 1: 300 students', 'Target 2: 400 students', 'Target 3: 500 students', 'Target 4: 600 students', 15000.00, 'Government', 'Technology gaps', 'Low', 'Provide training programs', '2025-01-19 10:21:16', 'saved'),
 (6, 1, 'Small Business Grants - Phase 2', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 100 businesses', 'Target 2: 200 businesses', 'Target 3: 300 businesses', 'Target 4: 400 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-11-11 10:21:16', 'saved'),
 (54, 9, 'Community Health Initiative', 'Number of health screenings conducted', 'Healthcare Department', 'Target 1: 100 screenings', 'Target 2: 150 screenings', 'Target 3: 200 screenings', 'Target 4: 250 screenings', 6000.00, 'Government', 'Lack of participation', 'Moderate', 'Increase community outreach', '2024-09-17 10:21:16', 'saved'),
-(55, 5, 'School Infrastructure Upgrades', 'Number of classrooms renovated', 'Education Department', 'Target 1: 5 classrooms', 'Target 2: 10 classrooms', 'Target 3: 15 classrooms', 'Target 4: 20 classrooms', 7000.00, 'Government', 'Supply chain delays', 'Low', 'Secure additional suppliers', '2024-11-03 10:21:16', 'saved'),
 (56, 1, 'Business Development Support', 'Number of businesses receiving support', 'Economic Development Office', 'Target 1: 20 businesses', 'Target 2: 30 businesses', 'Target 3: 40 businesses', 'Target 4: 50 businesses', 11000.00, 'Private Sector', 'Market volatility', 'High', 'Develop contingency plans', '2024-12-16 10:21:16', 'archived'),
 (57, 1, 'Skills Development Programs', 'Number of people trained', 'Labor and Employment Office', 'Target 1: 500 people', 'Target 2: 600 people', 'Target 3: 700 people', 'Target 4: 800 people', 24000.00, 'Government', 'Inadequate training resources', 'Moderate', 'Partner with training providers', '2024-12-23 10:21:16', 'saved'),
 (58, 1, 'Small Business Grants', 'Number of businesses funded', 'Economic Development Office', 'Target 1: 70 businesses', 'Target 2: 150 businesses', 'Target 3: 200 businesses', 'Target 4: 250 businesses', 5000.00, 'Government', 'Limited funding', 'Moderate', 'Increase grant applications', '2024-12-09 10:21:16', 'saved'),
@@ -427,22 +494,20 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (60, 2, 'Health Outreach Programs', 'Number of people reached', 'Healthcare Department', 'Target 1: 200 people', 'Target 2: 400 people', 'Target 3: 600 people', 'Target 4: 800 people', 15000.00, 'International Aid', 'Community engagement issues', 'High', 'Increase marketing efforts', '2024-04-12 02:21:16', 'saved'),
 (61, 3, 'Upgrade Hospitals', 'Number of hospitals upgraded', 'Healthcare Department', 'Target 1: 5 hospitals', 'Target 2: 10 hospitals', 'Target 3: 15 hospitals', 'Target 4: 20 hospitals', 40000.00, 'Health Ministry', 'Supply chain disruptions', 'High', 'Source from multiple suppliers', '2024-05-10 02:21:16', 'saved'),
 (62, 4, 'Clean Energy Projects', 'Energy produced (kWh)', 'Environment Office', 'Target 1: 5000 kWh', 'Target 2: 10000 kWh', 'Target 3: 15000 kWh', 'Target 4: 20000 kWh', 20000.00, 'Private Sector', 'Regulatory challenges', 'Moderate', 'Work closely with local authorities', '2024-06-02 02:21:16', 'saved'),
-(63, 5, 'Teacher Training Programs', 'Number of teachers trained', 'Education Department', 'Target 1: 100 teachers', 'Target 2: 200 teachers', 'Target 3: 300 teachers', 'Target 4: 400 teachers', 12000.00, 'Government', 'Low engagement', 'Moderate', 'Provide incentives for participation', '2024-07-15 02:21:16', 'saved'),
-(64, 1, 'Community Outreach Prograams', 'Number of communities reached', 'Economic Development Office', 'Target 1: 10 communities', 'Target 2: 20 communities', 'Target 3: 30 communities', 'Target 4: 40 communities', 5000.00, 'Government', 'Low participation', 'Moderate', 'Enhance communication strategies', '2024-08-10 02:21:16', 'archived'),
+(64, 1, 'Community Outreach Prograams', 'Number of communities reached', 'Economic Development Office', 'Target 1: 10 communities', 'Target 2: 20 communities', 'Target 3: 30 communities', 'Target 4: 40 communities', 5000.00, 'Government', 'Low participation', 'Moderate', 'Enhance communication strategies', '2024-08-10 02:21:16', 'saved'),
 (65, 3, 'Digital Literacy Training', 'Number of people trained', 'Education Department', 'Target 1: 500 people', 'Target 2: 1000 people', 'Target 3: 1500 people', 'Target 4: 2000 people', 8000.00, 'Private Sector', 'Lack of resources', 'Low', 'Collaborate with tech companies', '2024-09-05 02:21:16', 'saved'),
 (66, 4, 'Water Conservation Projects', 'Amount of water saved (liters)', 'Environment Office', 'Target 1: 10000 liters', 'Target 2: 20000 liters', 'Target 3: 30000 liters', 'Target 4: 40000 liters', 15000.00, 'Government', 'Limited access to water sources', 'Moderate', 'Develop local partnerships', '2024-09-20 02:21:16', 'saved'),
 (67, 2, 'Youth Empowerment Programs', 'Number of youth enrolled', 'Social Welfare Office', 'Target 1: 200 youth', 'Target 2: 300 youth', 'Target 3: 400 youth', 'Target 4: 500 youth', 10000.00, 'International Aid', 'Cultural resistance', 'Moderate', 'Engage with local leaders', '2024-10-10 02:21:16', 'saved'),
 (68, 1, 'Support for Small Businesses', 'Number of businesses supported', 'Economic Development Office', 'Target 1: 100 businesses', 'Target 2: 200 businesses', 'Target 3: 300 businesses', 'Target 4: 400 businesses', 5000.00, 'Private Sector', 'Economic downturn', 'High', 'Diversify funding sources', '2024-10-25 02:21:16', 'saved'),
-(69, 5, 'Health Education Campaigns', 'Number of people educated', 'Healthcare Department', 'Target 1: 1000 people', 'Target 2: 1500 people', 'Target 3: 2000 people', 'Target 4: 2500 people', 10000.00, 'Government', 'Awareness fatigue', 'Moderate', 'Reinforce message regularly', '2024-11-10 02:21:16', 'saved'),
 (70, 3, 'Public Housing Improvements', 'Number of homes improved', 'Housing Office', 'Target 1: 50 homes', 'Target 2: 100 homes', 'Target 3: 150 homes', 'Target 4: 200 homes', 20000.00, 'Government', 'Budget constraints', 'High', 'Optimize resource allocation', '2024-11-18 02:21:16', 'saved'),
 (71, 2, 'Welfare Support Programs', 'Number of people assisted', 'Social Welfare Office', 'Target 1: 500 people', 'Target 2: 1000 people', 'Target 3: 1500 people', 'Target 4: 2000 people', 15000.00, 'International Aid', 'Regulatory delays', 'High', 'Engage government agencies', '2024-11-22 02:21:16', 'saved'),
 (72, 4, 'Reforestation Programs', 'Number of trees planted', 'Environment Office', 'Target 1: 5000 trees', 'Target 2: 10000 trees', 'Target 3: 15000 trees', 'Target 4: 20000 trees', 8000.00, 'Private Sector', 'Weather conditions', 'Moderate', 'Monitor climate forecasts', '2024-12-01 02:21:16', 'saved'),
 (73, 1, 'Small Business Support Program', 'Number of businesses receiving aid', 'Economic Development Office', 'Target 1: 100 businesses', 'Target 2: 200 businesses', 'Target 3: 300 businesses', 'Target 4: 400 businesses', 10000.00, 'Government', 'Supply chain issues', 'Moderate', 'Strengthen logistics partnerships', '2024-12-03 02:21:16', 'saved'),
-(74, 5, 'Student Scholarships', 'Number of students awarded scholarships', 'Education Department', 'Target 1: 50 students', 'Target 2: 100 students', 'Target 3: 150 students', 'Target 4: 200 students', 20000.00, 'Government', 'Low scholarship funds', 'Moderate', 'Increase fundraising efforts', '2024-12-12 02:21:16', 'saved'),
 (75, 2, 'Community Health Campaigns', 'Number of people reached', 'Healthcare Department', 'Target 1: 2000 people', 'Target 2: 3000 people', 'Target 3: 4000 people', 'Target 4: 5000 people', 18000.00, 'Private Sector', 'Low awareness', 'High', 'Increase public service announcements', '2024-12-15 02:21:16', 'saved'),
 (76, 3, 'Medical Equipment Donations', 'Amount of equipment donated', 'Healthcare Department', 'Target 1: 100 pieces', 'Target 2: 200 pieces', 'Target 3: 300 pieces', 'Target 4: 400 pieces', 12000.00, 'International Aid', 'Logistical challenges', 'Moderate', 'Improve supply chain management', '2024-12-22 02:21:16', 'saved'),
 (77, 4, 'Waste Management Initiatives', 'Amount of waste recycled (tons)', 'Environment Office', 'Target 1: 500 tons', 'Target 2: 1000 tons', 'Target 3: 1500 tons', 'Target 4: 2000 tons', 14000.00, 'Private Sector', 'Regulatory approval delays', 'Low', 'Streamline approval processes', '2024-12-28 02:21:16', 'saved'),
-(78, 5, 'Adult Education Programs', 'Number of adults enrolled', 'Education Department', 'Target 1: 200 adults', 'Target 2: 300 adults', 'Target 3: 400 adults', 'Target 4: 500 adults', 5000.00, 'Government', 'Lack of facilities', 'Moderate', 'Renovate existing buildings', '2025-01-05 02:21:16', 'saved');
+(82, 21, '789', '7897', '8979', '789', '7897', '789', '789', 78789.00, '789', '79797', '789', '78978', '2025-01-23 15:52:29', 'saved'),
+(83, 21, '4534', '5345345', '34534', '345', '3453', '345', '3534', 5345.00, '34', '53453', '453', '4534', '2025-01-23 15:52:29', 'saved');
 
 -- --------------------------------------------------------
 
@@ -465,8 +530,8 @@ INSERT INTO `strategy` (`id`, `outcome_id`, `name`) VALUES
 (2, 2, 'Increase Social Safety Nets'),
 (3, 3, 'Improve Rural Health Clinics'),
 (4, 4, 'Adopt Renewable Energy'),
-(5, 5, 'Implement Digital Learning Tools'),
-(9, 9, 'Make different timeframes');
+(9, 9, 'Make different timeframes'),
+(21, 21, '7897897');
 
 -- --------------------------------------------------------
 
@@ -505,11 +570,13 @@ INSERT INTO `teachingload` (`id`, `employee_id`, `Academic_Load_Units`, `General
 (1, 1, 121, 61, 'Academic', 'CS1011', 'Introduction to Computer Science', 31),
 (2, 2, 9, 3, 'General', 'ENG201', 'Advanced English Literature', 2),
 (3, 3, 15, 4, 'Academic', 'MATH301', 'Advanced Calculus', 4),
-(4, 4, 8, 5, 'General', 'HIST102', 'World History', 3),
+(4, 4, 8, 5, 'Academic', 'HIST102', 'World History', 3),
 (5, 5, 14, 2, 'Academic', 'BIO405', 'Genetics', 3),
 (6, 2, 9, 3, 'General', 'ENG2014', 'Advanced English Literature', 2),
 (7, 1, 121, 61, 'Academic', 'CS10131', 'Introduction to Computer Science', 31),
-(8, 1, 121, 61, 'General', '12', '12', 12);
+(8, 1, 121, 61, 'General', '12', '12', 12),
+(11, 472515, 1, 1, 'Academic', '1', '1', 1),
+(12, 54858, 2312, 213, 'Academic', '123', '213', 123);
 
 -- --------------------------------------------------------
 
@@ -549,7 +616,9 @@ INSERT INTO `workinfo` (`id`, `employee_id`, `Date_of_Appointment`, `Years_in_Se
 (2, 2, '2021-05-15', 4, 'Part Time', 'Contractual', 'Instructor II', 'Lecturer', 30000.00),
 (3, 3, '2020-08-20', 5, 'Full Time', 'Permanent', 'Associate Professor I', 'Senior Lecturer', 60000.00),
 (4, 4, '2019-11-10', 6, 'Part Time', 'Temporary', 'Assistant Professor III', 'Adjunct Faculty', 40000.00),
-(5, 5, '2018-03-25', 7, 'Full Time', 'Permanent', 'Professor IV', 'Faculty Head', 70000.00);
+(5, 5, '2018-03-25', 7, 'Full Time', 'Permanent', 'Professor IV', 'Faculty Head', 70000.00),
+(8, 472515, '2025-01-24', 21, 'Full Time', 'Temporary', 'Professor V', 'gfgfh', 5455.00),
+(9, 54858, '2025-01-23', 23, 'Full Time', 'Permanent', 'Professor V', '213', 23123.00);
 
 -- --------------------------------------------------------
 
@@ -585,7 +654,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `operational_plan_full`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_full`  AS SELECT `p`.`status` AS `status`, `da`.`id` AS `development_area_id`, `da`.`name` AS `development_area_name`, `o`.`id` AS `outcome_id`, `o`.`name` AS `outcome_name`, `s`.`id` AS `strategy_id`, `s`.`name` AS `strategy_name`, concat(`da`.`id`,'-',`o`.`id`,'-',`s`.`id`) AS `unique_id`, `p`.`id` AS `pap_id`, `p`.`name` AS `pap_name`, `p`.`performance_indicator` AS `performance_indicator`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities` FROM (((`development_area` `da` left join `outcome` `o` on(`o`.`development_area_id` = `da`.`id`)) left join `strategy` `s` on(`s`.`outcome_id` = `o`.`id`)) left join `pap` `p` on(`p`.`strategy_id` = `s`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_full`  AS SELECT `p`.`status` AS `status`, `da`.`id` AS `development_area_id`, `da`.`name` AS `development_area_name`, `o`.`id` AS `outcome_id`, `o`.`name` AS `outcome_name`, `s`.`id` AS `strategy_id`, `s`.`name` AS `strategy_name`, concat(`da`.`id`,'-',`o`.`id`,'-',`s`.`id`) AS `unique_id`, `p`.`id` AS `pap_id`, `p`.`name` AS `pap_name`, `p`.`performance_indicator` AS `performance_indicator`, `p`.`personnel_office_concerned` AS `personnel_office_concerned`, `p`.`quarterly_target_q1` AS `quarterly_target_q1`, `p`.`quarterly_target_q2` AS `quarterly_target_q2`, `p`.`quarterly_target_q3` AS `quarterly_target_q3`, `p`.`quarterly_target_q4` AS `quarterly_target_q4`, `p`.`total_estimated_cost` AS `total_estimated_cost`, `p`.`funding_source` AS `funding_source`, `p`.`risks` AS `risks`, `p`.`assessment_of_risk` AS `assessment_of_risk`, `p`.`mitigating_activities` AS `mitigating_activities`, `da`.`status` AS `d_status`, `p`.`date_time` AS `date_time`, year(`p`.`date_time`) AS `m_year` FROM (((`development_area` `da` left join `outcome` `o` on(`o`.`development_area_id` = `da`.`id`)) left join `strategy` `s` on(`s`.`outcome_id` = `o`.`id`)) left join `pap` `p` on(`p`.`strategy_id` = `s`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -608,11 +677,29 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `operational_plan_summary_by_development_area`
+--
+DROP TABLE IF EXISTS `operational_plan_summary_by_development_area`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_summary_by_development_area`  AS SELECT `operational_plan_full`.`development_area_id` AS `development_area_id`, `operational_plan_full`.`development_area_name` AS `development_area_name`, `operational_plan_full`.`d_status` AS `status`, `operational_plan_full`.`m_year` AS `m_year`, count(distinct `operational_plan_full`.`strategy_id`) AS `strategy_count`, count(distinct `operational_plan_full`.`outcome_id`) AS `outcome_count`, count(distinct `operational_plan_full`.`pap_id`) AS `pap_count` FROM (`operational_plan_full` left join `operational_plan_monitoring_matrix` on(`operational_plan_monitoring_matrix`.`opmm_fid` = `operational_plan_full`.`unique_id`)) GROUP BY `operational_plan_full`.`development_area_id`, `operational_plan_full`.`development_area_name` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `operational_plan_view`
 --
 DROP TABLE IF EXISTS `operational_plan_view`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view`  AS SELECT `operational_plan_monitoring_matrix`.`id` AS `id`, `operational_plan_monitoring_matrix`.`opmm_fid` AS `opmm_fid`, `operational_plan_monitoring_matrix`.`m_pap_id` AS `m_pap_id`, `operational_plan_monitoring_matrix`.`actual_accomplishments` AS `actual_accomplishments`, `operational_plan_monitoring_matrix`.`variance` AS `variance`, `operational_plan_monitoring_matrix`.`remarks` AS `remarks`, `operational_plan_full`.`development_area_id` AS `development_area_id`, `operational_plan_full`.`development_area_name` AS `development_area_name`, `operational_plan_full`.`outcome_id` AS `outcome_id`, `operational_plan_full`.`outcome_name` AS `outcome_name`, `operational_plan_full`.`strategy_id` AS `strategy_id`, `operational_plan_full`.`strategy_name` AS `strategy_name`, `operational_plan_full`.`unique_id` AS `unique_id`, `operational_plan_full`.`pap_id` AS `pap_id`, `operational_plan_full`.`pap_name` AS `pap_name`, `operational_plan_full`.`performance_indicator` AS `performance_indicator`, `operational_plan_full`.`personnel_office_concerned` AS `personnel_office_concerned`, `operational_plan_full`.`quarterly_target_q1` AS `quarterly_target_q1`, `operational_plan_full`.`quarterly_target_q2` AS `quarterly_target_q2`, `operational_plan_full`.`quarterly_target_q3` AS `quarterly_target_q3`, `operational_plan_full`.`quarterly_target_q4` AS `quarterly_target_q4`, `operational_plan_full`.`total_estimated_cost` AS `total_estimated_cost`, `operational_plan_full`.`funding_source` AS `funding_source`, `operational_plan_full`.`risks` AS `risks`, `operational_plan_full`.`assessment_of_risk` AS `assessment_of_risk`, `operational_plan_full`.`mitigating_activities` AS `mitigating_activities` FROM (`operational_plan_monitoring_matrix` join `operational_plan_full` on(`operational_plan_full`.`unique_id` = `operational_plan_monitoring_matrix`.`opmm_fid`)) WHERE `operational_plan_monitoring_matrix`.`m_pap_id` = `operational_plan_full`.`pap_id` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `operational_plan_view_matrix`
+--
+DROP TABLE IF EXISTS `operational_plan_view_matrix`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `operational_plan_view_matrix`  AS SELECT `operational_plan_monitoring_matrix`.`id` AS `id`, `operational_plan_monitoring_matrix`.`opmm_fid` AS `opmm_fid`, `operational_plan_monitoring_matrix`.`m_pap_id` AS `m_pap_id`, `operational_plan_monitoring_matrix`.`actual_accomplishments` AS `actual_accomplishments`, `operational_plan_monitoring_matrix`.`variance` AS `variance`, `operational_plan_monitoring_matrix`.`remarks` AS `remarks`, `operational_plan_full`.`development_area_id` AS `development_area_id`, `operational_plan_full`.`development_area_name` AS `development_area_name`, `operational_plan_full`.`outcome_id` AS `outcome_id`, `operational_plan_full`.`outcome_name` AS `outcome_name`, `operational_plan_full`.`strategy_id` AS `strategy_id`, `operational_plan_full`.`strategy_name` AS `strategy_name`, `operational_plan_full`.`unique_id` AS `unique_id`, `operational_plan_full`.`pap_id` AS `pap_id`, `operational_plan_full`.`pap_name` AS `pap_name`, `operational_plan_full`.`performance_indicator` AS `performance_indicator`, `operational_plan_full`.`personnel_office_concerned` AS `personnel_office_concerned`, `operational_plan_full`.`quarterly_target_q1` AS `quarterly_target_q1`, `operational_plan_full`.`quarterly_target_q2` AS `quarterly_target_q2`, `operational_plan_full`.`quarterly_target_q3` AS `quarterly_target_q3`, `operational_plan_full`.`quarterly_target_q4` AS `quarterly_target_q4`, `operational_plan_full`.`total_estimated_cost` AS `total_estimated_cost`, `operational_plan_full`.`funding_source` AS `funding_source`, `operational_plan_full`.`risks` AS `risks`, `operational_plan_full`.`assessment_of_risk` AS `assessment_of_risk`, `operational_plan_full`.`mitigating_activities` AS `mitigating_activities`, `operational_plan_full`.`status` AS `pstatus`, `operational_plan_monitoring_matrix`.`timestamp` AS `date_time`, year(`operational_plan_monitoring_matrix`.`timestamp`) AS `m_year` FROM (`operational_plan_full` left join `operational_plan_monitoring_matrix` on(`operational_plan_monitoring_matrix`.`m_pap_id` = `operational_plan_full`.`pap_id`)) GROUP BY `operational_plan_full`.`pap_id` ORDER BY `operational_plan_full`.`development_area_id` ASC ;
 
 -- --------------------------------------------------------
 
@@ -723,13 +810,13 @@ ALTER TABLE `admin_accounts`
 -- AUTO_INCREMENT for table `development_area`
 --
 ALTER TABLE `development_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `employee_accounts`
@@ -741,43 +828,43 @@ ALTER TABLE `employee_accounts`
 -- AUTO_INCREMENT for table `licensesandorganizations`
 --
 ALTER TABLE `licensesandorganizations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `operational_plan_monitoring_matrix`
 --
 ALTER TABLE `operational_plan_monitoring_matrix`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `outcome`
 --
 ALTER TABLE `outcome`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `pap`
 --
 ALTER TABLE `pap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `strategy`
 --
 ALTER TABLE `strategy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `teachingload`
 --
 ALTER TABLE `teachingload`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `workinfo`
 --
 ALTER TABLE `workinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
