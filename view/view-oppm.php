@@ -105,7 +105,7 @@ if (isset($_GET['op_id'])) {
                             
                             
                             <div class="table-responsive p-1">
-                <button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button> | 
+              
                 <a href="view-oppm-print.php?op_id=<?= $_GET['op_id'] ?>" target="_blank" class="btn btn-primary m-3">Print</a>
                             <?php
 
@@ -484,6 +484,8 @@ if(isset($_POST['strategy_btn'])){
 
 </table>
 </form>
+<button onclick="addRow()" class="btn btn-primary m-3">+ Add New Row</button> 
+
 <?php } else { ?>
 <p>No data found for the provided Operational Plan ID.</p>
 <?php } ?>

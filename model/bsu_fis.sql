@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2025 at 06:04 AM
+-- Generation Time: Jan 27, 2025 at 06:08 AM
 -- Server version: 11.5.2-MariaDB
 -- PHP Version: 8.2.12
 
@@ -87,8 +87,7 @@ INSERT INTO `development_area` (`id`, `name`, `status`, `date_time`) VALUES
 (2, 'Healthcare Improvement', 'saved', '2025-01-24 14:54:29'),
 (3, 'Environmental Sustainability', 'saved', '2025-01-24 14:54:29'),
 (4, 'Education Quality', 'saved', '2025-01-24 14:54:29'),
-(9, 'School Activities', 'saved', '2025-01-24 14:54:29'),
-(21, '7897', 'saved', '2025-01-24 14:54:29');
+(9, 'School Activities', 'saved', '2025-01-24 14:54:29');
 
 -- --------------------------------------------------------
 
@@ -448,8 +447,7 @@ INSERT INTO `outcome` (`id`, `development_area_id`, `name`) VALUES
 (3, 2, 'Access to Healthcare'),
 (4, 3, 'Carbon Footprint Reduction'),
 (5, 4, 'Improved Literacy Rates'),
-(9, 9, 'Creative Illustrations'),
-(21, 21, '979');
+(9, 9, 'Creative Illustrations');
 
 -- --------------------------------------------------------
 
@@ -505,9 +503,7 @@ INSERT INTO `pap` (`id`, `strategy_id`, `name`, `performance_indicator`, `person
 (73, 1, 'Small Business Support Program', 'Number of businesses receiving aid', 'Economic Development Office', 'Target 1: 100 businesses', 'Target 2: 200 businesses', 'Target 3: 300 businesses', 'Target 4: 400 businesses', 10000.00, 'Government', 'Supply chain issues', 'Moderate', 'Strengthen logistics partnerships', '2024-12-03 02:21:16', 'saved'),
 (75, 2, 'Community Health Campaigns', 'Number of people reached', 'Healthcare Department', 'Target 1: 2000 people', 'Target 2: 3000 people', 'Target 3: 4000 people', 'Target 4: 5000 people', 18000.00, 'Private Sector', 'Low awareness', 'High', 'Increase public service announcements', '2024-12-15 02:21:16', 'saved'),
 (76, 3, 'Medical Equipment Donations', 'Amount of equipment donated', 'Healthcare Department', 'Target 1: 100 pieces', 'Target 2: 200 pieces', 'Target 3: 300 pieces', 'Target 4: 400 pieces', 12000.00, 'International Aid', 'Logistical challenges', 'Moderate', 'Improve supply chain management', '2024-12-22 02:21:16', 'saved'),
-(77, 4, 'Waste Management Initiatives', 'Amount of waste recycled (tons)', 'Environment Office', 'Target 1: 500 tons', 'Target 2: 1000 tons', 'Target 3: 1500 tons', 'Target 4: 2000 tons', 14000.00, 'Private Sector', 'Regulatory approval delays', 'Low', 'Streamline approval processes', '2024-12-28 02:21:16', 'saved'),
-(82, 21, '789', '7897', '8979', '789', '7897', '789', '789', 78789.00, '789', '79797', '789', '78978', '2025-01-23 15:52:29', 'saved'),
-(83, 21, '4534', '5345345', '34534', '345', '3453', '345', '3534', 5345.00, '34', '53453', '453', '4534', '2025-01-23 15:52:29', 'saved');
+(77, 4, 'Waste Management Initiatives', 'Amount of waste recycled (tons)', 'Environment Office', 'Target 1: 500 tons', 'Target 2: 1000 tons', 'Target 3: 1500 tons', 'Target 4: 2000 tons', 14000.00, 'Private Sector', 'Regulatory approval delays', 'Low', 'Streamline approval processes', '2024-12-28 02:21:16', 'saved');
 
 -- --------------------------------------------------------
 
@@ -530,8 +526,7 @@ INSERT INTO `strategy` (`id`, `outcome_id`, `name`) VALUES
 (2, 2, 'Increase Social Safety Nets'),
 (3, 3, 'Improve Rural Health Clinics'),
 (4, 4, 'Adopt Renewable Energy'),
-(9, 9, 'Make different timeframes'),
-(21, 21, '7897897');
+(9, 9, 'Make different timeframes');
 
 -- --------------------------------------------------------
 
