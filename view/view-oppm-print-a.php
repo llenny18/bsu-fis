@@ -83,7 +83,7 @@ if (isset($_GET['op_id'])) {
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Printing of Operational Record Full Data  <a href="view-oppm-print.php?op_id=<?= $_GET['op_id'] ?>" class="btn btn-success"> View Archived printing</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Printing of Archived Operational Record Full Data  <a href="view-oppm-print.php?op_id=<?= $_GET['op_id'] ?>" class="btn btn-success"> Return to normal list printing</a></h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">

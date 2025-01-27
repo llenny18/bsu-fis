@@ -155,7 +155,7 @@ if(isset($_POST['matrix_new'])){
             <hr class="red-hr-design">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Printing of Operational Plan Matrix Data  <a href="view-oppm-matrix-print-a.php?pap_id=<?= $_GET['pap_id'] ?>" class="btn btn-success"> View Archive Printing</a></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Printing of Archived Operational Plan Matrix Data  <a href="view-oppm-matrix-print.php?pap_id=<?= $_GET['pap_id'] ?>" class="btn btn-success"> Return to normal list printing</a></h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -176,7 +176,7 @@ if (isset($_GET['pap_id'])) {
 
     // Fetch data from the operational_plan_view
     try {
-        $query = "SELECT * FROM `operational_plan_view_matrix`  WHERE development_area_id = :pap_id and pstatus='saved' GROUP BY pap_id";
+        $query = "SELECT * FROM `operational_plan_view_matrix`  WHERE development_area_id = :pap_id and pstatus='archived' GROUP BY pap_id";
 
         $stmt = $pdo->prepare($query); // Use prepare instead of query
         $stmt->bindParam(':pap_id', $pap_id, PDO::PARAM_STR);
