@@ -27,6 +27,16 @@
     <link href="dist/css/style.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .ct-label {
+  display: none; /* Hide labels */
+}
+
+.ct-bar:hover {
+  opacity: 0.8; /* Optional: Highlight hovered bar */
+}
+
+    </style>
    
 </head>
 
@@ -168,8 +178,8 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Operational Plan <br> Outcome Counts</h4>
-                                <div class="net-income mt-4 position-relative" style="height:384px;"></div>
+                                <h4 class="card-title">Operational Plan <br>Outcome Counts</h4>
+                                <div class="net-income position-relative" style="height:384px;"></div>
                               
                             </div>
                         </div>

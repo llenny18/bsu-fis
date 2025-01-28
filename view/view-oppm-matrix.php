@@ -32,6 +32,7 @@
             $sql = "UPDATE operational_plan_monitoring_matrix 
                     SET actual_accomplishments = :actual_accomplishments, 
                         variance = :variance, 
+                        timestamp = :date_time, 
                         remarks = :remarks
                     WHERE id = :id";
         
@@ -44,6 +45,7 @@
                 $stmt->bindParam(':actual_accomplishments', $_POST['accomplished'][$key]);
                 $stmt->bindParam(':variance', $_POST['variance'][$key]);
                 $stmt->bindParam(':remarks', $_POST['remarks'][$key]);
+                $stmt->bindParam(':date_time', $_POST['date_time'][$key]);
                 $stmt->bindParam(':id', $m_id);
         
                 // Execute the query
@@ -69,8 +71,8 @@
         if (isset($_POST['saveAll'])) {
             // Prepare SQL query for inserting multiple records
             $sql = "INSERT INTO operational_plan_monitoring_matrix 
-                    (m_pap_id, id, actual_accomplishments, variance, remarks) 
-                    VALUES (:npid, :id, :actual_accomplishments, :variance, :remarks)";
+                    (m_pap_id, id, actual_accomplishments, variance, remarks, timestamp) 
+                    VALUES (:npid, :id, :actual_accomplishments, :variance, :remarks, :date_time)";
             
             // Prepare the query
             $stmt = $pdo->prepare($sql);
@@ -83,6 +85,7 @@
                 $stmt->bindParam(':actual_accomplishments', $_POST['accomplished'][$key]);
                 $stmt->bindParam(':variance', $_POST['variance'][$key]);
                 $stmt->bindParam(':remarks', $_POST['remarks'][$key]);
+                $stmt->bindParam(':date_time', $_POST['date_time'][$key]);
         
                 // Execute the query
                 $stmt->execute();
@@ -104,48 +107,7 @@
         }
         
         
-                   
-if(isset($_POST['matrix_new'])){
-
-    $sql = "INSERT INTO operational_plan_monitoring_matrix 
-    (actual_accomplishments, variance, remarks, m_pap_id, opmm_fid) VALUES(:actual_accomplishments, :variance, :remarks, :id, :opmm_fid);";
-    
-    // Prepare the query
-    $stmt = $pdo->prepare($sql);
-    
-
-    // Bind parameters
-    $stmt->bindParam(':actual_accomplishments', $actual_accomplishments);
-    $stmt->bindParam(':variance', $variance);
-    $stmt->bindParam(':remarks', $remarks);
-    $stmt->bindParam(':id', $m_id);
-    $stmt->bindParam(':opmm_fid', $opmm_fid);
-    
-    // Set values for the parameters (for example purposes)
-    $actual_accomplishments = $_POST['accomplished']; // The new username
-    $variance = $_POST['variance']; // The new username
-    $remarks = $_POST['remarks']; // The new username
-    $m_id = $_GET['new_id']; // The new username
-    $opmm_fid = $_GET['pap_id']; // The new username
-    
-    // Execute the query
-    $stmt->execute();
-    
-    // Check if the update was successful
-    if ($stmt->rowCount() > 0) {
-        echo "<script>window.location.href='view-oppm-matrix.php?pap_id=".$_GET['pap_id']."';
-        Swal.fire({
-                icon: 'success',
-                title: 'Update Success',
-                text: 'Matrix inserted successfully!',
-                timer: 2000,
-                showConfirmButton: false
-            }).then(() => {
-                window.location.href = window.location.href;
-            });
-        </script>";
-    }
-}
+            
 
          ?>
       
@@ -208,8 +170,8 @@ if (isset($_GET['pap_id'])) {
                                     <thead>
                                         <tr>
                                             <th scope="col">Development Area</th>
-                                            <th scope="col" colspan="6"><?= $row2['development_area_name'] ?></th>
-                                            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button><hr><button class='edit-btn btn btn-success' type="submit" name="saveAll">Insert All Data</button></th>
+                                            <th scope="col" colspan="7"><?= $row2['development_area_name'] ?></th>
+                                            <th scope="col"><button class='edit-btn btn btn-primary' onclick='editDA(this)'>Edit</button><hr><button  id="insertBtn" class='edit-btn btn btn-success' type="submit" name="saveAll">Insert All Data</button></th>
                                             
                                         </tr>
                                        
@@ -222,6 +184,7 @@ if (isset($_GET['pap_id'])) {
                                         <th >Actual Accomplishments</th>
                                         <th >Variance</th>
                                         <th >Remarks</th>
+                                        <th >Date</th>
                                         <th >Action</th>
                                         </tr>
                                         
@@ -260,7 +223,11 @@ if (isset($_GET['pap_id'])) {
             <option value="Unmet" >Unmet</option>
             <option value="Not Applicable" >Not Applicable</option>
         </select>
-                                                    </td> '; } else { echo "<td>". htmlspecialchars($row['remarks']) . "</td>"; }
+        </td>'; } else { echo "<td>". htmlspecialchars($row['remarks']) . "</td>"; }
+                                                    if(empty($row['date_time'])) { echo  '<td> <input required type="datetime-local" name="date_time[]" class="form-control" style="width: 200px; display: inline-block; border: 1px solid darkred;" ></td> '; } else { echo "<td>". htmlspecialchars($row['date_time']) . "</td>"; }
+
+
+
                                                     echo "<td><button class='edit-btn btn btn-primary' onclick='editRow(this)'>Edit</button>";
                                                     echo "<hr>
                                                     <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm-matrix.php?pap_id=".$_GET['pap_id']."' class='btn btn-danger'>Archive</a>
@@ -331,6 +298,7 @@ function editST(button) {
         function editRow(button) {
     // Get the row where the button was clicked
     var row = button.parentElement.parentElement;
+    document.getElementById("insertBtn").disabled = true;
 
     // Get the current values of the row
     var cell1 = row.cells[0].innerText;
@@ -338,6 +306,7 @@ function editST(button) {
     var cell6 = row.cells[6].innerText;
     var cell7 = row.cells[7].innerText;
     var cell8 = row.cells[8].innerText;
+    var cell9 = row.cells[9].innerText;
 
     // Replace the current row values with input fields
     row.cells[0].innerHTML = `<input required type="hidden" name="m_id[]" value="${cell1}">`;
@@ -355,8 +324,9 @@ function editST(button) {
             <option value="Not Applicable" ${cell7 === 'Not Applicable' ? 'selected' : ''}>Not Applicable</option>
         </select>
     `;
+    row.cells[8].innerHTML = `<input required type="datetime-local" name="date_time[]" class="form-control" style="width: 300px; display: inline-block; border: 1px solid darkred;" value="${cell8}">`;
 
-    row.cells[8].innerHTML = `<button type="submit" name="edit_matrix" class="btn btn-success">Save Data</button>`;
+    row.cells[9].innerHTML = `<button type="submit" name="edit_matrix" class="btn btn-success">Save Data</button>`;
 }
 
 

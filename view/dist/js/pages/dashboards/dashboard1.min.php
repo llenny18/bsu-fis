@@ -189,20 +189,32 @@ new Chartist.Bar(
     ".net-income",
     {
         labels: labels, // Use dynamic labels from the query
-        series: [counts] // Use dynamic counts from the query
+        series: [
+            counts.map((count, index) => ({
+                value: count,
+                meta: labels[index] // Attach label as metadata
+            }))
+        ]
     },
     {
         seriesBarDistance: 30,
         axisX: {
-            labelInterpolationFnc: function(e) {
-                return e;
+            labelInterpolationFnc: function(value, index) {
+                // Return the original labels
+                return counts[index] !== undefined ? counts[index] : "";
             }
         },
         plugins: [
-            Chartist.plugins.tooltip() // Enable tooltips on hover
+            Chartist.plugins.tooltip({
+                transformTooltipTextFnc: function(value, meta) {
+                    // Use metadata (label) in the tooltip
+                    return `${value}`;
+                }
+            })
         ]
     }
-),
+);
+
     jQuery("#visitbylocate").vectorMap({
       map: "world_mill_en",
       backgroundColor: "transparent",

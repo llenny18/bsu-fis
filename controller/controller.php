@@ -322,7 +322,7 @@ function getValueAfterHyphen($string) {
     
 }
 
-function findPAP($pdo, $npap_id, $opmm_fid) {
+function findPAP($pdo, $npap_id, $opmm_fid, $daid) {
     try {
         $query_new = "SELECT COUNT(*) AS row_count FROM operational_plan_monitoring_matrix WHERE m_pap_id = :npap_id AND opmm_fid = :opmm_fid";
         $stmt_new = $pdo->prepare($query_new);
@@ -333,7 +333,7 @@ function findPAP($pdo, $npap_id, $opmm_fid) {
         $row_count = $row_new['row_count'];
 
         if ($row_count == 0) {
-            echo "<hr><a class='btn btn-success' href='view-oppm-matrix.php?new_id=" . htmlspecialchars($npap_id) . "&pap_id=" . htmlspecialchars($opmm_fid) . "'>Add to Matrix</a>";
+            echo "<hr><a class='btn btn-success' href='view-oppm-matrix.php?pap_id=" . htmlspecialchars($daid) . "'>Add to Matrix</a>";
         }
     } catch (PDOException $e) {
         // Handle database-specific exceptions

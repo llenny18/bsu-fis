@@ -34,6 +34,7 @@ if (isset($_GET['op_id'])) {
                     funding_source,
                     risks,
                     assessment_of_risk,
+                    development_area_id,
                     status,
                     mitigating_activities
                   FROM operational_plan_full
@@ -467,7 +468,7 @@ if(isset($_POST['strategy_btn'])){
         <hr>
         <a href='archive.php?id_value={$row['pap_id']}&id_name=id&table=pap&link=view-oppm.php?op_id=1-1-1' class='btn btn-danger'>Archive</a>
         ";
-        findPAP($pdo, $row['pap_id'], $_GET['op_id']);
+        findPAP($pdo, $row['pap_id'], $_GET['op_id'], $row['development_area_id'] );
         echo"
         </td>";
 
